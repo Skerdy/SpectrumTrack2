@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:textAlignment="center"
+        app:titleTextColor="@color/accent"
         >
     </android.support.v7.widget.Toolbar>
     <RelativeLayout

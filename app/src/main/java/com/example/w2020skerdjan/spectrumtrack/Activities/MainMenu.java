@@ -1,12 +1,19 @@
 package com.example.w2020skerdjan.spectrumtrack;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.support.v7.widget.Toolbar;
 
+import com.example.w2020skerdjan.spectrumtrack.Fragments.PersonalAreaFragment;
+import com.example.w2020skerdjan.spectrumtrack.Fragments.TripsFragment;
+import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.TripsAdapter;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -20,6 +27,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 public class MainMenu extends AppCompatActivity {
     private Toolbar toolbar;
+    private FragmentManager fragmentManager;
+    private  FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +36,8 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+         fragmentManager = getSupportFragmentManager();
 
 
 
@@ -55,7 +66,7 @@ public class MainMenu extends AppCompatActivity {
                 .build();
 
 //create the drawer and remember the `Drawer` result object
-        Drawer result = new DrawerBuilder()
+        final Drawer result = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .addDrawerItems(
@@ -67,8 +78,18 @@ public class MainMenu extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        // do something with the clicked item :D
-                        return true;
+                         fragmentTransaction = fragmentManager.beginTransaction();
+                        Log.d("position", " "+position);
+                        switch (position){
+                            case 3:
+                                initTripsFragment();
+                                break;
+                            case 4 :
+                                initPersonalAreaFragment();
+                                break;
+                        }
+
+                        return false;
                     }
                 })
                 .withAccountHeader(headerResult)
@@ -80,4 +101,17 @@ public class MainMenu extends AppCompatActivity {
 
 
     }
+
+    private void initPersonalAreaFragment(){
+        PersonalAreaFragment fragment = new PersonalAreaFragment();
+        fragmentTransaction.replace(R.id.fragment, fragment);
+        fragmentTransaction.commit();
+    }
+
+    private void initTripsFragment(){
+        TripsFragment fragment1 = new TripsFragment();
+        fragmentTransaction.replace(R.id.fragment, fragment1);
+        fragmentTransaction.commit();
+    }
+
 }
