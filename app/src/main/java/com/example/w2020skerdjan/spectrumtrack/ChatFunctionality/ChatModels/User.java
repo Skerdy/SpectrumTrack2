@@ -1,4 +1,4 @@
-package com.example.user.spectrumtest.ChatFunctionality.Modelet;
+package com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.ChatModels;
 
 /**
  * Created by W2020 Android on 11/21/2017.
@@ -6,9 +6,7 @@ package com.example.user.spectrumtest.ChatFunctionality.Modelet;
 
 import com.stfalcon.chatkit.commons.models.IUser;
 
-/*
- * Created by troy379 on 04.04.17.
- */
+
 public class User implements IUser {
 
     private String id;

@@ -1,8 +1,10 @@
-package com.example.user.spectrumtest.ChatFunctionality;
+package com.example.w2020skerdjan.spectrumtrack.ChatFunctionality;
 
-import com.example.user.spectrumtest.ChatFunctionality.Modelet.Dialog;
-import com.example.user.spectrumtest.ChatFunctionality.Modelet.Message;
-import com.example.user.spectrumtest.ChatFunctionality.Modelet.User;
+
+
+import com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.ChatModels.Dialog;
+import com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.ChatModels.Message;
+import com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.ChatModels.User;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,6 +15,8 @@ import java.util.Date;
  */
 
 public final class DialogsFixtures extends FixturesData {
+
+    private ArrayList<User> hardCodedUsers =  new ArrayList<>();
     private DialogsFixtures() {
         throw new AssertionError();
     }
@@ -24,10 +28,8 @@ public final class DialogsFixtures extends FixturesData {
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.DAY_OF_MONTH, -(i * i));
             calendar.add(Calendar.MINUTE, -(i * i));
-
             chats.add(getDialog(i, calendar.getTime()));
         }
-
         return chats;
     }
 
@@ -35,8 +37,8 @@ public final class DialogsFixtures extends FixturesData {
         ArrayList<User> users = getUsers();
         return new Dialog(
                 getRandomId(),
-                users.size() > 1 ? groupChatTitles.get(0) : users.get(0).getName(),
-                users.size() > 1 ? groupChatImages.get(0) : getRandomAvatar(),
+                users.get(rnd.nextInt(3)).getName(),
+                getRandomAvatar(),
                 users,
                 getMessage(lastMessageCreatedAt),
                 i < 3 ? 3 - i : 0);
@@ -44,28 +46,26 @@ public final class DialogsFixtures extends FixturesData {
 
     private static ArrayList<User> getUsers() {
         ArrayList<User> users = new ArrayList<>();
-        int usersCount = 1 + rnd.nextInt(3);
 
-        for (int i = 0; i < usersCount; i++) {
-            users.add(getUser());
-        }
-
+            users.add(new User("1","Skerdjan Gurabardhi", "https://scontent.fskg1-1.fna.fbcdn.net/v/t1.0-1/p160x160/16681667_1378333725550492_7645852226125849371_n.jpg?oh=9c46457513d78ec4a9e89380872f6827&oe=5AA51006", true));
+            users.add(new User("2","Ersi Musta", "https://scontent.fskg1-1.fna.fbcdn.net/v/t31.0-8/16797287_1214827481905370_1452615798237214871_o.jpg?oh=2e22233f0800605ed04d6ae0f2fa49d6&oe=5AA41B5F", true));
+            users.add(new User("3","Besnik Palluqi", "https://scontent.fskg1-1.fna.fbcdn.net/v/t1.0-1/p160x160/10258009_887102014687854_1551946744427834665_n.jpg?oh=c305811285ce35d72f5ea55c00306399&oe=5AA22850", false));
+            users.add(new User("4","Artion Hasani", "https://scontent.fskg1-1.fna.fbcdn.net/v/t1.0-1/p160x160/10653551_4807371799521_3073438902636464705_n.jpg?oh=fd4ea1e36fd9e0f80205cbb3cf714f67&oe=5AA537B0", false));
+            int usersCount = users.size();
         return users;
     }
 
-    private static User getUser() {
-        return new User(
-                getRandomId(),
-                getRandomName(),
-                getRandomAvatar(),
-                getRandomBoolean());
+    private static User getUser(int i) {
+        return getUsers().get(i);
     }
 
     private static Message getMessage(final Date date) {
         return new Message(
                 getRandomId(),
-                getUser(),
+                getUser(rnd.nextInt(3)),
                 getRandomMessage(),
                 date);
+
+
     }
 }

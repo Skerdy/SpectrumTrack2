@@ -1,4 +1,4 @@
-package com.example.user.spectrumtest.ChatFunctionality.Modelet;
+package com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.ChatModels;
 
 
 

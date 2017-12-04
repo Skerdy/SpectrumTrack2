@@ -1,4 +1,4 @@
-package com.example.w2020skerdjan.spectrumtrack;
+package com.example.w2020skerdjan.spectrumtrack.Activities;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -9,9 +9,9 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.w2020skerdjan.spectrumtrack.R;
 
 
 public class LoginActivity extends AppCompatActivity {

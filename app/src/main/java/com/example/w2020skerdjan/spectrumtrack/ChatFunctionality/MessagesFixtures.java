@@ -1,7 +1,9 @@
-package com.example.user.spectrumtest.ChatFunctionality;
+package com.example.w2020skerdjan.spectrumtrack.ChatFunctionality;
 
-import com.example.user.spectrumtest.ChatFunctionality.Modelet.Message;
-import com.example.user.spectrumtest.ChatFunctionality.Modelet.User;
+
+
+import com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.ChatModels.Message;
+import com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.ChatModels.User;
 
 import java.util.ArrayList;
 import java.util.Calendar;

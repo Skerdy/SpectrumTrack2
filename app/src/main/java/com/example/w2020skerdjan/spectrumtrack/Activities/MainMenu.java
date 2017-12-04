@@ -1,5 +1,6 @@
-package com.example.w2020skerdjan.spectrumtrack;
+package com.example.w2020skerdjan.spectrumtrack.Activities;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.w2020skerdjan.spectrumtrack.Fragments.PersonalAreaFragment;
 import com.example.w2020skerdjan.spectrumtrack.Fragments.TripsFragment;
+import com.example.w2020skerdjan.spectrumtrack.R;
 import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.TripsAdapter;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -27,9 +29,9 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 public class MainMenu extends AppCompatActivity {
     private Toolbar toolbar;
-    private FragmentManager fragmentManager;
+    private  FragmentManager fragmentManager;
     private  FragmentTransaction fragmentTransaction;
-
+    private  Drawer result;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +39,12 @@ public class MainMenu extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-         fragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
 
 
 
         //if you want to update the items at a later time it is recommended to keep it in a variable
+        PrimaryDrawerItem itemHome = new PrimaryDrawerItem().withIdentifier(0).withName("Home");
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Calendar");
         PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("Chat");
         PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("Trips");
@@ -66,11 +69,11 @@ public class MainMenu extends AppCompatActivity {
                 .build();
 
 //create the drawer and remember the `Drawer` result object
-        final Drawer result = new DrawerBuilder()
+         result= new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .addDrawerItems(
-                        item1,item2,item3,item4,
+                        itemHome, item1,item2,item3,item4,
                         new DividerDrawerItem(),
                         settings,logout
 
@@ -82,9 +85,12 @@ public class MainMenu extends AppCompatActivity {
                         Log.d("position", " "+position);
                         switch (position){
                             case 3:
+                                initChatActivity();
+                                break;
+                            case 4:
                                 initTripsFragment();
                                 break;
-                            case 4 :
+                            case 5 :
                                 initPersonalAreaFragment();
                                 break;
                         }
@@ -114,4 +120,17 @@ public class MainMenu extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    private void initChatActivity(){
+        Intent intent = new Intent(MainMenu.this, ChatActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(!result.isDrawerOpen()){
+            result.closeDrawer();
+        }
+        else
+            result.openDrawer();
+    }
 }

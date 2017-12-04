@@ -1,11 +1,11 @@
-package com.example.user.spectrumtest.ChatFunctionality;
+package com.example.w2020skerdjan.spectrumtrack.ChatFunctionality;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
-import com.example.user.spectrumtest.ChatFunctionality.Modelet.Dialog;
+import com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.ChatModels.Dialog;
 import com.squareup.picasso.Picasso;
 import com.stfalcon.chatkit.commons.ImageLoader;
 import com.stfalcon.chatkit.dialogs.DialogsListAdapter;

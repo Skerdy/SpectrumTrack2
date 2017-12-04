@@ -1,4 +1,4 @@
-package com.example.w2020skerdjan.spectrumtrack;
+package com.example.w2020skerdjan.spectrumtrack.Activities;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import com.example.w2020skerdjan.spectrumtrack.R;
 import com.hanks.htextview.base.HTextView;
 
 public class SplashScreen extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.user.spectrumtest.ChatFunctionality;
+package com.example.w2020skerdjan.spectrumtrack.ChatFunctionality;
 
 import android.content.Context;
 import android.support.annotation.StringRes;
