@@ -3,6 +3,7 @@ package com.example.w2020skerdjan.spectrumtrack.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,15 +27,7 @@ public class TripDetailFragment extends Fragment {
     private static final String ARG_TRIP_ID = "trip_id";
     private Trip trip;
     private List<TripDetailsItem> data;
-/*
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-    }
-
-
-*/
 public static TripDetailFragment newInstance(int id){
     TripDetailFragment fragment = new TripDetailFragment();
     Bundle args = new Bundle();
@@ -42,6 +35,7 @@ public static TripDetailFragment newInstance(int id){
     fragment.setArguments(args);
     return fragment;
 }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,8 +51,8 @@ public static TripDetailFragment newInstance(int id){
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.trip_details_contents_fragment, container, false);
-        ListView lv = linearLayout.findViewById(R.id.tripDetailsList);
+        ListView lv = (ListView) inflater.inflate(R.layout.trip_details_contents_fragment, container, false);
+        //ListView lv = nW.findViewById(R.id.tripDetailsList);
         data = new ArrayList<>();
         data.add(new TripDetailsItem("Date", trip.getDate()));
         data.add(new TripDetailsItem("From", trip.getFrom()));
@@ -66,6 +60,7 @@ public static TripDetailFragment newInstance(int id){
         data.add(new TripDetailsItem("Truck", trip.getTruck()));
         data.add(new TripDetailsItem("Trailer", trip.getTrailer()));
         TripDetailsAdapter lvBaseAdapter = new TripDetailsAdapter(getContext(), data);
+        lv.setNestedScrollingEnabled(false);
         lv.setAdapter(lvBaseAdapter);
         return lv;
     }

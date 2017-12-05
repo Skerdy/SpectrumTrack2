@@ -41,6 +41,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Trip trip = trips.get(position);
+        final int p = position;
         holder.from.setText(trip.getFrom());
         holder.date.setText(trip.getDate());
         holder.to.setText(trip.getTo());
@@ -50,6 +51,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ctx, TripDetails.class );
+                intent.putExtra("TripPosition", p);
                 ctx.startActivity(intent);
             }
         });

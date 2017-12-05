@@ -51,7 +51,6 @@ public class TripsFragment extends Fragment {
         dummyTrips.add(new Trip("2/19/2017", "Shkoder", "Scania" , "Sarande", "dummyTrailer"));
         dummyTrips.add(new Trip("2/23/2017", "Bot", "Teleport" , "Top", "dummyPlayer"));
         dummyTrips.add(new Trip("3/1/2017", "getLocation", "Dollap" , "Narnia", "dummyMovie"));
-
         return dummyTrips;
     }
 
