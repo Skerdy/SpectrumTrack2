@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.support.v7.widget.Toolbar;
 
+import com.example.w2020skerdjan.spectrumtrack.Fragments.HomeFragment;
 import com.example.w2020skerdjan.spectrumtrack.Fragments.PersonalAreaFragment;
 import com.example.w2020skerdjan.spectrumtrack.Fragments.TripsFragment;
 import com.example.w2020skerdjan.spectrumtrack.R;
@@ -27,7 +28,9 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
-public class MainMenu extends AppCompatActivity {
+import java.util.Calendar;
+
+public class MainMenu extends BaseActivity {
     private Toolbar toolbar;
     private  FragmentManager fragmentManager;
     private  FragmentTransaction fragmentTransaction;
@@ -38,11 +41,7 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         fragmentManager = getSupportFragmentManager();
-
-
-
         //if you want to update the items at a later time it is recommended to keep it in a variable
         PrimaryDrawerItem itemHome = new PrimaryDrawerItem().withIdentifier(0).withName("Home");
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Calendar");
@@ -84,6 +83,12 @@ public class MainMenu extends AppCompatActivity {
                          fragmentTransaction = fragmentManager.beginTransaction();
                         Log.d("position", " "+position);
                         switch (position){
+                            case 1:
+                                initHome();
+                                break;
+                            case 2:
+                                initCalendar();
+                                break;
                             case 3:
                                 initChatActivity();
                                 break;
@@ -122,6 +127,17 @@ public class MainMenu extends AppCompatActivity {
 
     private void initChatActivity(){
         Intent intent = new Intent(MainMenu.this, ChatActivity.class);
+        startActivity(intent);
+    }
+
+    private void initHome(){
+        HomeFragment homeFragment = new HomeFragment();
+        fragmentTransaction.replace(R.id.fragment, homeFragment);
+        fragmentTransaction.commit();
+    }
+
+    private void initCalendar(){
+        Intent intent = new Intent(MainMenu.this, CalendarActivity.class);
         startActivity(intent);
     }
 

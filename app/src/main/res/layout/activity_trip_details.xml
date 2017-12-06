@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.example.w2020skerdjan.spectrumtrack.Activities.TripDetails">
-
-
-
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -42,15 +39,22 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
-        android:id="@+id/trip_details"
+        android:id="@+id/tripDetailsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_margin="5dp"
-        android:padding="10dp"
-        android:nestedScrollingEnabled="false"
-        >
+        android:orientation="vertical"
+        android:background="@drawable/trip_detail_item"
+        android:layout_margin="10dp">
     </LinearLayout>
+
+    <com.nightonke.boommenu.BoomMenuButton
+        android:id="@+id/bmb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:bmb_buttonEnum="simpleCircle"
+        app:bmb_buttonPlaceEnum="buttonPlace_sc_3_3"
+        app:bmb_piecePlaceEnum="piecePlace_dot_3_3"
+        android:layout_gravity="bottom|end"/>
 
 </android.support.design.widget.CoordinatorLayout>

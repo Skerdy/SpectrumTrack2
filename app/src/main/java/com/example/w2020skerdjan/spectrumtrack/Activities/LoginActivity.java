@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.w2020skerdjan.spectrumtrack.R;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity{
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
