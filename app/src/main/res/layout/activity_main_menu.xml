@@ -17,10 +17,22 @@
         app:titleTextColor="@color/accent"
         >
     </android.support.v7.widget.Toolbar>
+
     <RelativeLayout
         android:id="@+id/fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/main_swipe">
+
+            <ListView
+                android:id="@+id/main_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
     </RelativeLayout>
 
 

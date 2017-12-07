@@ -19,6 +19,12 @@ android {
     buildToolsVersion '26.0.2'
 }
 
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -43,6 +49,7 @@ dependencies {
     implementation 'com.nightonke:boommenu:2.1.1'
     implementation 'com.github.alamkanak:android-week-view:1.2.6'
     implementation 'com.github.clans:fab:1.6.3'
+    implementation 'com.github.recruit-lifestyle:WaveSwipeRefreshLayout:1.6'
 
     implementation project(':calendarlibrary')
 

@@ -1,6 +1,9 @@
 package com.example.w2020skerdjan.spectrumtrack.Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.support.v7.widget.Toolbar;
+import android.widget.SeekBar;
 
 import com.example.w2020skerdjan.spectrumtrack.Fragments.HomeFragment;
 import com.example.w2020skerdjan.spectrumtrack.Fragments.PersonalAreaFragment;
@@ -30,11 +34,14 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import java.util.Calendar;
 
-public class MainMenu extends BaseActivity {
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
+
+public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnRefreshListener {
     private Toolbar toolbar;
     private  FragmentManager fragmentManager;
     private  FragmentTransaction fragmentTransaction;
     private  Drawer result;
+    private WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +117,8 @@ public class MainMenu extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);;
 
-
+        initLoader();
+        mWaveSwipeRefreshLayout.setOnRefreshListener(this);
     }
 
     private void initPersonalAreaFragment(){
@@ -137,8 +145,14 @@ public class MainMenu extends BaseActivity {
     }
 
     private void initCalendar(){
-        Intent intent = new Intent(MainMenu.this, CalendarActivity.class);
-        startActivity(intent);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(MainMenu.this, CalendarActivity.class);
+                startActivity(intent);
+            }
+        }, 200);
+
     }
 
     @Override
@@ -148,5 +162,43 @@ public class MainMenu extends BaseActivity {
         }
         else
             result.openDrawer();
+    }
+
+    @Override
+    public void onRefresh() {
+        refresh();
+    }
+
+    private class Task extends AsyncTask<Void, Void, String[]> {
+        @Override
+        protected String[] doInBackground(Void... voids) {
+            return new String[0];
+        }
+
+        @Override protected void onPostExecute(String[] result) {
+            // Call setRefreshing(false) when the list has been refreshed.
+            mWaveSwipeRefreshLayout.setRefreshing(false);
+            super.onPostExecute(result);
+        }
+    }
+
+    private void refresh(){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mWaveSwipeRefreshLayout.setRefreshing(false);
+            }
+        }, 1100);
+    }
+
+
+    public void initLoader (){
+
+        mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) findViewById(R.id.main_swipe);
+        mWaveSwipeRefreshLayout.setColorSchemeColors(Color.WHITE, Color.WHITE);
+        mWaveSwipeRefreshLayout.setOnRefreshListener(this);
+        mWaveSwipeRefreshLayout.setWaveColor(Color.argb(100,255,0,0));
+        //mWaveSwipeRefreshLayout.setRefreshing(true);
+
     }
 }
