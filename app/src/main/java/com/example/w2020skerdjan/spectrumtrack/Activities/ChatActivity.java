@@ -3,70 +3,78 @@ package com.example.w2020skerdjan.spectrumtrack.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
 
-
-import com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.ChatModels.Dialog;
+import com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.AppUtils;
+import com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.BaseChatActivity;
 import com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.ChatModels.Message;
-import com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.DemoDialogsActivity;
-import com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.DialogsFixtures;
+import com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.MessagesFixtures;
 import com.example.w2020skerdjan.spectrumtrack.R;
-import com.stfalcon.chatkit.dialogs.DialogsList;
-import com.stfalcon.chatkit.dialogs.DialogsListAdapter;
-
-import java.util.ArrayList;
+import com.stfalcon.chatkit.messages.MessageInput;
+import com.stfalcon.chatkit.messages.MessagesList;
+import com.stfalcon.chatkit.messages.MessagesListAdapter;
 
 /**
- * Created by W2020 Android on 11/20/2017.
+ * Created by W2020 Android on 12/8/2017.
  */
 
-public class ChatActivity extends DemoDialogsActivity {
+public class ChatActivity extends BaseChatActivity implements MessageInput.InputListener,
+        MessageInput.AttachmentsListener {
+
+    private ActionBar actionBar;
 
 
-        private  ActionBar actionBar;
-        private  ArrayList<Dialog> dialogs;
-        private  DialogsList dialogsList;
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState)  {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.chat_activity);
-        dialogsList = (DialogsList) findViewById(R.id.dialogs);
-        actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        initAdapter();
+    public static void open(Context context) {
+        context.startActivity(new Intent(context, ChatActivity.class));
     }
 
+    private MessagesList messagesList;
 
     @Override
-    public void onDialogClick(Dialog dialog) {
-        Toast.makeText(this, "Mesazhi nuk ekziston!", Toast.LENGTH_SHORT).show();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.chat_activity);
+
+        this.messagesList = (MessagesList) findViewById(R.id.messagesList);
+        initAdapter();
+
+        MessageInput input = (MessageInput) findViewById(R.id.input);
+        input.setInputListener(this);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onSubmit(CharSequence input) {
+        super.messagesAdapter.addToStart(
+                MessagesFixtures.getTextMessage(input.toString()), true);
+        return true;
+    }
+
+    @Override
+    public void onAddAttachments() {
+        super.messagesAdapter.addToStart(
+                MessagesFixtures.getImageMessage(), true);
     }
 
     private void initAdapter() {
-        super.dialogsAdapter = new DialogsListAdapter<>(super.imageLoader);
-        super.dialogsAdapter.setItems(DialogsFixtures.getDialogs());
-        super.dialogsAdapter.setOnDialogClickListener(this);
-        super.dialogsAdapter.setOnDialogLongClickListener(this);
-        dialogsList.setAdapter(super.dialogsAdapter);
+        super.messagesAdapter = new MessagesListAdapter<>(super.senderId, super.imageLoader);
+        super.messagesAdapter.enableSelectionMode(this);
+        super.messagesAdapter.setLoadMoreListener(this);
+        super.messagesAdapter.registerViewClickListener(R.id.messageUserAvatar,
+                new MessagesListAdapter.OnMessageViewClickListener<Message>() {
+                    @Override
+                    public void onMessageViewClick(View view, Message message) {
+                        AppUtils.showToast(ChatActivity.this,
+                                message.getUser().getName() + " clicked",
+                                false);
+                    }
+                });
+        this.messagesList.setAdapter(super.messagesAdapter);
     }
 
-
-    private void onNewMessage(String dialogId, Message message) {
-        boolean isUpdated = dialogsAdapter.updateDialogWithMessage(dialogId, message);
-        if (!isUpdated) {
-            //Dialog with this ID doesn't exist, so you can create new Dialog or update all dialogs list
-        }
-    }
-
-    //for example
-    private void onNewDialog(Dialog dialog) {
-        dialogsAdapter.addItem(dialog);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -75,7 +83,6 @@ public class ChatActivity extends DemoDialogsActivity {
                 super.onBackPressed();
                 break;
         }
-
         return true;
     }
 }

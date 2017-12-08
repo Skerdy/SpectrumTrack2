@@ -4,23 +4,18 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.support.v7.widget.Toolbar;
-import android.widget.SeekBar;
 
+import com.example.w2020skerdjan.spectrumtrack.ChatFunctionality.BaseChatActivity;
 import com.example.w2020skerdjan.spectrumtrack.Fragments.HomeFragment;
 import com.example.w2020skerdjan.spectrumtrack.Fragments.PersonalAreaFragment;
 import com.example.w2020skerdjan.spectrumtrack.Fragments.TripsFragment;
 import com.example.w2020skerdjan.spectrumtrack.R;
-import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.TripsAdapter;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -31,8 +26,6 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-
-import java.util.Calendar;
 
 import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 

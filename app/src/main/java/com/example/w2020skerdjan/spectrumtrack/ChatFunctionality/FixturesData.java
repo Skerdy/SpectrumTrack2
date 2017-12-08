@@ -60,8 +60,9 @@ abstract class FixturesData {
 
     static final ArrayList<String> images = new ArrayList<String>() {
         {
-            add("https://habrastorage.org/getpro/habr/post_images/e4b/067/b17/e4b067b17a3e414083f7420351db272b.jpg");
-            add("http://www.designboom.com/wp-content/uploads/2015/11/stefano-boeri-architetti-vertical-forest-residential-tower-lausanne-switzerland-designboom-01.jpg");
+            add("http://www.images.searchpointer.com/transport/9133/3.jpg");
+            add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS64OuV7Lk8FH9z6Adf4_3a2BRqb7uT9QqDmyA7GtrE7yhZPQsT");
+            add("http://www.multinal.com/en/wp-content/uploads/sites/3/2015/08/Transport.jpg");
         }
     };
 

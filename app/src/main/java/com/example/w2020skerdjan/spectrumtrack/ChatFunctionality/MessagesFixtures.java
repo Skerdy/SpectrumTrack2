@@ -26,7 +26,7 @@ public final class MessagesFixtures extends FixturesData {
 
     public static Message getVoiceMessage() {
         Message message = new Message(getRandomId(), getUser(), null);
-        message.setVoice(new Message.Voice("http://example.com", rnd.nextInt(200) + 30));
+        message.setVoice(new Message.Voice("blob:http://output.jsbin.com/286da875-716f-414f-b8a8-dc8a0c906132", rnd.nextInt(200) + 30));
         return message;
     }
 
@@ -40,14 +40,18 @@ public final class MessagesFixtures extends FixturesData {
 
     public static ArrayList<Message> getMessages(Date startDate) {
         ArrayList<Message> messages = new ArrayList<>();
-        for (int i = 0; i < 10/*days count*/; i++) {
+        for (int i = 0; i < 20/*days count*/; i++) {
             int countPerDay = rnd.nextInt(5) + 1;
 
             for (int j = 0; j < countPerDay; j++) {
                 Message message;
                 if (i % 2 == 0 && j % 3 == 0) {
+                    message = getVoiceMessage();
+                }/*
+                else if(i%2==0 && j%5==0){
                     message = getImageMessage();
-                } else {
+                }*/
+                else {
                     message = getTextMessage();
                 }
 

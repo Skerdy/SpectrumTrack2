@@ -28,7 +28,7 @@
             android:theme="@style/AppTheme.Dark">
     </activity>
         <activity
-            android:name=".Activities.ChatActivity"
+            android:name=".Activities.OldDialogsChatActivity"
             android:label="Conversations">
         </activity>
         <activity
@@ -40,6 +40,12 @@
             android:name=".Activities.CalendarActivity"
             android:label="@string/title_activity_calendar"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".Activities.ChatActivity"
+            android:label="Chat HQ">
+
+
         </activity>
     </application>
 
