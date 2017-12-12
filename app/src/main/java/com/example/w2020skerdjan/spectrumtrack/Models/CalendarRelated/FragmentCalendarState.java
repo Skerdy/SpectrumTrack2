@@ -1,4 +1,4 @@
-package com.example.w2020skerdjan.spectrumtrack.Models;
+package com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated;
 
 import com.squareup.timessquare.CalendarPickerView;
 

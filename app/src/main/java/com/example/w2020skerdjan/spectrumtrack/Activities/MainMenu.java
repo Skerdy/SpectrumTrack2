@@ -127,8 +127,13 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
     }
 
     private void initChatActivity(){
-        Intent intent = new Intent(MainMenu.this, ChatActivity.class);
-        startActivity(intent);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(MainMenu.this, ChatActivity.class);
+                startActivity(intent);
+            }
+        }, 200);
     }
 
     private void initHome(){
@@ -145,7 +150,6 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
                 startActivity(intent);
             }
         }, 200);
-
     }
 
     @Override

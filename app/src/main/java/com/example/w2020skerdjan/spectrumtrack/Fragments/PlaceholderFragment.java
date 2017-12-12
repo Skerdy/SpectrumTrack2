@@ -7,9 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.w2020skerdjan.spectrumtrack.Activities.CalendarActivity;
-import com.example.w2020skerdjan.spectrumtrack.Models.CalendarEntity;
-import com.example.w2020skerdjan.spectrumtrack.Models.FragmentCalendarState;
+import com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated.FragmentCalendarState;
 import com.example.w2020skerdjan.spectrumtrack.R;
 import com.squareup.timessquare.CalendarPickerView;
 

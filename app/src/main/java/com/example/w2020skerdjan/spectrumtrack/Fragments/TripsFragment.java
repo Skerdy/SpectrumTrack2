@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.w2020skerdjan.spectrumtrack.Models.Trip;
+import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.Trip;
 import com.example.w2020skerdjan.spectrumtrack.R;
 import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.TripsAdapter;
 

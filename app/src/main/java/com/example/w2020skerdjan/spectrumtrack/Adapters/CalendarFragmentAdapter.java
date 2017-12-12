@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.w2020skerdjan.spectrumtrack.Fragments.PlaceholderFragment;
-import com.example.w2020skerdjan.spectrumtrack.Models.CalendarEntity;
+import com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated.CalendarEntity;
 
 import java.util.ArrayList;
 

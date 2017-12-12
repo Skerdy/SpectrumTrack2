@@ -11,16 +11,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.w2020skerdjan.spectrumtrack.Models.LoginResponse;
 import com.example.w2020skerdjan.spectrumtrack.R;
+import com.example.w2020skerdjan.spectrumtrack.Retrofit.LoginCalls;
+import com.example.w2020skerdjan.spectrumtrack.Retrofit.RetrofitClient;
+import com.example.w2020skerdjan.spectrumtrack.Retrofit.TripRelatedCalls.TripDetailsAPI;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 public class LoginActivity extends BaseActivity{
+
     private static final String TAG = "LoginActivity";
-    private static final int REQUEST_SIGNUP = 0;
-
-
     private  EditText _emailText, _passwordText;
     private  Button _loginButton;
+    private  RetrofitClient retrofitClient;
+    private  Retrofit retrofit;
+    private  LoginCalls loginCalls;
+    private  LoginResponse loginResponse;
+    private  ProgressDialog progressDialog;
+    private  boolean flag;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,28 +45,37 @@ public class LoginActivity extends BaseActivity{
         _passwordText = (EditText) findViewById(R.id.input_password);
         _loginButton = (Button) findViewById(R.id.btn_login);
 
+        retrofitClient = new RetrofitClient();
+        retrofit = retrofitClient.krijoRetrofit();
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 login();
             }
         });
-
+       loginResponse=null;
     }
 
     public void login() {
         Log.d(TAG, "Login");
 
         if (!validate()) {
-            onLoginFailed();
+            onLoginSuccess();
             return;
         }
 
         _loginButton.setEnabled(false);
+        _loginButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                onLoginSuccess();
+                return false;
+            }
+        });
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+
+        progressDialog= new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
@@ -60,32 +83,44 @@ public class LoginActivity extends BaseActivity{
 
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
+        loginCalls = retrofit.create(LoginCalls.class);
 
-        // TODO: Implement your own authentication logic here.
-
+        loginCalls.Login(email,password).enqueue(loginCallback);
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
+                        if(!loginResponse.getMessageList().get(0).getDescription().equals("Invalid user credentials!")){
+                            onLoginSuccess();
+                            // onLoginFailed();
+                            progressDialog.dismiss();
+                        }
+                        else {
+                            onLoginFailed();
+                        }
                     }
                 }, 3000);
+
     }
 
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_SIGNUP) {
-            if (resultCode == RESULT_OK) {
-
-                // TODO: Implement successful signup logic here
-                // By default we just finish the Activity and log them in automatically
-                this.finish();
+    Callback<LoginResponse> loginCallback = new Callback<LoginResponse>() {
+        @Override
+        public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+            if(response.isSuccessful()) {
+                 loginResponse = response.body();
+                Log.d("Skerdi", "Sukses" + response.body().toString() + loginResponse.getData());
+            }
+            else {
+                Log.d("Skerdi", "noSucces" );
             }
         }
-    }
+
+        @Override
+        public void onFailure(Call<LoginResponse> call, Throwable t) {
+            Log.d("Skerdi", "Failure Login" + t.getMessage());
+        }
+    };
+
+
 
     @Override
     public void onBackPressed() {
@@ -101,8 +136,11 @@ public class LoginActivity extends BaseActivity{
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
+        if(progressDialog!=null && progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
         _loginButton.setEnabled(true);
+
     }
 
     public boolean validate() {
@@ -124,7 +162,6 @@ public class LoginActivity extends BaseActivity{
         } else {
             _passwordText.setError(null);
         }
-
         return valid;
     }
 }

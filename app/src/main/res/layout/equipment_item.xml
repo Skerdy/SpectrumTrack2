@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <TextView
+        android:id="@+id/equipmentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:text="Equipment"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        />
+
+    <EditText
+        android:id="@+id/quantityEditor"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="number"
+        android:textAlignment="center"/>
+
+    <CheckedTextView
+        android:id="@+id/checkQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="of 5"
+        android:textSize="24sp"
+        android:layout_margin="5dp"
+        android:clickable="true"
+        android:paddingLeft="3dp"
+        android:gravity="center"
+        android:checkMark="@drawable/checked"
+        />
+</LinearLayout>

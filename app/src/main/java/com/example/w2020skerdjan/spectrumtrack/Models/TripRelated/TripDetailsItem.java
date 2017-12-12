@@ -1,4 +1,4 @@
-package com.example.w2020skerdjan.spectrumtrack.Models;
+package com.example.w2020skerdjan.spectrumtrack.Models.TripRelated;
 
 /**
  * Created by W2020 Android on 12/4/2017.

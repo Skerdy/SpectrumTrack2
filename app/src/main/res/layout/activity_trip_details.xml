@@ -27,7 +27,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/background_trip_detail" />
+                app:srcCompat="@drawable/background_trip_detail"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -39,22 +41,24 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
-        android:id="@+id/tripDetailsFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:orientation="vertical"
+        android:fillViewport="true"
+        android:id="@+id/tripDetailsFragment"
         android:background="@drawable/trip_detail_item"
-        android:layout_margin="10dp">
-    </LinearLayout>
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        />
 
     <com.nightonke.boommenu.BoomMenuButton
         android:id="@+id/bmb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:bmb_buttonEnum="simpleCircle"
-        app:bmb_buttonPlaceEnum="buttonPlace_sc_3_3"
-        app:bmb_piecePlaceEnum="piecePlace_dot_3_3"
+        app:bmb_buttonPlaceEnum="buttonPlace_sc_2_2"
+        app:bmb_piecePlaceEnum="piecePlace_dot_2_2"
         android:layout_gravity="bottom|end"/>
+
 
 </android.support.design.widget.CoordinatorLayout>

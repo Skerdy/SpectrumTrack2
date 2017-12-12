@@ -1,13 +1,10 @@
-package com.example.w2020skerdjan.spectrumtrack.Models;
+package com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated;
 
 import android.util.Log;
-
-import com.squareup.timessquare.CalendarPickerView;
 
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by W2020 Android on 12/6/2017.

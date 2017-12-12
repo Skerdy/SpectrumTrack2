@@ -3,6 +3,7 @@
     package="com.example.w2020skerdjan.spectrumtrack">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,35 +17,44 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".Activities.MainMenu"
             android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
         <activity
             android:name=".Activities.LoginActivity"
             android:theme="@style/AppTheme.Dark">
-    </activity>
+
+        </activity>
         <activity
             android:name=".Activities.OldDialogsChatActivity"
             android:label="Conversations">
+
         </activity>
         <activity
             android:name=".Activities.TripDetails"
             android:label="@string/title_activity_trip_details"
             android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
         <activity
             android:name=".Activities.CalendarActivity"
             android:label="@string/title_activity_calendar"
             android:theme="@style/AppTheme.NoActionBar">
-        </activity>
 
-        <activity android:name=".Activities.ChatActivity"
+        </activity>
+        <activity
+            android:name=".Activities.ChatActivity"
             android:label="Chat HQ">
 
+        </activity>
+        <activity android:name=".Activities.TripCommands"
+            android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
     </application>

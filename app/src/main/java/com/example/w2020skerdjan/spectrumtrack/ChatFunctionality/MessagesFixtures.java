@@ -46,7 +46,7 @@ public final class MessagesFixtures extends FixturesData {
             for (int j = 0; j < countPerDay; j++) {
                 Message message;
                 if (i % 2 == 0 && j % 3 == 0) {
-                    message = getVoiceMessage();
+                    message = getImageMessage();
                 }/*
                 else if(i%2==0 && j%5==0){
                     message = getImageMessage();

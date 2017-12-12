@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.w2020skerdjan.spectrumtrack.Activities.TripDetails;
-import com.example.w2020skerdjan.spectrumtrack.Fragments.TripDetailFragment;
-import com.example.w2020skerdjan.spectrumtrack.Models.TripDetailsItem;
+import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.TripDetailsItem;
 import com.example.w2020skerdjan.spectrumtrack.R;
 
 import java.util.List;

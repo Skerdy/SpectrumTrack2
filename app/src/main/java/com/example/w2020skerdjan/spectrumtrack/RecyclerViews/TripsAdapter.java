@@ -2,7 +2,6 @@ package com.example.w2020skerdjan.spectrumtrack.RecyclerViews;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.w2020skerdjan.spectrumtrack.Activities.TripDetails;
-import com.example.w2020skerdjan.spectrumtrack.Models.Trip;
+import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.Trip;
 import com.example.w2020skerdjan.spectrumtrack.R;
 
 import java.util.ArrayList;

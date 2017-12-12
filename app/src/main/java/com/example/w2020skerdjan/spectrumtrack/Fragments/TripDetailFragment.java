@@ -3,19 +3,15 @@ package com.example.w2020skerdjan.spectrumtrack.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 
 import com.example.w2020skerdjan.spectrumtrack.Adapters.TripDetailsAdapter;
-import com.example.w2020skerdjan.spectrumtrack.Models.Trip;
-import com.example.w2020skerdjan.spectrumtrack.Models.TripDetailsItem;
+import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.Trip;
+import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.TripDetailsItem;
 import com.example.w2020skerdjan.spectrumtrack.R;
-import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.TripsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +56,11 @@ public static TripDetailFragment newInstance(int id){
         data.add(new TripDetailsItem("To", trip.getTo()));
         data.add(new TripDetailsItem("Truck", trip.getTruck()));
         data.add(new TripDetailsItem("Trailer", trip.getTrailer()));
+        data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
+        data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
+        data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
+        data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
+        data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
         data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
         data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
         data.add(new TripDetailsItem("Dummy tag", "Dummy data"));

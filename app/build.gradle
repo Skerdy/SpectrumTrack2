@@ -50,7 +50,9 @@ dependencies {
     implementation 'com.github.alamkanak:android-week-view:1.2.6'
     implementation 'com.github.clans:fab:1.6.3'
     implementation 'com.github.recruit-lifestyle:WaveSwipeRefreshLayout:1.6'
-
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.github.Yalantis:GuillotineMenu-Android:1.2'
     implementation project(':calendarlibrary')
 
     testImplementation 'junit:junit:4.12'
@@ -58,6 +60,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
 }
+
 
 
 
