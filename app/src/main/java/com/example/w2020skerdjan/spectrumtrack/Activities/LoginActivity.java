@@ -2,7 +2,6 @@ package com.example.w2020skerdjan.spectrumtrack.Activities;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import android.content.Intent;
@@ -11,11 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.w2020skerdjan.spectrumtrack.Models.LoginResponse;
+import com.example.w2020skerdjan.spectrumtrack.Models.ResponseModels.LoginResponse;
 import com.example.w2020skerdjan.spectrumtrack.R;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.LoginCalls;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.RetrofitClient;
-import com.example.w2020skerdjan.spectrumtrack.Retrofit.TripRelatedCalls.TripDetailsAPI;
 
 import retrofit2.Call;
 import retrofit2.Callback;

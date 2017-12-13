@@ -19,6 +19,7 @@ import com.example.w2020skerdjan.spectrumtrack.Fragments.PersonalAreaFragment;
 import com.example.w2020skerdjan.spectrumtrack.Fragments.TripCheckListFragment;
 import com.example.w2020skerdjan.spectrumtrack.Fragments.TripDetailFragment;
 import com.example.w2020skerdjan.spectrumtrack.Fragments.TripsFragment;
+import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.Trip;
 import com.example.w2020skerdjan.spectrumtrack.R;
 import com.nightonke.boommenu.BoomButtons.BoomButton;
 import com.nightonke.boommenu.BoomButtons.SimpleCircleButton;
@@ -33,7 +34,8 @@ public class TripDetails extends BaseActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private List<Fragment> fragments = new ArrayList<>();
-    private int tripPosition ;
+    private Trip trip;
+    private Bundle bundle;
   //  private FragmentPagerAdapter fragmentPagerAdapter;
     private BoomMenuButton bmb;
 
@@ -43,7 +45,9 @@ public class TripDetails extends BaseActivity {
         setContentView(R.layout.activity_trip_details);
         bmb = (BoomMenuButton) findViewById(R.id.bmb) ;
         Intent intent = getIntent();
-        tripPosition=intent.getIntExtra("TripPosition", 0);
+
+        bundle = intent.getBundleExtra("Bundle");
+        trip= (Trip) bundle.getSerializable("TripPosition");
         fragmentManager = getSupportFragmentManager();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -113,7 +117,7 @@ public class TripDetails extends BaseActivity {
 
     private void initTripDetailsFragment(){
         fragmentTransaction = fragmentManager.beginTransaction();
-        TripDetailFragment fragment1 = TripDetailFragment.newInstance(tripPosition);
+        TripDetailFragment fragment1 = TripDetailFragment.newInstance(trip);
         fragmentTransaction.replace(R.id.tripDetailsFragment, fragment1);
         fragmentTransaction.commit();
     }

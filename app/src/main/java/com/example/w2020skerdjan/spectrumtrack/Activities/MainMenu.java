@@ -115,12 +115,14 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
     }
 
     private void initPersonalAreaFragment(){
+        setTitle("Personal Area");
         PersonalAreaFragment fragment = new PersonalAreaFragment();
         fragmentTransaction.replace(R.id.fragment, fragment);
         fragmentTransaction.commit();
     }
 
     private void initTripsFragment(){
+        setTitle("My Trips");
         TripsFragment fragment1 = new TripsFragment();
         fragmentTransaction.replace(R.id.fragment, fragment1);
         fragmentTransaction.commit();

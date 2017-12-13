@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.w2020skerdjan.spectrumtrack.Adapters.TripDetailsAdapter;
+import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.OldTrip;
 import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.Trip;
 import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.TripDetailsItem;
 import com.example.w2020skerdjan.spectrumtrack.R;
@@ -25,10 +26,11 @@ public class TripDetailFragment extends Fragment {
     private Trip trip;
     private List<TripDetailsItem> data;
 
-public static TripDetailFragment newInstance(int id){
+public static TripDetailFragment newInstance(Trip trip){
     TripDetailFragment fragment = new TripDetailFragment();
     Bundle args = new Bundle();
-    args.putInt(ARG_TRIP_ID, id );
+
+    args.putSerializable(ARG_TRIP_ID, trip );
     fragment.setArguments(args);
     return fragment;
 }
@@ -38,11 +40,11 @@ public static TripDetailFragment newInstance(int id){
     public void onCreate(@Nullable Bundle savedInstanceState) {
     TripsFragment tf = new TripsFragment();
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            if (getArguments().containsKey(ARG_TRIP_ID)) {
-                trip = tf.generateDummyTrips().get(getArguments().getInt(ARG_TRIP_ID));
-            }
-        }
+       if (getArguments() != null) {
+           if (getArguments().containsKey(ARG_TRIP_ID)) {
+               trip = (Trip) getArguments().getSerializable(ARG_TRIP_ID);
+           }
+       }
     }
 
     @Nullable
@@ -51,11 +53,11 @@ public static TripDetailFragment newInstance(int id){
         View nsw = inflater.inflate(R.layout.trip_details_contents_fragment, container, false);
         ListView lv = nsw.findViewById(R.id.tripDetailsList);
         data = new ArrayList<>();
-        data.add(new TripDetailsItem("Date", trip.getDate()));
-        data.add(new TripDetailsItem("From", trip.getFrom()));
-        data.add(new TripDetailsItem("To", trip.getTo()));
-        data.add(new TripDetailsItem("Truck", trip.getTruck()));
-        data.add(new TripDetailsItem("Trailer", trip.getTrailer()));
+        data.add(new TripDetailsItem("Date", trip.getLoadUnloads().get(0).getLoadingPointAddress().getCity().toString()));
+        data.add(new TripDetailsItem("From", trip.getLoadUnloads().get(0).getLoadingPointDate().toString()));
+        data.add(new TripDetailsItem("To", trip.getLoadUnloads().get(trip.getLoadUnloads().size()-1).getDeliveryPointAddress().getCity()));
+        data.add(new TripDetailsItem("Truck", trip.getDisposition().getVehicle().toString()));
+        data.add(new TripDetailsItem("Trailer", trip.getDisposition().getTrailer().toString()));
         data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
         data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
         data.add(new TripDetailsItem("Dummy tag", "Dummy data"));

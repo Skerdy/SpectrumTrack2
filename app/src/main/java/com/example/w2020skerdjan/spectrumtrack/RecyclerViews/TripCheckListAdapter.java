@@ -7,12 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.w2020skerdjan.spectrumtrack.Fragments.TripCheckListFragment;
-import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.Trip;
-import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.TripDetailsItem;
 import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.VehicleEquipment;
 import com.example.w2020skerdjan.spectrumtrack.R;
 

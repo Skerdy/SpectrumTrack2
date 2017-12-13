@@ -64,7 +64,7 @@
 
 
 
-    <!-- Styles qe perdoren tek Trip Commands si nje secondary main menu -->
+    <!-- Styles qe perdoren OldTripTrip Commands si nje secondary main menu -->
     <style name="LinearLayout" />
 
     <style name="LinearLayout.GuillotineItem">
@@ -72,6 +72,14 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:layout_marginTop">@dimen/guillotine_small_margin</item>
+    </style>
+
+    <style name="LinearLayout.GuillotineItem.Selected">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_marginTop">@dimen/guillotine_small_margin</item>
+        <item name="android:textViewStyle">@style/TextView.GuillotineItem.Selected</item>
     </style>
 
     <style name="TextView" />

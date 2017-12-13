@@ -1,12 +1,10 @@
 package com.example.w2020skerdjan.spectrumtrack.Retrofit;
 
-import com.example.w2020skerdjan.spectrumtrack.Models.LoginResponse;
-import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.EquipmentResponseModel;
+import com.example.w2020skerdjan.spectrumtrack.Models.ResponseModels.LoginResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**

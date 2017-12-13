@@ -1,4 +1,4 @@
-package com.example.w2020skerdjan.spectrumtrack.Models;
+package com.example.w2020skerdjan.spectrumtrack.Models.ResponseModels;
 
 /**
  * Created by W2020 Android on 12/12/2017.

@@ -33,7 +33,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Trip Commands"
-                android:textSize="@dimen/guillotine_item_text_size" />
+                android:textSize="@dimen/guillotine_item_text_size"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
         </android.support.v7.widget.Toolbar>
 
 
