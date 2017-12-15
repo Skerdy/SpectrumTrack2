@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.w2020skerdjan.spectrumtrack.MapsActivity;
 import com.example.w2020skerdjan.spectrumtrack.R;
 import com.yalantis.guillotine.animation.GuillotineAnimation;
 import com.yalantis.guillotine.interfaces.GuillotineListener;
@@ -49,6 +50,7 @@ public class TripCommands extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.map_guillotine:
                 guillotineAnimation.close();
+                initMapActivity();
                 break;
             case R.id.activities_guillotine:
                 guillotineAnimation.close();
@@ -83,6 +85,11 @@ public class TripCommands extends AppCompatActivity implements View.OnClickListe
 
     private void initBackToHome(){
         Intent intent = new Intent(TripCommands.this, MainMenu.class);
+        startActivity(intent);
+    }
+
+    private void initMapActivity(){
+        Intent intent = new Intent(TripCommands.this, MapsActivity.class);
         startActivity(intent);
     }
 }

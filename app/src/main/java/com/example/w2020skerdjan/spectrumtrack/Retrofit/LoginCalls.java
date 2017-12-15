@@ -2,8 +2,11 @@ package com.example.w2020skerdjan.spectrumtrack.Retrofit;
 
 import com.example.w2020skerdjan.spectrumtrack.Models.ResponseModels.LoginResponse;
 
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.HeaderMap;
 import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
@@ -12,10 +15,18 @@ import retrofit2.http.Query;
  */
 
 public interface LoginCalls {
-    @Headers({"Content-Type:application/json", "Origin:192.168.0.192:8081"})
-    @GET("login?")
+
+    /*
+
+
     Call<LoginResponse> Login(@Query("email") String email,
                               @Query("password") String password);
+                              */
+
+    @Headers({"Content-Type:application/json", "Origin:192.168.0.192:8081"})
+    @GET("login")
+    Call<LoginResponse> Login(@HeaderMap Map<String, String> headers);
+
 
 
     /*

@@ -16,73 +16,52 @@ public class Disposition implements Serializable {
     private Integer id;
     @SerializedName("workType")
     @Expose
-    private Integer workType;
-    @SerializedName("user")
-    @Expose
-    private Integer user;
+    private String workType;
     @SerializedName("vehicle")
     @Expose
-    private Integer vehicle;
+    private String vehicle;
     @SerializedName("trailer")
     @Expose
-    private Integer trailer;
+    private String trailer;
     @SerializedName("vehiclePlate")
     @Expose
-    private Object vehiclePlate;
+    private String vehiclePlate;
     @SerializedName("trailerPlate")
     @Expose
-    private Object trailerPlate;
-    @SerializedName("repositioning")
+    private String trailerPlate;
+    @SerializedName("driver")
     @Expose
-    private Object repositioning;
-    @SerializedName("firstDriver")
-    @Expose
-    private Object firstDriver;
-    @SerializedName("secondDriver")
-    @Expose
-    private Object secondDriver;
-    @SerializedName("customerPrice")
-    @Expose
-    private Object customerPrice;
-    @SerializedName("tarifftype")
-    @Expose
-    private Object tarifftype;
-    @SerializedName("measureUnit")
-    @Expose
-    private Object measureUnit;
-    @SerializedName("value")
-    @Expose
-    private Integer value;
-    @SerializedName("kmFull")
-    @Expose
-    private Integer kmFull;
-    @SerializedName("kmEmpty")
-    @Expose
-    private Integer kmEmpty;
-    @SerializedName("minValueInvoiced")
-    @Expose
-    private Integer minValueInvoiced;
-    @SerializedName("currency")
-    @Expose
-    private Object currency;
+    private String driver;
     @SerializedName("company")
     @Expose
-    private Integer company;
-    @SerializedName("orders")
+    private String company;
+    @SerializedName("customer")
     @Expose
-    private Integer orders;
+    private Object customer;
+    @SerializedName("subContractor")
+    @Expose
+    private Object subContractor;
+    @SerializedName("order")
+    @Expose
+    private String order;
+    @SerializedName("subContractorPrice")
+    @Expose
+    private Integer subContractorPrice;
+    @SerializedName("status")
+    @Expose
+    private Integer status;
+    @SerializedName("user")
+    @Expose
+    private String user;
     @SerializedName("createdDate")
     @Expose
     private Long createdDate;
-    @SerializedName("modifiedDate")
+    @SerializedName("transportType")
     @Expose
-    private Long modifiedDate;
-    @SerializedName("deletedDate")
+    private Object transportType;
+    @SerializedName("carrier")
     @Expose
-    private Long deletedDate;
-    @SerializedName("validity")
-    @Expose
-    private Integer validity;
+    private Object carrier;
 
     public Integer getId() {
         return id;
@@ -92,156 +71,108 @@ public class Disposition implements Serializable {
         this.id = id;
     }
 
-    public Integer getWorkType() {
+    public String getWorkType() {
         return workType;
     }
 
-    public void setWorkType(Integer workType) {
+    public void setWorkType(String workType) {
         this.workType = workType;
     }
 
-    public Integer getUser() {
-        return user;
-    }
-
-    public void setUser(Integer user) {
-        this.user = user;
-    }
-
-    public Integer getVehicle() {
+    public String getVehicle() {
         return vehicle;
     }
 
-    public void setVehicle(Integer vehicle) {
+    public void setVehicle(String vehicle) {
         this.vehicle = vehicle;
     }
 
-    public Integer getTrailer() {
+    public String getTrailer() {
         return trailer;
     }
 
-    public void setTrailer(Integer trailer) {
+    public void setTrailer(String trailer) {
         this.trailer = trailer;
     }
 
-    public Object getVehiclePlate() {
+    public String getVehiclePlate() {
         return vehiclePlate;
     }
 
-    public void setVehiclePlate(Object vehiclePlate) {
+    public void setVehiclePlate(String vehiclePlate) {
         this.vehiclePlate = vehiclePlate;
     }
 
-    public Object getTrailerPlate() {
+    public String getTrailerPlate() {
         return trailerPlate;
     }
 
-    public void setTrailerPlate(Object trailerPlate) {
+    public void setTrailerPlate(String trailerPlate) {
         this.trailerPlate = trailerPlate;
     }
 
-    public Object getRepositioning() {
-        return repositioning;
+    public String getDriver() {
+        return driver;
     }
 
-    public void setRepositioning(Object repositioning) {
-        this.repositioning = repositioning;
+    public void setDriver(String driver) {
+        this.driver = driver;
     }
 
-    public Object getFirstDriver() {
-        return firstDriver;
-    }
-
-    public void setFirstDriver(Object firstDriver) {
-        this.firstDriver = firstDriver;
-    }
-
-    public Object getSecondDriver() {
-        return secondDriver;
-    }
-
-    public void setSecondDriver(Object secondDriver) {
-        this.secondDriver = secondDriver;
-    }
-
-    public Object getCustomerPrice() {
-        return customerPrice;
-    }
-
-    public void setCustomerPrice(Object customerPrice) {
-        this.customerPrice = customerPrice;
-    }
-
-    public Object getTarifftype() {
-        return tarifftype;
-    }
-
-    public void setTarifftype(Object tarifftype) {
-        this.tarifftype = tarifftype;
-    }
-
-    public Object getMeasureUnit() {
-        return measureUnit;
-    }
-
-    public void setMeasureUnit(Object measureUnit) {
-        this.measureUnit = measureUnit;
-    }
-
-    public Integer getValue() {
-        return value;
-    }
-
-    public void setValue(Integer value) {
-        this.value = value;
-    }
-
-    public Integer getKmFull() {
-        return kmFull;
-    }
-
-    public void setKmFull(Integer kmFull) {
-        this.kmFull = kmFull;
-    }
-
-    public Integer getKmEmpty() {
-        return kmEmpty;
-    }
-
-    public void setKmEmpty(Integer kmEmpty) {
-        this.kmEmpty = kmEmpty;
-    }
-
-    public Integer getMinValueInvoiced() {
-        return minValueInvoiced;
-    }
-
-    public void setMinValueInvoiced(Integer minValueInvoiced) {
-        this.minValueInvoiced = minValueInvoiced;
-    }
-
-    public Object getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Object currency) {
-        this.currency = currency;
-    }
-
-    public Integer getCompany() {
+    public String getCompany() {
         return company;
     }
 
-    public void setCompany(Integer company) {
+    public void setCompany(String company) {
         this.company = company;
     }
 
-    public Integer getOrders() {
-        return orders;
+    public Object getCustomer() {
+        return customer;
     }
 
-    public void setOrders(Integer orders) {
-        this.orders = orders;
+    public void setCustomer(Object customer) {
+        this.customer = customer;
+    }
+
+    public Object getSubContractor() {
+        return subContractor;
+    }
+
+    public void setSubContractor(Object subContractor) {
+        this.subContractor = subContractor;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
+    }
+
+    public Integer getSubContractorPrice() {
+        return subContractorPrice;
+    }
+
+    public void setSubContractorPrice(Integer subContractorPrice) {
+        this.subContractorPrice = subContractorPrice;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public Long getCreatedDate() {
@@ -252,28 +183,21 @@ public class Disposition implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public Long getModifiedDate() {
-        return modifiedDate;
+    public Object getTransportType() {
+        return transportType;
     }
 
-    public void setModifiedDate(Long modifiedDate) {
-        this.modifiedDate = modifiedDate;
+    public void setTransportType(Object transportType) {
+        this.transportType = transportType;
     }
 
-    public Long getDeletedDate() {
-        return deletedDate;
+    public Object getCarrier() {
+        return carrier;
     }
 
-    public void setDeletedDate(Long deletedDate) {
-        this.deletedDate = deletedDate;
-    }
-
-    public Integer getValidity() {
-        return validity;
-    }
-
-    public void setValidity(Integer validity) {
-        this.validity = validity;
+    public void setCarrier(Object carrier) {
+        this.carrier = carrier;
     }
 
 }
+

@@ -35,6 +35,11 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
     private  FragmentTransaction fragmentTransaction;
     private  Drawer result;
     private WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
+    private String authToken;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +47,8 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         fragmentManager = getSupportFragmentManager();
+        if(getIntent().getStringExtra("auth")!=null)
+        authToken = getIntent().getStringExtra("auth");
         //if you want to update the items at a later time it is recommended to keep it in a variable
         PrimaryDrawerItem itemHome = new PrimaryDrawerItem().withIdentifier(0).withName("Home");
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Calendar");
@@ -50,7 +57,9 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
         PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName("Personal Area");
         SecondaryDrawerItem settings = new SecondaryDrawerItem().withIdentifier(5).withName("Settings");
         SecondaryDrawerItem logout = new SecondaryDrawerItem().withIdentifier(6).withName("Logout");
-
+        //nis me Home Fragment ne OnCreate
+       fragmentTransaction=fragmentManager.beginTransaction();
+       initHome();
         // Create the AccountHeader
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -80,8 +89,7 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                         fragmentTransaction = fragmentManager.beginTransaction();
-                        Log.d("position", " "+position);
+                                                Log.d("position", " "+position);
                         switch (position){
                             case 1:
                                 initHome();
@@ -107,6 +115,7 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
                 .build();
 
 
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);;
 
@@ -114,21 +123,37 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
         mWaveSwipeRefreshLayout.setOnRefreshListener(this);
     }
 
-    private void initPersonalAreaFragment(){
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initHome();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+    }
+
+    public void initPersonalAreaFragment(){
         setTitle("Personal Area");
+        fragmentTransaction=getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.addToBackStack("fragment");
         PersonalAreaFragment fragment = new PersonalAreaFragment();
         fragmentTransaction.replace(R.id.fragment, fragment);
         fragmentTransaction.commit();
     }
 
-    private void initTripsFragment(){
+    public void initTripsFragment(){
         setTitle("My Trips");
+        fragmentTransaction=getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.addToBackStack("fragment");
         TripsFragment fragment1 = new TripsFragment();
         fragmentTransaction.replace(R.id.fragment, fragment1);
         fragmentTransaction.commit();
     }
 
-    private void initChatActivity(){
+    public void initChatActivity(){
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -138,13 +163,16 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
         }, 200);
     }
 
-    private void initHome(){
+    public void initHome(){
+        setTitle("Home");
+        fragmentTransaction=getSupportFragmentManager().beginTransaction();
         HomeFragment homeFragment = new HomeFragment();
+        fragmentTransaction.addToBackStack("fragment");
         fragmentTransaction.replace(R.id.fragment, homeFragment);
         fragmentTransaction.commit();
     }
 
-    private void initCalendar(){
+    public void initCalendar(){
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -156,11 +184,18 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
 
     @Override
     public void onBackPressed() {
-        if(!result.isDrawerOpen()){
-            result.closeDrawer();
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 0) {
+            if(!result.isDrawerOpen()){
+                result.closeDrawer();
+            }
+            else
+                result.openDrawer();
+
+        } else {
+            getSupportFragmentManager().popBackStack();
         }
-        else
-            result.openDrawer();
+
     }
 
     @Override
@@ -200,4 +235,6 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
         //mWaveSwipeRefreshLayout.setRefreshing(true);
 
     }
+
+
 }

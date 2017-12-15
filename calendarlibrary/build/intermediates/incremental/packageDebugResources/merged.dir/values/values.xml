@@ -21,7 +21,7 @@
     <dimen name="calendar_text_small">14sp</dimen>
     <item name="day_view_adapter_class" type="id"/>
     <string name="day_name_format">EEE</string>
-    <string name="invalid_date">Data duhet te jete midis %1$s and %2$s.</string>
+    <string name="invalid_date">La data dovrebbe essere tra %1$s and %2$s.</string>
     <string name="month_name_format">MMMM yyyy</string>
     <style name="CalendarCell">
     <item name="android:layout_width">0dp</item>

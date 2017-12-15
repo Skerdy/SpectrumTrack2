@@ -18,8 +18,11 @@ import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.TripCheckListAdapte
 import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.TripsAdapter;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.RetrofitClient;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.TripRelatedCalls.TripDetailsAPI;
+import com.example.w2020skerdjan.spectrumtrack.Utils.MySharedPref;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,7 +66,7 @@ public class TripsFragment extends Fragment {
 
         retrofit = retrofitClient.krijoRetrofit();
         tripDetailsAPI = retrofit.create(TripDetailsAPI.class);
-        tripDetailsAPI.getAllTripsOfDriver("1").enqueue(callbackAllTrips);
+        tripDetailsAPI.getAllTripsOfDriver("1", getTripsMapHeader()).enqueue(callbackAllTrips);
         rc.setAdapter(tripsAdapter);
     }
 
@@ -102,5 +105,11 @@ public class TripsFragment extends Fragment {
         }
     };
 
-
+    public Map<String,String> getTripsMapHeader (){
+        MySharedPref mySharedPref = new MySharedPref(getActivity());
+        String auth = mySharedPref.getSavedObjectFromPreference("Auth", String.class);
+        Map<String,String> newMap = new HashMap<>();
+        newMap.put("x-auth-token", auth);
+        return  newMap;
+    }
 }

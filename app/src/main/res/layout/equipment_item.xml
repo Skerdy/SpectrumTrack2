@@ -4,37 +4,41 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/guillotine_background_dark"
+    android:layout_margin="6dp"
     >
 
     <TextView
         android:id="@+id/equipmentName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_weight="1"
         android:text="Equipment"
         android:textSize="24sp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textAlignment="center"
         />
 
     <EditText
         android:id="@+id/quantityEditor"
-        android:layout_width="63dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
         android:inputType="number"
+        android:textColor="@color/white"
         android:textAlignment="center"/>
 
     <CheckedTextView
         android:id="@+id/checkQuantity"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="of 5"
         android:textSize="24sp"
         android:layout_margin="5dp"
+        android:textColor="@color/white"
         android:clickable="true"
         android:paddingLeft="3dp"
         android:gravity="center"

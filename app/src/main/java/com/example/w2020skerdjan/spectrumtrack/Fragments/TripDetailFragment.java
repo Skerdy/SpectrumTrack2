@@ -3,6 +3,8 @@ package com.example.w2020skerdjan.spectrumtrack.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,8 @@ import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.TripDetailsIte
 import com.example.w2020skerdjan.spectrumtrack.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,7 +28,7 @@ import java.util.List;
 public class TripDetailFragment extends Fragment {
     private static final String ARG_TRIP_ID = "trip_id";
     private Trip trip;
-    private List<TripDetailsItem> data;
+    private ArrayList<TripDetailsItem> data;
 
 public static TripDetailFragment newInstance(Trip trip){
     TripDetailFragment fragment = new TripDetailFragment();
@@ -51,25 +55,37 @@ public static TripDetailFragment newInstance(Trip trip){
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View nsw = inflater.inflate(R.layout.trip_details_contents_fragment, container, false);
-        ListView lv = nsw.findViewById(R.id.tripDetailsList);
+        RecyclerView lv = nsw.findViewById(R.id.tripDetailsList);
+        /*
+        TripDetailsAdapter tripDetailBaseAdapter = new TripDetailsAdapter(getContext(), data);
+        lv.setAdapter(tripDetailBaseAdapter);
+        */
         data = new ArrayList<>();
-        data.add(new TripDetailsItem("Date", trip.getLoadUnloads().get(0).getLoadingPointAddress().getCity().toString()));
-        data.add(new TripDetailsItem("From", trip.getLoadUnloads().get(0).getLoadingPointDate().toString()));
+        data.add(new TripDetailsItem("Date", getStringDate(trip.getLoadUnloads().get(0).getLoadingPointDate())));
+        data.add(new TripDetailsItem("From", trip.getLoadUnloads().get(0).getLoadingPointAddress().getCity().toString() ));
         data.add(new TripDetailsItem("To", trip.getLoadUnloads().get(trip.getLoadUnloads().size()-1).getDeliveryPointAddress().getCity()));
         data.add(new TripDetailsItem("Truck", trip.getDisposition().getVehicle().toString()));
         data.add(new TripDetailsItem("Trailer", trip.getDisposition().getTrailer().toString()));
-        data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
-        data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
-        data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
-        data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
-        data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
-        data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
-        data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
-        data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
-        data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
-        data.add(new TripDetailsItem("Dummy tag", "Dummy data"));
-        TripDetailsAdapter tripDetailBaseAdapter = new TripDetailsAdapter(getContext(), data);
-        lv.setAdapter(tripDetailBaseAdapter);
+        lv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        lv.setAdapter(new com.example.w2020skerdjan.spectrumtrack.RecyclerViews.TripDetailsAdapter(getActivity(),data));
         return nsw;
     }
+
+    public String getStringDate (long dt){
+    Date date = new Date(dt);
+    return  getStringFromDate(date);
+    }
+
+    private String getStringFromDate(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        StringBuilder string = new StringBuilder();
+        string.append(" " + month +"/"+day +"/"+year);
+        return string.toString();
+    }
+
+
 }

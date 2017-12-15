@@ -59,7 +59,7 @@
 
         <TextView
             android:id="@+id/StopsTxt"
-            style="@style/TextView.GuillotineItem.Selected"
+            style="@style/TextView.GuillotineItem"
             android:text="Stops" />
     </LinearLayout>
 

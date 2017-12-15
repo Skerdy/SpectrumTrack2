@@ -12,6 +12,7 @@ public class DefaultDayViewAdapter implements DayViewAdapter {
       parent.addView(textView);
       parent.setDayOfMonthTextView(textView);
 
+      /*
       if(highlighted) {
           TextView textView1 = new TextView(new ContextThemeWrapper(parent.getContext(), R.style.CalendarCell_Calendartrip));
           textView.setDuplicateParentStateEnabled(true);
@@ -19,5 +20,6 @@ public class DefaultDayViewAdapter implements DayViewAdapter {
           parent.addView(textView1);
           parent.setTripText(textView1);
       }
+      */
   }
 }

@@ -18,10 +18,13 @@ import com.example.w2020skerdjan.spectrumtrack.R;
 import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.TripCheckListAdapter;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.RetrofitClient;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.TripRelatedCalls.TripDetailsAPI;
+import com.example.w2020skerdjan.spectrumtrack.Utils.MySharedPref;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Request;
 import retrofit2.Call;
@@ -56,7 +59,7 @@ public class TripCheckListFragment extends Fragment {
         retrofitClient = new RetrofitClient();
         retrofit = retrofitClient.krijoRetrofit();
         tripDetailsAPI = retrofit.create(TripDetailsAPI.class);
-        tripDetailsAPI.getEquipments().enqueue(callbackEquipments);
+        tripDetailsAPI.getEquipments(getEquipmentMapHeader()).enqueue(callbackEquipments);
 
     }
 
@@ -96,5 +99,13 @@ public class TripCheckListFragment extends Fragment {
         recyclerView= (RecyclerView) view.findViewById(R.id.check_list_recycler_view);
         recyclerView.setLayoutManager(mLayoutManager);
         //recyclerView.setAdapter(new TripCheckListAdapter(getActivity(), vehicleEquipments));
+    }
+
+    public Map<String,String> getEquipmentMapHeader (){
+        MySharedPref mySharedPref = new MySharedPref(getActivity());
+        String auth = mySharedPref.getSavedObjectFromPreference("Auth", String.class);
+        Map<String,String> newMap = new HashMap<>();
+        newMap.put("x-auth-token", auth);
+        return  newMap;
     }
 }

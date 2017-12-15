@@ -14,6 +14,9 @@ public class LoadUnload implements Serializable {
     @SerializedName("id")
     @Expose
     private Integer id;
+    @SerializedName("name")
+    @Expose
+    private String name;
     @SerializedName("loadingPointDate")
     @Expose
     private Long loadingPointDate;
@@ -26,18 +29,6 @@ public class LoadUnload implements Serializable {
     @SerializedName("deliveryPointAddress")
     @Expose
     private DeliveryPointAddress deliveryPointAddress;
-    @SerializedName("order")
-    @Expose
-    private String order;
-    @SerializedName("zone_id")
-    @Expose
-    private Object zoneId;
-    @SerializedName("kilometers")
-    @Expose
-    private Integer kilometers;
-    @SerializedName("validity")
-    @Expose
-    private Integer validity;
 
     public Integer getId() {
         return id;
@@ -45,6 +36,14 @@ public class LoadUnload implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getLoadingPointDate() {
@@ -78,37 +77,4 @@ public class LoadUnload implements Serializable {
     public void setDeliveryPointAddress(DeliveryPointAddress deliveryPointAddress) {
         this.deliveryPointAddress = deliveryPointAddress;
     }
-
-    public String getOrder() {
-        return order;
-    }
-
-    public void setOrder(String order) {
-        this.order = order;
-    }
-
-    public Object getZoneId() {
-        return zoneId;
-    }
-
-    public void setZoneId(Object zoneId) {
-        this.zoneId = zoneId;
-    }
-
-    public Integer getKilometers() {
-        return kilometers;
-    }
-
-    public void setKilometers(Integer kilometers) {
-        this.kilometers = kilometers;
-    }
-
-    public Integer getValidity() {
-        return validity;
-    }
-
-    public void setValidity(Integer validity) {
-        this.validity = validity;
-    }
-
 }

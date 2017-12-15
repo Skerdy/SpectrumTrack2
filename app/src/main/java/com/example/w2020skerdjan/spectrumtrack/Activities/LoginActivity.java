@@ -10,10 +10,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.w2020skerdjan.spectrumtrack.BuildConfig;
 import com.example.w2020skerdjan.spectrumtrack.Models.ResponseModels.LoginResponse;
 import com.example.w2020skerdjan.spectrumtrack.R;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.LoginCalls;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.RetrofitClient;
+import com.example.w2020skerdjan.spectrumtrack.Utils.MySharedPref;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +37,9 @@ public class LoginActivity extends BaseActivity{
     private  LoginResponse loginResponse;
     private  ProgressDialog progressDialog;
     private  boolean flag;
+    private  Map<String, String> map;
+    private String auth;
+    private  MySharedPref mySharedPref;
 
 
     @Override
@@ -42,7 +50,7 @@ public class LoginActivity extends BaseActivity{
         _emailText = (EditText) findViewById(R.id.input_email);
         _passwordText = (EditText) findViewById(R.id.input_password);
         _loginButton = (Button) findViewById(R.id.btn_login);
-
+        mySharedPref= new MySharedPref(this);
         retrofitClient = new RetrofitClient();
         retrofit = retrofitClient.krijoRetrofit();
 
@@ -53,6 +61,7 @@ public class LoginActivity extends BaseActivity{
             }
         });
        loginResponse=null;
+
     }
 
     public void login() {
@@ -83,7 +92,7 @@ public class LoginActivity extends BaseActivity{
         String password = _passwordText.getText().toString();
         loginCalls = retrofit.create(LoginCalls.class);
 
-        loginCalls.Login(email,password).enqueue(loginCallback);
+        loginCalls.Login(callMap(email,password)).enqueue(loginCallback);
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
@@ -104,8 +113,11 @@ public class LoginActivity extends BaseActivity{
         @Override
         public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
             if(response.isSuccessful()) {
-                 loginResponse = response.body();
+                loginResponse = response.body();
                 Log.d("Skerdi", "Sukses" + response.body().toString() + loginResponse.getData());
+                auth= loginResponse.getData();
+                mySharedPref.saveStringInSharedPref("Auth", auth);
+
             }
             else {
                 Log.d("Skerdi", "noSucces" );
@@ -128,6 +140,9 @@ public class LoginActivity extends BaseActivity{
 
     public void onLoginSuccess() {
         Intent intent = new Intent(LoginActivity.this, MainMenu.class);
+        if(auth!=null){
+            intent.putExtra("auth", auth);
+        }
         startActivity(intent);
         finish();
     }
@@ -162,4 +177,13 @@ public class LoginActivity extends BaseActivity{
         }
         return valid;
     }
+
+
+    public Map<String,String> callMap (String em , String pass){
+       Map<String,String> newMap = new HashMap<>();
+        newMap.put("email", em);
+        newMap.put("password", pass);
+        return  newMap;
+    }
+
 }

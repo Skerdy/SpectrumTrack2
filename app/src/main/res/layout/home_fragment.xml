@@ -1,21 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:background="@color/gray_dark">
 
-    <com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/listView"
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_active_trip"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffffff"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="3dp"
-        android:fadingEdge="none"
-        android:focusable="false"
-        android:gravity="center"
-        android:listSelector="#00000000"/>
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:fitsSystemWindows="true"
+        app:cardBackgroundColor="@color/cardview_dark_background"
+        android:elevation="@dimen/cardview_default_elevation"
+        android:layout_margin="10dp"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/truck_active_trip"
+            android:layout_gravity="top"
+            android:paddingBottom="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Milano"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_margin="20dp"
+            android:layout_gravity="start|bottom"
+            android:paddingBottom="30dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Truck"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_margin="20dp"
+            android:layout_gravity="center|bottom"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Roma"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_margin="20dp"
+            android:layout_gravity="start|bottom"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Trailer"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_margin="20dp"
+            android:layout_gravity="end|bottom"/>
+
+
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.GridLayout
+        android:layout_weight="6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:rowCount="4"
+        app:columnCount="2"
+        android:layout_margin="6dp"
+        >
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_calendar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:elevation="3dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:cardBackgroundColor="@color/guillotine_background_dark"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+                        >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/calendar_button"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="bottom"
+                android:background="@color/guillotine_background"
+                android:layout_margin="1dp"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:text="Calendar"
+                    />
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_chat"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:elevation="3dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:cardBackgroundColor="@color/guillotine_background_dark"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/chat_button"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="bottom"
+                android:background="@color/guillotine_background"
+                android:layout_margin="1dp"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:text="Chat"
+                    />
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_trips"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:elevation="3dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:cardBackgroundColor="@color/guillotine_background_dark"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/trips_button"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="bottom"
+                android:background="@color/guillotine_background"
+                android:layout_margin="1dp"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:text="My Trips"
+                    />
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_personal_area"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:elevation="3dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:cardBackgroundColor="@color/guillotine_background_dark"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/personal_area_button"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="bottom"
+                android:background="@color/guillotine_background"
+                android:layout_margin="1dp"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:text="Personal Area"
+                    />
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </android.support.v7.widget.GridLayout>
+
+
 
 
 

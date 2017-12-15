@@ -11,14 +11,20 @@ import com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated.FragmentCa
 import com.example.w2020skerdjan.spectrumtrack.R;
 import com.squareup.timessquare.CalendarPickerView;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /**
  * Created by W2020 Android on 12/7/2017.
  */
 
     public  class PlaceholderFragment extends Fragment {
         private static final String ARGUMENTS = "arg";
+        private static final String DATES = "dates";
         private FragmentCalendarState fragmentCalendarState;
         private CalendarPickerView calendarPickerView;
+        private ArrayList<Date> highlightedDates=null;
 
         public PlaceholderFragment() {
         }
@@ -33,6 +39,7 @@ import com.squareup.timessquare.CalendarPickerView;
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putSerializable(ARGUMENTS,calendarState);
+            //args.putSerializable(DATES, dates);
             fragment.setArguments(args);
             return fragment;
         }
@@ -44,6 +51,8 @@ import com.squareup.timessquare.CalendarPickerView;
             calendarPickerView = (CalendarPickerView) rootView.findViewById(R.id.calendar_view);
             fragmentCalendarState = (FragmentCalendarState) getArguments().getSerializable(ARGUMENTS);
             fragmentCalendarState.initCalendarInFragment(calendarPickerView);
+            if(highlightedDates!=null)
+            fragmentCalendarState.setHighlighteddates((highlightedDates));
             return rootView;
         }
 

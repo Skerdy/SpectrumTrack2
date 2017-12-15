@@ -5,9 +5,11 @@ import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.EquipmentRespo
 import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.VehicleEquipment;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.HeaderMap;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -17,14 +19,12 @@ import retrofit2.http.Path;
  */
 
 public interface TripDetailsAPI {
-
-
     @Headers({"Content-Type:application/json", "Origin:192.168.0.192:8081"})
     @GET("vehicleEquipmentModule/equipmentsOfVehicle/1")
-    Call<EquipmentResponseModel> getEquipments();
+    Call<EquipmentResponseModel> getEquipments(@HeaderMap Map<String,String> map);
 
     @Headers({"Content-Type:application/json", "Origin:192.168.0.192:8081"})
     @GET("tripModule/tripsOfDriver/{idDriver}")
-    Call<tripsOfDriverResponse> getAllTripsOfDriver(@Path("idDriver") String id);
+    Call<tripsOfDriverResponse> getAllTripsOfDriver(@Path("idDriver") String id, @HeaderMap Map<String,String> map);
 
 }

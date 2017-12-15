@@ -53,13 +53,10 @@ public class TripDetailsAdapter extends BaseAdapter {
             holder.tvContent = (TextView) convertView.findViewById(R.id.content);
             convertView.setTag(holder);
         }
-
         holder = (TripDetailsViewHolder) convertView.getTag();
         TripDetailsItem data = list.get(position);
-
         holder.tvTag.setText(data.getTag());
         holder.tvContent.setText(data.getContent());
-
         return convertView;
     }
 }

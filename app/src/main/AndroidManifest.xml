@@ -3,6 +3,14 @@
     package="com.example.w2020skerdjan.spectrumtrack">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -23,19 +31,13 @@
         </activity>
         <activity
             android:name=".Activities.MainMenu"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Activities.LoginActivity"
-            android:theme="@style/AppTheme.Dark">
-
-        </activity>
+            android:theme="@style/AppTheme.Dark"></activity>
         <activity
             android:name=".Activities.OldDialogsChatActivity"
-            android:label="Conversations">
-
-        </activity>
+            android:label="Conversations"></activity>
         <activity
             android:name=".Activities.TripDetails"
             android:label="@string/title_activity_trip_details"
@@ -50,13 +52,25 @@
         </activity>
         <activity
             android:name=".Activities.ChatActivity"
-            android:label="Chat HQ">
+            android:label="Chat HQ"></activity>
 
-        </activity>
-        <activity android:name=".Activities.TripCommands"
+        <activity
+            android:name=".Activities.TripCommands"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
+
+
+
+        <activity
+            android:name=".MapsActivity"
+            android:theme="@style/AppTheme"
+            android:label="@string/title_activity_maps">
+
+        </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCEKNpIGAH6b5CWqitSa4cLO-iosnT5pKk" />
     </application>
 
 </manifest>

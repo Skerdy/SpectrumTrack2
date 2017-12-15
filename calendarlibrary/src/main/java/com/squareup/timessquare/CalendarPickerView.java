@@ -623,11 +623,11 @@ public class CalendarPickerView extends ListView {
 
   private void validateDate(Date date) {
     if (date == null) {
-      throw new IllegalArgumentException("Data e zgjedhur nuk duhet te jete null");
+      throw new IllegalArgumentException("La data selezionata non dovrebbe essere nulla");
     }
     if (date.before(minCal.getTime()) || date.after(maxCal.getTime())) {
       throw new IllegalArgumentException(String.format(
-              "Data e zgjedhur duhet te jete midis dates minimale dhe maksimale"
+              "La data selezionata deve essere compresa tra la data minima e quella massima!"
                       + "%nminDate: %s%nmaxDate: %s%nselectedDate: %s", minCal.getTime(), maxCal.getTime(),
               date));
     }

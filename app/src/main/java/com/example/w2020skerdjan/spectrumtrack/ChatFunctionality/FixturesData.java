@@ -44,16 +44,11 @@ abstract class FixturesData {
 
     static final ArrayList<String> messages = new ArrayList<String>() {
         {
-            add("Pershendetje");
-            add("Yo!");
-            add("K");
-            add("Gha");
-            add("Lul");
-            add("Zero!");
-            add("Yo");
-            add("Yo");
-            add("Yo!");
-            add("Yup");
+            add("Ciao");
+            add("Ciao, come va oggi?");
+            add("Sto bene, grazie!");
+            add("Sei al lavoro oggi?");
+            add("Si, dove sei?");
             add(":D");
         }
     };

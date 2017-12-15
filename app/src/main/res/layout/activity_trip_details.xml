@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.w2020skerdjan.spectrumtrack.Activities.TripDetails">
+    tools:context="com.example.w2020skerdjan.spectrumtrack.Activities.TripDetails"
+    android:background="@color/guillotine_background_dark">
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -46,7 +47,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:fillViewport="true"
         android:id="@+id/tripDetailsFragment"
-        android:background="@drawable/trip_detail_item"
+        android:background="@color/gray_dark"
         android:layout_margin="5dp"
         android:orientation="vertical"
         />

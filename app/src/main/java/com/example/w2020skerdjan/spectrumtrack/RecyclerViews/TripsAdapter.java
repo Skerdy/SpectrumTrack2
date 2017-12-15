@@ -16,6 +16,8 @@ import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.Trip;
 import com.example.w2020skerdjan.spectrumtrack.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,10 +47,10 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
         Trip trip = trips.get(position);
         final int p = position;
         holder.from.setText(trip.getLoadUnloads().get(0).getLoadingPointAddress().getCity().toString());
-        holder.date.setText(trip.getLoadUnloads().get(0).getLoadingPointDate().toString());
+        holder.date.setText(getStringDate(trip.getLoadUnloads().get(0).getLoadingPointDate()));
         holder.to.setText(trip.getLoadUnloads().get(trip.getLoadUnloads().size()-1).getDeliveryPointAddress().getCity());
-        holder.truck.setText(trip.getDisposition().getVehicle().toString());
-        holder.trailer.setText(trip.getDisposition().getTrailer().toString());
+        holder.truck.setText(trip.getDisposition().getVehicle());
+        holder.trailer.setText(trip.getDisposition().getTrailer());
         holder.openTripButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,5 +85,19 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
         }
 
     }
+    public String getStringDate (long dt){
+        Date date = new Date(dt);
+        return  getStringFromDate(date);
+    }
 
+    private String getStringFromDate(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        StringBuilder string = new StringBuilder();
+        string.append(" " + month +"/"+day +"/"+year);
+        return string.toString();
+    }
 }
