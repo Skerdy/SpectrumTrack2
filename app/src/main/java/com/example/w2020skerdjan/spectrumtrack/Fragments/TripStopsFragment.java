@@ -10,20 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.w2020skerdjan.spectrumtrack.Models.ResponseModels.tripsOfDriverResponse;
-import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.EquipmentResponseModel;
-import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.OldTrip;
+import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.Activities.AllActivities;
+import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.Stops.AllStops;
 import com.example.w2020skerdjan.spectrumtrack.R;
-import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.TripCheckListAdapter;
-import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.TripsAdapter;
+import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.ActivityAdapter;
+import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.StopsAdapter;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.RetrofitClient;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.TripRelatedCalls.TripDetailsAPI;
-import com.example.w2020skerdjan.spectrumtrack.Utils.MySharedPref;
 import com.example.w2020skerdjan.spectrumtrack.Utils.RetrofitHeaderManager;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,55 +25,50 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 /**
- * Created by W2020 Android on 12/2/2017.
+ * Created by W2020 Android on 12/18/2017.
  */
 
-public class TripsFragment extends Fragment {
+public class TripStopsFragment extends Fragment {
     private RecyclerView rc;
     private RecyclerView.LayoutManager mLayoutManager;
-    private TripsAdapter tripsAdapter;
+    private StopsAdapter stopsAdapter;
     private Retrofit retrofit;
     private TripDetailsAPI tripDetailsAPI;
     private RetrofitClient retrofitClient;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.trips_fragment, container, false);
-
+        return inflater.inflate(R.layout.trip_stops_fragment, container, false);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
+
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mLayoutManager= new LinearLayoutManager(getActivity());
-        //tripsAdapter=new TripsAdapter(getActivity(), generateDummyTrips());
-        rc = (RecyclerView)view.findViewById(R.id.trips_recycler_view);
+        rc = (RecyclerView)view.findViewById(R.id.recyclerViewStops);
         rc.setLayoutManager(mLayoutManager);
         retrofitClient = new RetrofitClient();
-
         retrofit = retrofitClient.krijoRetrofit();
         tripDetailsAPI = retrofit.create(TripDetailsAPI.class);
-        tripDetailsAPI.getAllTripsOfDriver("1", RetrofitHeaderManager.getAuthMap(getActivity())).enqueue(callbackAllTrips);
-        rc.setAdapter(tripsAdapter);
+        tripDetailsAPI.getAllStops(RetrofitHeaderManager.getAuthMap(getActivity())).enqueue(callbackAllStops);
     }
 
-
-    Callback<tripsOfDriverResponse> callbackAllTrips = new Callback<tripsOfDriverResponse>() {
+    Callback<AllStops> callbackAllStops = new Callback<AllStops>() {
         @Override
-        public void onResponse(Call<tripsOfDriverResponse> call, Response<tripsOfDriverResponse> response) {
+        public void onResponse(Call<AllStops> call, Response<AllStops> response) {
             if(response.isSuccessful()){
                 Log.d("Skerdi", "response Sukses");
-                 tripsOfDriverResponse tripsResponse = response.body();
-                 tripsAdapter =  new TripsAdapter(getActivity(), tripsResponse.getData());
-                rc.setAdapter(tripsAdapter);
+                AllStops allStops = response.body();
+                stopsAdapter =  new StopsAdapter(getActivity(), allStops.getData());
+                rc.setAdapter(stopsAdapter);
             }
             else {
                 Log.d("Skerdi", "response vjen por eshte gabim ");
@@ -87,11 +76,9 @@ public class TripsFragment extends Fragment {
         }
 
         @Override
-        public void onFailure(Call<tripsOfDriverResponse> call, Throwable t) {
+        public void onFailure(Call<AllStops> call, Throwable t) {
             Log.d("Skerdi", "Fail ");
             Log.d("Skerdi", t.getMessage());
         }
     };
-
-
 }

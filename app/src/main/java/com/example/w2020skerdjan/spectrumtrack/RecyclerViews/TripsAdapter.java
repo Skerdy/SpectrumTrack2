@@ -3,6 +3,7 @@ package com.example.w2020skerdjan.spectrumtrack.RecyclerViews;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,7 @@ import java.util.List;
  * Created by W2020 Android on 12/2/2017.
  */
 
-public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> {
+public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder>{
     private List<Trip> trips =  new ArrayList<>();
     private Context ctx;
 
@@ -61,6 +62,17 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
                 ctx.startActivity(intent);
             }
         });
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ctx, TripDetails.class );
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("TripPosition", trips.get(position));
+                intent.putExtra("Bundle", bundle);
+                ctx.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -69,11 +81,13 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
     }
 
 
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
 
         private TextView from, to , date, truck, trailer;
         private ImageButton openTripButton;
+        private CardView cardView;
         public ViewHolder(View v) {
             super(v);
             from = (TextView) v.findViewById(R.id.fromText);
@@ -82,6 +96,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder> 
             truck = (TextView) v.findViewById(R.id.truckText);
             trailer = (TextView) v.findViewById(R.id.trailerText);
             openTripButton = (ImageButton) v.findViewById(R.id.image_button_trips);
+            cardView = (CardView) v.findViewById(R.id.TripCard);
         }
 
     }

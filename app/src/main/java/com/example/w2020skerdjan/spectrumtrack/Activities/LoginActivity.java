@@ -16,6 +16,7 @@ import com.example.w2020skerdjan.spectrumtrack.R;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.LoginCalls;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.RetrofitClient;
 import com.example.w2020skerdjan.spectrumtrack.Utils.MySharedPref;
+import com.example.w2020skerdjan.spectrumtrack.Utils.RetrofitHeaderManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,7 +61,7 @@ public class LoginActivity extends BaseActivity{
                 login();
             }
         });
-       loginResponse=null;
+         loginResponse=null;
 
     }
 
@@ -81,6 +82,9 @@ public class LoginActivity extends BaseActivity{
             }
         });
 
+        String email = _emailText.getText().toString();
+        String password = _passwordText.getText().toString();
+
 
         progressDialog= new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme_Dark_Dialog);
@@ -88,24 +92,11 @@ public class LoginActivity extends BaseActivity{
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
         loginCalls = retrofit.create(LoginCalls.class);
+        loginCalls.Login(RetrofitHeaderManager.loginMap(email,password)).enqueue(loginCallback);
 
-        loginCalls.Login(callMap(email,password)).enqueue(loginCallback);
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        if(!loginResponse.getMessageList().get(0).getDescription().equals("Invalid user credentials!")){
-                            onLoginSuccess();
-                            // onLoginFailed();
-                            progressDialog.dismiss();
-                        }
-                        else {
-                            onLoginFailed();
-                        }
-                    }
-                }, 3000);
+
+
 
     }
 
@@ -115,8 +106,22 @@ public class LoginActivity extends BaseActivity{
             if(response.isSuccessful()) {
                 loginResponse = response.body();
                 Log.d("Skerdi", "Sukses" + response.body().toString() + loginResponse.getData());
-                auth= loginResponse.getData();
-                mySharedPref.saveStringInSharedPref("Auth", auth);
+                 auth= loginResponse.getData();
+                 mySharedPref.saveStringInSharedPref("Auth", auth);
+
+                new android.os.Handler().postDelayed(
+                        new Runnable() {
+                            public void run() {
+                                if(!loginResponse.getMessageList().get(0).getDescription().equals("Invalid user credentials!")){
+                                    onLoginSuccess();
+                                    // onLoginFailed();
+                                    progressDialog.dismiss();
+                                }
+                                else {
+                                    onLoginFailed();
+                                }
+                            }
+                        }, 3000);
 
             }
             else {
@@ -179,11 +184,6 @@ public class LoginActivity extends BaseActivity{
     }
 
 
-    public Map<String,String> callMap (String em , String pass){
-       Map<String,String> newMap = new HashMap<>();
-        newMap.put("email", em);
-        newMap.put("password", pass);
-        return  newMap;
-    }
+
 
 }

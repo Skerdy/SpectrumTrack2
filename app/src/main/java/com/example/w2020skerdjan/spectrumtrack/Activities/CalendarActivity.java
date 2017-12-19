@@ -2,16 +2,13 @@ package com.example.w2020skerdjan.spectrumtrack.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.widget.ImageButton;
-
 import com.example.w2020skerdjan.spectrumtrack.Adapters.CalendarFragmentAdapter;
 import com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated.CalendarEntity;
 import com.example.w2020skerdjan.spectrumtrack.R;
@@ -31,8 +28,8 @@ public class CalendarActivity extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    private ViewPager mViewPager;
 
+    private ViewPager mViewPager;
     private ImageButton prev, next;
     private CalendarFragmentAdapter calendarFragmentAdapter;
 
@@ -48,7 +45,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        calendarFragmentAdapter = new CalendarFragmentAdapter(getSupportFragmentManager());
+        calendarFragmentAdapter = new CalendarFragmentAdapter(getSupportFragmentManager(),6, this);
         prev = (ImageButton) findViewById(R.id.buton_prev);
         next = (ImageButton) findViewById(R.id.buton_next);
 

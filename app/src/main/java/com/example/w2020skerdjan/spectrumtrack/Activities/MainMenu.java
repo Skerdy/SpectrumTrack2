@@ -58,7 +58,6 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
         SecondaryDrawerItem settings = new SecondaryDrawerItem().withIdentifier(5).withName("Settings");
         SecondaryDrawerItem logout = new SecondaryDrawerItem().withIdentifier(6).withName("Logout");
         //nis me Home Fragment ne OnCreate
-       fragmentTransaction=fragmentManager.beginTransaction();
        initHome();
         // Create the AccountHeader
         AccountHeader headerResult = new AccountHeaderBuilder()
@@ -132,7 +131,6 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
     @Override
     protected void onRestart() {
         super.onRestart();
-
     }
 
     public void initPersonalAreaFragment(){

@@ -29,6 +29,7 @@
                 android:src="@drawable/ic_menu_90" />
 
             <TextView
+                android:id="@+id/TripCommandsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -37,6 +38,21 @@
                 android:textStyle="bold"
                 android:textColor="@color/white"/>
         </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/DefaultTripContainer"
+            >
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TripCommandsContainer"
+            >
+
+        </LinearLayout>
 
 
 
