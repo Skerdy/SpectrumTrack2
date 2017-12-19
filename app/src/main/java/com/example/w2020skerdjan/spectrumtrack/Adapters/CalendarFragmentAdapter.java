@@ -40,6 +40,7 @@ public class CalendarFragmentAdapter extends FragmentPagerAdapter {
         private CalendarResponse calendarResponse;
         private Context ctx;
         private List<PlaceholderFragment> months;
+        private int monthIterator;
 
 
         public CalendarFragmentAdapter(FragmentManager fm, int numberOfMonths, Context ctx){
@@ -51,20 +52,17 @@ public class CalendarFragmentAdapter extends FragmentPagerAdapter {
             retrofitClient = new RetrofitClient();
             retrofit = retrofitClient.krijoRetrofit();
             calendarCalls= retrofit.create(CalendarCalls.class);
+            fetchAllMonths();
+            monthIterator=1;
         }
 
 
 
         @Override
         public Fragment getItem(int position) {
+            /*
             if(position==0){
                 makeCalendarCall();
-                new android.os.Handler().postDelayed(
-                        new Runnable() {
-                            public void run() {
-                                Log.d("AfterCall"," calendar response" + calendarResponse.getData().get(0).getActivity().get(0).getName());
-                            }
-                        }, 2000);
                 return PlaceholderFragment.newInstance(calendarEntity.getFragmentCalendarState());
 
 
@@ -72,15 +70,10 @@ public class CalendarFragmentAdapter extends FragmentPagerAdapter {
             else {
                 calendarEntity.showActualMonth();
                 makeCalendarCall();
-                new android.os.Handler().postDelayed(
-                        new Runnable() {
-                            public void run() {
-                                Log.d("AfterCall"," calendar response" + calendarResponse.getData().get(0).getActivity().get(0).getName());
-                            }
-                        }, 2000);
-
                 return PlaceholderFragment.newInstance(calendarEntity.getFragmentCalendarState());
             }
+            */
+            return months.get(position);
 
         }
 
@@ -92,27 +85,51 @@ public class CalendarFragmentAdapter extends FragmentPagerAdapter {
 
 
         public void makeCalendarCall(){
-            calendarCalls.getCalendarEvents(RetrofitHeaderManager.getCalendarMap(ctx,12,2017)).enqueue(calendarCallback);
+            calendarCalls.getCalendarEvents(RetrofitHeaderManager.getCalendarMap(ctx,calendarEntity.getCurrentMonth(),calendarEntity.getCurrentYear())).enqueue(calendarCallback);
         }
 
        Callback<CalendarResponse> calendarCallback = new Callback<CalendarResponse>() {
            @Override
            public void onResponse(Call<CalendarResponse> call, Response<CalendarResponse> response) {
                if(response.isSuccessful()) {
+                   Log.d("Kalendar", "Success" );
                    calendarResponse = response.body();
-                  // PlaceholderFragment placeholderFragment = PlaceholderFragment.newInstance(calendarEntity.getFragmentCalendarState());
 
+                   if( calendarResponse != null)
+                   if(calendarResponse.getData().size()!=0) {
+
+                       if(monthIterator!=1)
+                       calendarEntity.showActualMonth();
+
+                       Log.d("Kalendar", calendarResponse.getData().toString() );
+                       PlaceholderFragment actualMonth = PlaceholderFragment.newInstance(calendarEntity.getFragmentCalendarState());
+                       months.add(actualMonth);
+                   }
                }
                else {
-                   Log.d("Skerdi", "noSucces" );
+                   Log.d("Kalendar", "noSucces" );
                }
            }
+
 
            @Override
            public void onFailure(Call<CalendarResponse> call, Throwable t) {
-               Log.d("Skerdi", "Failure Calendar FetchData" + t.getMessage());
+               Log.d("Kalendar", "Failure Calendar FetchData" + t.getMessage());
            }
        };
+
+
+        public void fetchAllMonths(){
+            for(int i =0; i<numberOfMonths;i++){
+                if(i==0){
+                    makeCalendarCall();
+                }
+                else{
+                    makeCalendarCall();
+                }
+                monthIterator++;
+            }
+        }
 
     }
 

@@ -45,7 +45,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        calendarFragmentAdapter = new CalendarFragmentAdapter(getSupportFragmentManager(),6, this);
+        calendarFragmentAdapter = new CalendarFragmentAdapter(getSupportFragmentManager(),3, this);
         prev = (ImageButton) findViewById(R.id.buton_prev);
         next = (ImageButton) findViewById(R.id.buton_next);
 
