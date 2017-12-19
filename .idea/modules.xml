@@ -4,9 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SpectrumTrack2.iml" filepath="$PROJECT_DIR$/SpectrumTrack2.iml" />
       <module fileurl="file://C:\Users\W2020 Android\Documents\GitHub\SpectrumTrack2\.idea\SpectrumTrack2.iml" filepath="C:\Users\W2020 Android\Documents\GitHub\SpectrumTrack2\.idea\SpectrumTrack2.iml" />
-      <module fileurl="file://C:\Users\user\Desktop\SpectrumTrack2\SpectrumTrack2.iml" filepath="C:\Users\user\Desktop\SpectrumTrack2\SpectrumTrack2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\user\Desktop\SpectrumTrack2\app\app.iml" filepath="C:\Users\user\Desktop\SpectrumTrack2\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/calendarlibrary/calendarlibrary.iml" filepath="$PROJECT_DIR$/calendarlibrary/calendarlibrary.iml" />
     </modules>
   </component>

@@ -4,9 +4,10 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
-import com.example.w2020skerdjan.spectrumtrack.Fragments.PlaceholderFragment;
+import com.example.w2020skerdjan.spectrumtrack.Fragments.MonthFragment;
 import com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated.CalendarEntity;
 import com.example.w2020skerdjan.spectrumtrack.Models.ResponseModels.CalendarResponse;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.CalendarRelatedCalls.CalendarCalls;
@@ -14,7 +15,6 @@ import com.example.w2020skerdjan.spectrumtrack.Retrofit.RetrofitClient;
 import com.example.w2020skerdjan.spectrumtrack.Utils.RetrofitHeaderManager;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,15 +22,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-/**
- * Created by W2020 Android on 12/7/2017.
- */
 
  /** A {@link FragmentPagerAdapter} that returns a fragment corresponding to
         * one of the sections/tabs/pages.
         */
 
-public class CalendarFragmentAdapter extends FragmentPagerAdapter {
+public class CalendarFragmentAdapter extends FragmentStatePagerAdapter {
 
         private int numberOfMonths;
         private CalendarEntity calendarEntity;
@@ -39,7 +36,7 @@ public class CalendarFragmentAdapter extends FragmentPagerAdapter {
         private CalendarCalls calendarCalls;
         private CalendarResponse calendarResponse;
         private Context ctx;
-        private List<PlaceholderFragment> months;
+        private List<MonthFragment> months;
         private int monthIterator;
 
 
@@ -63,14 +60,14 @@ public class CalendarFragmentAdapter extends FragmentPagerAdapter {
             /*
             if(position==0){
                 makeCalendarCall();
-                return PlaceholderFragment.newInstance(calendarEntity.getFragmentCalendarState());
+                return MonthFragment.newInstance(calendarEntity.getFragmentCalendarState());
 
 
             }
             else {
                 calendarEntity.showActualMonth();
                 makeCalendarCall();
-                return PlaceholderFragment.newInstance(calendarEntity.getFragmentCalendarState());
+                return MonthFragment.newInstance(calendarEntity.getFragmentCalendarState());
             }
             */
             return months.get(position);
@@ -102,7 +99,7 @@ public class CalendarFragmentAdapter extends FragmentPagerAdapter {
                        calendarEntity.showActualMonth();
 
                        Log.d("Kalendar", calendarResponse.getData().toString() );
-                       PlaceholderFragment actualMonth = PlaceholderFragment.newInstance(calendarEntity.getFragmentCalendarState());
+                       MonthFragment actualMonth = MonthFragment.newInstance(calendarEntity.getFragmentCalendarState());
                        months.add(actualMonth);
                    }
                }

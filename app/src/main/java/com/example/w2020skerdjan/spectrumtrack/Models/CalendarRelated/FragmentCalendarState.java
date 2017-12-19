@@ -1,6 +1,8 @@
 package com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated;
 
+import com.squareup.timessquare.CalendarCellView;
 import com.squareup.timessquare.CalendarPickerView;
+import com.squareup.timessquare.DayViewAdapter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,36 +35,11 @@ public class FragmentCalendarState implements Serializable {
     public void initCalendarInFragment(CalendarPickerView cal){
         this.cal=cal;
         cal.init(calendarStartingDate, calendarJavaObject.getTime())
-                .inMode(CalendarPickerView.SelectionMode.SINGLE).withHighlightedDates(generateDummyHighlightdates());
-    }
-
-
-    public List<Date> generateDummySelectedDates(){
-        List<Date> dates = new ArrayList<>();
-        for(int i=0;i<5;i++){
-            Date date = krijoDate(getYearFromDate(calendarStartingDate), getMonthFromDate(calendarStartingDate), i+getDayFromDate(calendarStartingDate)+1);
-            dates.add(date);
-        }
-         return dates;
+                .inMode(CalendarPickerView.SelectionMode.SINGLE);
 
     }
 
-    public List<Date> generateDummyHighlightdates(){
-        List<Date> dates = new ArrayList<>();
-        for(int i=0;i<7;i++){
-            Date date = krijoDate(getYearFromDate(calendarStartingDate), getMonthFromDate(calendarStartingDate), i + getDayFromDate(calendarStartingDate)+2);
-            dates.add(date);
-        }
-        dates.add(krijoDate(getYearFromDate(calendarStartingDate), getMonthFromDate(calendarStartingDate),23));
-        dates.add(krijoDate(getYearFromDate(calendarStartingDate), getMonthFromDate(calendarStartingDate),24));
-        dates.add(krijoDate(getYearFromDate(calendarStartingDate), getMonthFromDate(calendarStartingDate),25));
 
-
-        dates.add(krijoDate(getYearFromDate(calendarStartingDate), getMonthFromDate(calendarStartingDate),27));
-        dates.add(krijoDate(getYearFromDate(calendarStartingDate), getMonthFromDate(calendarStartingDate),28));
-        return dates;
-
-    }
     public void setHighlighteddates(ArrayList<Date> dates){
         cal.highlightDates(dates);
     }

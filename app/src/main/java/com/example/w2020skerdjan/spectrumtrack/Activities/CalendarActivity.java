@@ -1,5 +1,7 @@
 package com.example.w2020skerdjan.spectrumtrack.Activities;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -38,59 +40,8 @@ public class CalendarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        calendarFragmentAdapter = new CalendarFragmentAdapter(getSupportFragmentManager(),3, this);
-        prev = (ImageButton) findViewById(R.id.buton_prev);
-        next = (ImageButton) findViewById(R.id.buton_next);
-
-
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(calendarFragmentAdapter);
-
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            float sumPositionplusPositionOffset;
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if(position+positionOffset>sumPositionplusPositionOffset){
-                    //swipe right ->left
-                }
-                else{
-                    //swipe left ->right
-                }
-                sumPositionplusPositionOffset=position+positionOffset;
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
-
-        prev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mViewPager.setCurrentItem(moveViewPagerWithButton(-1), true);
-            }
-        });
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {mViewPager.setCurrentItem(moveViewPagerWithButton(1), true);
-            }
-        });
-
+        initCalendarViews();
+        new initCalendarActivity().execute(this);
     }
 
     private int moveViewPagerWithButton(int i) {
@@ -121,6 +72,41 @@ public class CalendarActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private class initCalendarActivity extends AsyncTask<Context,Integer,Void>{
+
+        @Override
+        protected Void doInBackground(Context... contexts) {
+            calendarFragmentAdapter = new CalendarFragmentAdapter(getSupportFragmentManager(),3,contexts[0] );
+            mViewPager.setAdapter(calendarFragmentAdapter);
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+    }
+
+    private void initCalendarViews(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        prev = (ImageButton) findViewById(R.id.buton_prev);
+        next = (ImageButton) findViewById(R.id.buton_next);
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewPager.setCurrentItem(moveViewPagerWithButton(-1), true);
+            }
+        });
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {mViewPager.setCurrentItem(moveViewPagerWithButton(1), true);
+            }
+        });
     }
 
 }

@@ -12,10 +12,10 @@ import java.util.Date;
 
 public class CalendarEntity implements Serializable{
     //kalendar stuff
-    private int CurrentMonth, todayMonth, CurrentYear, todayYear;
+    private int CurrentMonth, CurrentYear, todayMonth, todayYear;
     private Date today;
     private Date lastGeneratedDate;
-    private Calendar kalendar_android;
+    private Calendar calendar_util;
     private FragmentCalendarState fragmentCalendarState;
 
 
@@ -27,8 +27,8 @@ public class CalendarEntity implements Serializable{
         todayYear = getYearFromDate(today);
         CurrentYear=todayYear;
         Log.d("Current Month ", " "+CurrentMonth);
-        kalendar_android = fetchCalendarDates(today);
-        fragmentCalendarState= new FragmentCalendarState(today,kalendar_android);
+        calendar_util = fetchCalendarDates(today);
+        fragmentCalendarState= new FragmentCalendarState(today,calendar_util);
     }
 
     public FragmentCalendarState getFragmentCalendarState(){
@@ -36,7 +36,7 @@ public class CalendarEntity implements Serializable{
     }
 
 
-    private int getMonthFromDate(Date date){
+    public static int getMonthFromDate(Date date){
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int year = cal.get(Calendar.YEAR);
@@ -45,7 +45,7 @@ public class CalendarEntity implements Serializable{
         return month;
     }
 
-    private  int getYearFromDate(Date date) {
+    public static int getYearFromDate(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int year = cal.get(Calendar.YEAR);
@@ -56,7 +56,7 @@ public class CalendarEntity implements Serializable{
 
 
 
-    public Calendar fetchCalendarDates(Date startingDay){
+    public static Calendar fetchCalendarDates(Date startingDay){
         Calendar kalendar = Calendar.getInstance();
         Calendar cal = Calendar.getInstance();
         kalendar.setTime(startingDay);
@@ -84,7 +84,7 @@ public class CalendarEntity implements Serializable{
         fragmentCalendarState= new FragmentCalendarState(nextMonthFirstDate,workingCal);
     }
 
-    public Date krijoDate (int Viti, int muaji){
+    public static Date krijoDate (int Viti, int muaji){
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, Viti);
         calendar.set(Calendar.MONTH, muaji);

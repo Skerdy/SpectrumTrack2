@@ -13,20 +13,19 @@ import com.squareup.timessquare.CalendarPickerView;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by W2020 Android on 12/7/2017.
  */
 
-    public  class PlaceholderFragment extends Fragment {
+    public  class MonthFragment extends Fragment {
         private static final String ARGUMENTS = "arg";
         private static final String DATES = "dates";
         private FragmentCalendarState fragmentCalendarState;
         private CalendarPickerView calendarPickerView;
         private ArrayList<Date> highlightedDates=null;
 
-        public PlaceholderFragment() {
+        public MonthFragment() {
         }
 
         @Override
@@ -35,8 +34,8 @@ import java.util.List;
         }
 
 
-        public static PlaceholderFragment newInstance(FragmentCalendarState calendarState) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+        public static MonthFragment newInstance(FragmentCalendarState calendarState) {
+            MonthFragment fragment = new MonthFragment();
             Bundle args = new Bundle();
             args.putSerializable(ARGUMENTS,calendarState);
             //args.putSerializable(DATES, dates);
