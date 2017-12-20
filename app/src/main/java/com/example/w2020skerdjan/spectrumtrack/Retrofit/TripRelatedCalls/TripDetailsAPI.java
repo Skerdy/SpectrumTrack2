@@ -26,8 +26,8 @@ public interface TripDetailsAPI {
     Call<EquipmentResponseModel> getEquipments(@HeaderMap Map<String,String> map);
 
     @Headers({"Content-Type:application/json", "Origin:192.168.0.192:8081"})
-    @GET("tripModule/tripsOfDriver/{idDriver}")
-    Call<tripsOfDriverResponse> getAllTripsOfDriver(@Path("idDriver") String id, @HeaderMap Map<String,String> map);
+    @GET("tripModule/tripsOfDriver/")
+    Call<tripsOfDriverResponse> getAllTripsOfDriver(@HeaderMap Map<String,String> map);
 
     @Headers({"Content-Type:application/json", "Origin:192.168.0.192:8081"})
     @GET("tripModule/activity")

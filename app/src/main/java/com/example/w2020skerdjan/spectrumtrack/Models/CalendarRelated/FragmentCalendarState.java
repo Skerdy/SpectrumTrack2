@@ -23,6 +23,7 @@ public class FragmentCalendarState implements Serializable {
     public FragmentCalendarState(Date dt, Calendar cl){
         calendarJavaObject=cl;
         calendarStartingDate=dt;
+        highlighteddates = new ArrayList<>();
     }
 
     public Date getCalendarStartingDate(){
@@ -36,12 +37,19 @@ public class FragmentCalendarState implements Serializable {
         this.cal=cal;
         cal.init(calendarStartingDate, calendarJavaObject.getTime())
                 .inMode(CalendarPickerView.SelectionMode.SINGLE);
-
+        if(highlighteddates.size()!=0){
+            cal.highlightDates(highlighteddates);
+        }
     }
 
 
     public void setHighlighteddates(ArrayList<Date> dates){
-        cal.highlightDates(dates);
+        this.highlighteddates=dates;
+    }
+
+    public void clearHighLightedDates (){
+        this.highlighteddates.clear();
+
     }
 
     public Date krijoDate (int Viti, int muaji, int dite){

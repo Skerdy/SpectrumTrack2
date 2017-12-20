@@ -22,4 +22,13 @@ public class DefaultDayViewAdapter implements DayViewAdapter {
       }
       */
   }
+
+    @Override
+    public void makeEventName(CalendarCellView parent) {
+        TextView textView = new TextView(
+                new ContextThemeWrapper(parent.getContext(), R.style.CalendarCell_Calendartrip));
+        textView.setDuplicateParentStateEnabled(true);
+        parent.addView(textView);
+        parent.setEventName(textView);
+    }
 }

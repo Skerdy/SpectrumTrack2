@@ -67,7 +67,7 @@ public class TripsFragment extends Fragment {
 
         retrofit = retrofitClient.krijoRetrofit();
         tripDetailsAPI = retrofit.create(TripDetailsAPI.class);
-        tripDetailsAPI.getAllTripsOfDriver("1", RetrofitHeaderManager.getAuthMap(getActivity())).enqueue(callbackAllTrips);
+        tripDetailsAPI.getAllTripsOfDriver(RetrofitHeaderManager.getAuthMap(getActivity())).enqueue(callbackAllTrips);
         rc.setAdapter(tripsAdapter);
     }
 

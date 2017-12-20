@@ -14,19 +14,33 @@ public class CalendarEntity implements Serializable{
     //kalendar stuff
     private int CurrentMonth, CurrentYear, todayMonth, todayYear;
     private Date today;
-    private Date lastGeneratedDate;
     private Calendar calendar_util;
     private FragmentCalendarState fragmentCalendarState;
 
 
     public CalendarEntity (){
-        today = new Date();
-        lastGeneratedDate=today;
+        initWithoutDate();
+        Log.d("Current Month ", " "+CurrentMonth);
+
+    }
+
+
+    public void initWithDate(Date date){
+        this.today=date;
         todayMonth = getMonthFromDate(today);
-        CurrentMonth=todayMonth;
+        CurrentMonth = todayMonth;
         todayYear = getYearFromDate(today);
         CurrentYear=todayYear;
-        Log.d("Current Month ", " "+CurrentMonth);
+        calendar_util = fetchCalendarDates(today);
+        fragmentCalendarState= new FragmentCalendarState(today,calendar_util);
+    }
+
+    private void initWithoutDate(){
+        today = new Date();
+        todayMonth = getMonthFromDate(today);
+        CurrentMonth = todayMonth;
+        todayYear = getYearFromDate(today);
+        CurrentYear=todayYear;
         calendar_util = fetchCalendarDates(today);
         fragmentCalendarState= new FragmentCalendarState(today,calendar_util);
     }
@@ -39,9 +53,7 @@ public class CalendarEntity implements Serializable{
     public static int getMonthFromDate(Date date){
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
         return month;
     }
 
@@ -49,12 +61,8 @@ public class CalendarEntity implements Serializable{
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
         return year;
     }
-
-
 
     public static Calendar fetchCalendarDates(Date startingDay){
         Calendar kalendar = Calendar.getInstance();
@@ -77,7 +85,6 @@ public class CalendarEntity implements Serializable{
             CurrentMonth = -1;
         }
         Date nextMonthFirstDate = krijoDate(CurrentYear, CurrentMonth + 1);
-        lastGeneratedDate = nextMonthFirstDate;
         Log.d("Data e muajit tjeter", nextMonthFirstDate.toString());
         workingCal = fetchCalendarDates(nextMonthFirstDate);
         CurrentMonth++;
@@ -113,7 +120,4 @@ public class CalendarEntity implements Serializable{
         return CurrentYear;
     }
 
-    public Date getLastGeneratedDate() {
-        return lastGeneratedDate;
-    }
 }

@@ -773,6 +773,24 @@ public class CalendarPickerView extends ListView {
     validateAndUpdate();
   }
 
+  public void highlightSkerdyDates(Collection<Date> dates){
+    for (Date date : dates) {
+      validateDate(date);
+
+      MonthCellWithMonthIndex monthCellWithMonthIndex = getMonthCellWithIndexByDate(date);
+      if (monthCellWithMonthIndex != null) {
+        Calendar newlyHighlightedCal = Calendar.getInstance(timeZone, locale);
+        newlyHighlightedCal.setTime(date);
+        MonthCellDescriptor cell = monthCellWithMonthIndex.cell;
+        highlightedCells.add(cell);
+        highlightedCals.add(newlyHighlightedCal);
+        cell.setHighlighted(true);
+      }
+    }
+
+    validateAndUpdate();
+  }
+
   public void clearSelectedDates() {
     for (MonthCellDescriptor selectedCell : selectedCells) {
       selectedCell.setRangeState(RangeState.NONE);

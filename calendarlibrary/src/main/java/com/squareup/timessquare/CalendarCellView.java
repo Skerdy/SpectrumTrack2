@@ -36,7 +36,7 @@ public class CalendarCellView extends FrameLayout {
   private boolean isHighlighted = false;
   private RangeState rangeState = RangeState.NONE;
   private TextView dayOfMonthTextView;
-  private TextView tripText;
+  private TextView eventName;
 
   @SuppressWarnings("UnusedDeclaration") //
   public CalendarCellView(Context context, AttributeSet attrs) {
@@ -132,8 +132,8 @@ public class CalendarCellView extends FrameLayout {
     dayOfMonthTextView = textView;
   }
 
-  public void setTripText(TextView textView){
-    tripText = textView;
+  public void setEventName(TextView textView){
+    eventName = textView;
   }
 
   public TextView getDayOfMonthTextView() {
@@ -143,5 +143,14 @@ public class CalendarCellView extends FrameLayout {
       );
     }
     return dayOfMonthTextView;
+  }
+
+  public TextView getEventNameTextView(){
+    if (eventName == null) {
+      throw new IllegalStateException(
+              "You have to setDayOfMonthTextView in your custom DayViewAdapter."
+      );
+    }
+    return eventName;
   }
 }
