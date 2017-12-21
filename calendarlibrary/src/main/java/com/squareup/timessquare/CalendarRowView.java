@@ -10,12 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.Serializable;
+
 import static android.view.View.MeasureSpec.AT_MOST;
 import static android.view.View.MeasureSpec.EXACTLY;
 import static android.view.View.MeasureSpec.makeMeasureSpec;
 
 /** TableRow that draws a divider between each cell. To be used with {@link CalendarGridView}. */
-public class CalendarRowView extends ViewGroup implements View.OnClickListener {
+public class CalendarRowView extends ViewGroup implements View.OnClickListener, Serializable {
   private boolean isHeaderRow;
   private MonthView.Listener listener;
 
@@ -85,7 +87,6 @@ public class CalendarRowView extends ViewGroup implements View.OnClickListener {
       if (getChildAt(i) instanceof CalendarCellView) {
         CalendarCellView cell = ((CalendarCellView) getChildAt(i));
         cell.removeAllViews();
-        Log.d("Skerdi",  "" +cell.isHighlighted());
         adapter.makeCellView(cell, i%2==0);
       }
     }

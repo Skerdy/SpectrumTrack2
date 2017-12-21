@@ -1,9 +1,10 @@
 // Copyright 2012 Square, Inc.
 package com.squareup.timessquare;
 
+import java.io.Serializable;
 import java.util.Date;
 
-class MonthDescriptor {
+class MonthDescriptor implements Serializable {
   private final int month;
   private final int year;
   private final Date date;

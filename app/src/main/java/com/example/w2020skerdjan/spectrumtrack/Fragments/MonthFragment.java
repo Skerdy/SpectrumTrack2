@@ -1,5 +1,6 @@
 package com.example.w2020skerdjan.spectrumtrack.Fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -36,8 +37,6 @@ import retrofit2.Retrofit;
         private FragmentCalendarState fragmentCalendarState;
         private CalendarPickerView calendarPickerView;
         private ArrayList<Date> highlightedDates=null;
-
-
         private int monthParam, yearParam;
         private Retrofit retrofit;
         private RetrofitClient retrofitClient;
@@ -79,11 +78,17 @@ import retrofit2.Retrofit;
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_calendar, container, false);
             calendarPickerView = (CalendarPickerView) rootView.findViewById(R.id.calendar_view);
-
-            fragmentCalendarState.initCalendarInFragment(calendarPickerView);
-            if(highlightedDates!=null)
-            fragmentCalendarState.setHighlighteddates((highlightedDates));
+            initCalendarData(fragmentCalendarState);
             return rootView;
+        }
+
+        public void initCalendarData(FragmentCalendarState fr){
+            calendarPickerView.init(fr.getCalendarStartingDate(), fr.getCalendarJavaObject().getTime())
+                    .inMode(CalendarPickerView.SelectionMode.SINGLE);
+            if(fr.getHighlighteddates().size()!=0){
+                //  cal.highlightDates(highlighteddates);
+                calendarPickerView.highlightSkerdyDates(fr.getHighlighteddates(), Color.BLUE);
+            }
         }
 
         @Override
@@ -110,7 +115,7 @@ import retrofit2.Retrofit;
                         if (calendarUtilsResponse.getResultHighlight().size() != 0) {
                             Log.d("Kalendar", "HighlightedDates te llogaritura jane OK");
                             fragmentCalendarState.setHighlighteddates(calendarUtilsResponse.getResultHighlight());
-                            fragmentCalendarState.initCalendarInFragment(calendarPickerView);
+                            initCalendarData(fragmentCalendarState);
                         }
                         else {
                             Log.d("Kalendar", "HighlightedDates te llogaritura jane Bosh");

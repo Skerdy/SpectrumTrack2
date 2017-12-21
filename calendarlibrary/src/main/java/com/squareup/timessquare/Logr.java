@@ -2,8 +2,10 @@ package com.squareup.timessquare;
 
 import android.util.Log;
 
+import java.io.Serializable;
+
 /** Log utility class to handle the log tag and DEBUG-only logging. */
-final class Logr {
+final class Logr  implements Serializable {
   public static void d(String message) {
     if (BuildConfig.DEBUG) {
       Log.d("TimesSquare", message);

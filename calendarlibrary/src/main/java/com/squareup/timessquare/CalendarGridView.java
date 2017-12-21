@@ -10,6 +10,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.Serializable;
+
 import static android.view.View.MeasureSpec.AT_MOST;
 import static android.view.View.MeasureSpec.EXACTLY;
 import static android.view.View.MeasureSpec.makeMeasureSpec;
@@ -18,7 +20,7 @@ import static android.view.View.MeasureSpec.makeMeasureSpec;
  * ViewGroup that draws a grid of calendar cells.  All children must be {@link CalendarRowView}s.
  * The first row is assumed to be a header and no divider is drawn above it.
  */
-public class CalendarGridView extends ViewGroup {
+public class CalendarGridView extends ViewGroup implements Serializable {
   /**
    * The grid lines don't exactly line up on certain devices (Nexus 7, Nexus 5). Fudging the
    * co-ordinates by half a point seems to fix this without breaking other devices.

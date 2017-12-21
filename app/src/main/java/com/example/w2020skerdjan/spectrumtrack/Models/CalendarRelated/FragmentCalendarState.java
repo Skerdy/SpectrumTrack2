@@ -1,5 +1,7 @@
 package com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated;
 
+import android.graphics.Color;
+
 import com.squareup.timessquare.CalendarCellView;
 import com.squareup.timessquare.CalendarPickerView;
 import com.squareup.timessquare.DayViewAdapter;
@@ -17,7 +19,11 @@ import java.util.List;
 public class FragmentCalendarState implements Serializable {
     private Date calendarStartingDate;
     private Calendar calendarJavaObject;
-    private CalendarPickerView cal;
+
+    public ArrayList<Date> getHighlighteddates() {
+        return highlighteddates;
+    }
+
     private ArrayList<Date> highlighteddates;
 
     public FragmentCalendarState(Date dt, Calendar cl){
@@ -31,15 +37,6 @@ public class FragmentCalendarState implements Serializable {
     }
     public Calendar getCalendarJavaObject(){
         return  calendarJavaObject;
-    }
-
-    public void initCalendarInFragment(CalendarPickerView cal){
-        this.cal=cal;
-        cal.init(calendarStartingDate, calendarJavaObject.getTime())
-                .inMode(CalendarPickerView.SelectionMode.SINGLE);
-        if(highlighteddates.size()!=0){
-            cal.highlightDates(highlighteddates);
-        }
     }
 
 

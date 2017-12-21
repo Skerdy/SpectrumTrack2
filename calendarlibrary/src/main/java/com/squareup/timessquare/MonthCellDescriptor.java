@@ -2,10 +2,20 @@
 
 package com.squareup.timessquare;
 
+import android.graphics.Color;
+
+import java.io.Serializable;
 import java.util.Date;
 
 /** Describes the state of a particular date cell in a {@link MonthView}. */
-class MonthCellDescriptor {
+class MonthCellDescriptor implements Serializable {
+
+  public static final int RED= Color.parseColor("#e53935");
+  public static final int BLUE= Color.parseColor("#43a047");
+  public static final int GREEN= Color.parseColor("#1e88e5");
+  public static final int GRAY= Color.parseColor("#74756e");
+
+
 
   private final Date date;
   private final int value;
@@ -17,8 +27,12 @@ class MonthCellDescriptor {
   private RangeState rangeState;
   private String tripName = "bosh";
 
+
+
+  private int HIGHLIGHT_COLOR = RED;
+
   MonthCellDescriptor(Date date, boolean currentMonth, boolean selectable, boolean selected,
-      boolean today, boolean highlighted, int value, RangeState rangeState, String tripName) {
+      boolean today, boolean highlighted, int value, RangeState rangeState, String tripName, int Color) {
     this.date = date;
     isCurrentMonth = currentMonth;
     isSelectable = selectable;
@@ -28,6 +42,7 @@ class MonthCellDescriptor {
     this.value = value;
     this.rangeState = rangeState;
     this.tripName = tripName;
+    this.HIGHLIGHT_COLOR = Color;
   }
 
   public Date getDate() {
@@ -80,6 +95,14 @@ class MonthCellDescriptor {
 
   public void setTripName(String tripName){
     this.tripName=tripName;
+  }
+
+  public int getHIGHLIGHT_COLOR() {
+    return HIGHLIGHT_COLOR;
+  }
+
+  public void setHIGHLIGHT_COLOR(int HIGHLIGHT_COLOR) {
+    this.HIGHLIGHT_COLOR = HIGHLIGHT_COLOR;
   }
 
   @Override public String toString() {

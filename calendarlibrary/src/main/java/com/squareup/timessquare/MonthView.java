@@ -10,13 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class MonthView extends LinearLayout {
+public class MonthView extends LinearLayout implements Serializable {
   TextView title;
   CalendarGridView grid;
   View dayNamesHeaderRowView;
@@ -76,7 +78,6 @@ public class MonthView extends LinearLayout {
     } else {
       view.dayNamesHeaderRowView.setVisibility(View.GONE);
     }
-
     view.listener = listener;
     view.decorators = decorators;
     return view;
@@ -141,7 +142,9 @@ public class MonthView extends LinearLayout {
           cellView.setToday(cell.isToday());
           cellView.setRangeState(cell.getRangeState());
           cellView.setHighlighted(cell.isHighlighted());
+          cellView.setHighLightColor(cell.getHIGHLIGHT_COLOR());
           cellView.setTag(cell);
+
 
           if (null != decorators) {
             for (CalendarCellDecorator decorator : decorators) {

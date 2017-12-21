@@ -3,7 +3,9 @@ package com.squareup.timessquare;
 import android.view.ContextThemeWrapper;
 import android.widget.TextView;
 
-public class DefaultDayViewAdapter implements DayViewAdapter {
+import java.io.Serializable;
+
+public class DefaultDayViewAdapter implements DayViewAdapter, Serializable {
   @Override
   public void makeCellView(CalendarCellView parent, boolean highlighted) {
       TextView textView = new TextView(

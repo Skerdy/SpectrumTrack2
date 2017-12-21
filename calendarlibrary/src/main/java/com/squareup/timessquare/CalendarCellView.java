@@ -7,7 +7,9 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-public class CalendarCellView extends FrameLayout {
+import java.io.Serializable;
+
+public class CalendarCellView extends FrameLayout implements Serializable {
   private static final int[] STATE_SELECTABLE = {
       R.attr.tsquare_state_selectable
   };
@@ -29,11 +31,24 @@ public class CalendarCellView extends FrameLayout {
   private static final int[] STATE_RANGE_LAST = {
       R.attr.tsquare_state_range_last
   };
+  private static final int[] HIGHLIGHT_COLOR={
+          R.attr.tsquare_state_highlighted
+  };
 
   private boolean isSelectable = false;
   private boolean isCurrentMonth = false;
   private boolean isToday = false;
   private boolean isHighlighted = false;
+
+  public int getHighLightColor() {
+    return HighLightColor;
+  }
+
+  public void setHighLightColor(int highLightColor) {
+    HighLightColor = highLightColor;
+  }
+
+  private int HighLightColor = MonthCellDescriptor.BLUE;
   private RangeState rangeState = RangeState.NONE;
   private TextView dayOfMonthTextView;
   private TextView eventName;
@@ -115,6 +130,7 @@ public class CalendarCellView extends FrameLayout {
 
     if (isHighlighted) {
       mergeDrawableStates(drawableState, STATE_HIGHLIGHTED);
+      mergeDrawableStates(drawableState, HIGHLIGHT_COLOR);
     }
 
     if (rangeState == RangeState.FIRST) {

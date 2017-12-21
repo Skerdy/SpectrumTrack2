@@ -1,5 +1,6 @@
 package com.squareup.timessquare;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ import java.util.Map;
  * - Fast key lookup by index
  * - Fast index lookup by key
  */
-class IndexedLinkedHashMap<K, V> extends LinkedHashMap<K, V> {
+class IndexedLinkedHashMap<K, V> extends LinkedHashMap<K, V> implements Serializable {
   private final Map<Integer, K> indexToKey = new LinkedHashMap<>();
   private final Map<K, Integer> keyToIndex = new LinkedHashMap<>();
   private int index = 0;

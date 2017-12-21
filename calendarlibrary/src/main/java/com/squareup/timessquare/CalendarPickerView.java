@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
@@ -41,7 +43,7 @@ import static java.util.Calendar.YEAR;
  * {@link FluentInitializer} methods returned.  The currently selected date can be retrieved with
  * {@link #getSelectedDate()}.
  */
-public class CalendarPickerView extends ListView {
+public class CalendarPickerView extends ListView implements Serializable {
   public enum SelectionMode {
     /**
      * Only one date will be selectable.  If there is already a selected date and you select a new
@@ -81,6 +83,7 @@ public class CalendarPickerView extends ListView {
   SelectionMode selectionMode;
   Calendar today;
   private int dividerColor;
+  private int highlightColor;
   private int dayBackgroundResId;
   private int dayTextColorResId;
   private int titleTextStyle;
@@ -116,16 +119,22 @@ public class CalendarPickerView extends ListView {
 
     Resources res = context.getResources();
     TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CalendarPickerView);
+
     final int bg = a.getColor(R.styleable.CalendarPickerView_android_background,
             res.getColor(R.color.calendar_bg));
+
     dividerColor = a.getColor(R.styleable.CalendarPickerView_tsquare_dividerColor,
             res.getColor(R.color.calendar_divider));
+
     dayBackgroundResId = a.getResourceId(R.styleable.CalendarPickerView_tsquare_dayBackground,
             R.drawable.calendar_bg_selector);
+
     dayTextColorResId = a.getResourceId(R.styleable.CalendarPickerView_tsquare_dayTextColor,
             R.color.calendar_text_selector);
+
     titleTextStyle = a.getResourceId(R.styleable.CalendarPickerView_tsquare_titleTextStyle,
             R.style.CalendarTitle);
+
     displayHeader = a.getBoolean(R.styleable.CalendarPickerView_tsquare_displayHeader, true);
     headerTextColor = a.getColor(R.styleable.CalendarPickerView_tsquare_headerTextColor,
             res.getColor(R.color.calendar_text_active));
@@ -329,7 +338,7 @@ public class CalendarPickerView extends ListView {
     return init(minDate, maxDate, TimeZone.getDefault(), locale);
   }
 
-  public class FluentInitializer {
+  public class FluentInitializer implements  Serializable {
     /** Override the {@link SelectionMode} from the default ({@link SelectionMode#SINGLE}). */
     public FluentInitializer inMode(SelectionMode mode) {
       selectionMode = mode;
@@ -556,7 +565,7 @@ public class CalendarPickerView extends ListView {
     cal.set(MILLISECOND, 0);
   }
 
-  private class CellClickedListener implements MonthView.Listener {
+  private class CellClickedListener implements MonthView.Listener, Serializable {
     @Override public void handleClick(MonthCellDescriptor cell) {
       Date clickedDate = cell.getDate();
 
@@ -757,13 +766,11 @@ public class CalendarPickerView extends ListView {
   public void highlightDates(Collection<Date> dates) {
     for (Date date : dates) {
       validateDate(date);
-
       MonthCellWithMonthIndex monthCellWithMonthIndex = getMonthCellWithIndexByDate(date);
       if (monthCellWithMonthIndex != null) {
         Calendar newlyHighlightedCal = Calendar.getInstance(timeZone, locale);
         newlyHighlightedCal.setTime(date);
         MonthCellDescriptor cell = monthCellWithMonthIndex.cell;
-
         highlightedCells.add(cell);
         highlightedCals.add(newlyHighlightedCal);
         cell.setHighlighted(true);
@@ -773,7 +780,7 @@ public class CalendarPickerView extends ListView {
     validateAndUpdate();
   }
 
-  public void highlightSkerdyDates(Collection<Date> dates){
+  public void highlightSkerdyDates(Collection<Date> dates, int Color){
     for (Date date : dates) {
       validateDate(date);
 
@@ -782,12 +789,12 @@ public class CalendarPickerView extends ListView {
         Calendar newlyHighlightedCal = Calendar.getInstance(timeZone, locale);
         newlyHighlightedCal.setTime(date);
         MonthCellDescriptor cell = monthCellWithMonthIndex.cell;
+        cell.setHIGHLIGHT_COLOR(Color);
         highlightedCells.add(cell);
         highlightedCals.add(newlyHighlightedCal);
         cell.setHighlighted(true);
       }
     }
-
     validateAndUpdate();
   }
 
@@ -811,7 +818,7 @@ public class CalendarPickerView extends ListView {
   }
 
   /** Hold a cell with a month-index. */
-  private static class MonthCellWithMonthIndex {
+  private static class MonthCellWithMonthIndex implements  Serializable{
     MonthCellDescriptor cell;
     int monthIndex;
 
@@ -841,7 +848,7 @@ public class CalendarPickerView extends ListView {
     return null;
   }
 
-  private class MonthAdapter extends BaseAdapter {
+  private class MonthAdapter extends BaseAdapter implements Serializable {
     private final LayoutInflater inflater;
 
     private MonthAdapter() {
@@ -930,7 +937,7 @@ public class CalendarPickerView extends ListView {
 
         weekCells.add(
                 new MonthCellDescriptor(date, isCurrentMonth, isSelectable, isSelected, isToday,
-                        isHighlighted, value, rangeState, "Skerdi"));
+                        isHighlighted, value, rangeState, "Skerdi", highlightColor));
         cal.add(DATE, 1);
       }
     }
@@ -1075,11 +1082,11 @@ public class CalendarPickerView extends ListView {
    *
    * @see #setCellClickInterceptor(CellClickInterceptor)
    */
-  public interface CellClickInterceptor {
+  public interface CellClickInterceptor  {
     boolean onCellClicked(Date date);
   }
 
-  private class DefaultOnInvalidDateSelectedListener implements OnInvalidDateSelectedListener {
+  private class DefaultOnInvalidDateSelectedListener implements OnInvalidDateSelectedListener, Serializable {
     @Override public void onInvalidDateSelected(Date date) {
       String errMessage =
               getResources().getString(R.string.invalid_date, fullDateFormat.format(minCal.getTime()),
