@@ -106,7 +106,7 @@ public class LoginActivity extends BaseActivity{
             if(response.isSuccessful()) {
                 loginResponse = response.body();
                 Log.d("Skerdi", "Sukses" + response.body().toString() + loginResponse.getData());
-                 auth= loginResponse.getData();
+                 auth= loginResponse.getData().getToken();
                  mySharedPref.saveStringInSharedPref("Auth", auth);
 
                 new android.os.Handler().postDelayed(

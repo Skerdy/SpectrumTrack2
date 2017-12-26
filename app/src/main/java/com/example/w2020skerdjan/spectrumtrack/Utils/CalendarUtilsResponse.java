@@ -51,20 +51,24 @@ public class CalendarUtilsResponse {
              //Logjika per cdo kalendar Activity
              Log.d("CalendarUtil", "Jemi ne Calendar Activity");
 
-         if(calendarInfos.get(i).getLegend().toString().equals("Deadline")){
+         if(calendarInfos.get(i).getLegend().toString().equals("Deadline")) {
 
              Log.d("CalendarUtil", "Jemi ne deadLine");
              //Logjika per objektin DeadLine
-             Date eventLoadDate = new Date(calendarInfos.get(i).getActivity().get(j).getLoadingPointDate());
+             Date today = new Date();
+
+                 Date eventLoadDate = new Date(calendarInfos.get(i).getActivity().get(j).getLoadingPointDate());
+             if (eventLoadDate.compareTo(today)>=0){
              Log.d("CalendarUtil", "Event Load Date eshte = " + eventLoadDate.toString());
              Date eventDeliveryDate = new Date(calendarInfos.get(i).getActivity().get(j).getDeliveryPointDate());
              Log.d("CalendarUtil", "Event Delivery Date eshte = " + eventDeliveryDate.toString());
 
-             eventDuration = ktheDatatNdermjet(eventLoadDate,eventDeliveryDate);
+             eventDuration = ktheDatatNdermjet(eventLoadDate, eventDeliveryDate);
              Log.d("EventDuration", "Size i Event  Duration = " + eventDuration.size());
-             for(int k=0 ; k< eventDuration.size(); k++){
+             for (int k = 0; k < eventDuration.size(); k++) {
                  resultHighlight.add(eventDuration.get(k));
              }
+         }
 
          }
          else {

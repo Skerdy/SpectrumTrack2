@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.w2020skerdjan.spectrumtrack.Activities.TripDetails;
 import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.EquipmentResponseModel;
+import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.Trip;
 import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.VehicleEquipment;
 import com.example.w2020skerdjan.spectrumtrack.R;
 import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.TripCheckListAdapter;
@@ -37,17 +38,32 @@ import retrofit2.Retrofit;
  */
 
 public class TripCheckListFragment extends Fragment {
+    private static final String ARG_Trip_Id = "trip_id";
     private RecyclerView recyclerView;
     private ArrayList<VehicleEquipment> vehicleEquipments = new ArrayList<>();
     private RecyclerView.LayoutManager mLayoutManager;
     private RetrofitClient retrofitClient;
     private Retrofit retrofit;
     private TripDetailsAPI tripDetailsAPI;
+    private Trip trip;
+
+    public static TripCheckListFragment newInstance(Trip trip){
+        TripCheckListFragment fragment = new TripCheckListFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_Trip_Id,  trip);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            if (getArguments().containsKey(ARG_Trip_Id)) {
+                trip = (Trip) getArguments().getSerializable(ARG_Trip_Id);
+            }
+        }
         for(int i =0; i<20 ;i++){
             VehicleEquipment vh = new VehicleEquipment();
             vh.setEquipment("Equipment");
@@ -55,12 +71,10 @@ public class TripCheckListFragment extends Fragment {
             vh.setQuantity(12);
             vehicleEquipments.add(vh);
         }
-
         retrofitClient = new RetrofitClient();
         retrofit = retrofitClient.krijoRetrofit();
         tripDetailsAPI = retrofit.create(TripDetailsAPI.class);
-        tripDetailsAPI.getEquipments(getEquipmentMapHeader()).enqueue(callbackEquipments);
-
+        tripDetailsAPI.getEquipments(getEquipmentMapHeader(),trip.getDisposition().getVehicleId().toString()).enqueue(callbackEquipments);
     }
 
     Callback<EquipmentResponseModel> callbackEquipments = new Callback<EquipmentResponseModel>(){

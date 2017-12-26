@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.support.v7.widget.Toolbar;
 
@@ -133,6 +134,12 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
         super.onRestart();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.universal_menu, menu);
+        return true;
+    }
+
     public void initPersonalAreaFragment(){
         setTitle("Personal Area");
         fragmentTransaction=getSupportFragmentManager().beginTransaction();
@@ -191,6 +198,7 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
                 result.openDrawer();
 
         } else {
+            setTitle("Home");
             getSupportFragmentManager().popBackStack();
         }
 

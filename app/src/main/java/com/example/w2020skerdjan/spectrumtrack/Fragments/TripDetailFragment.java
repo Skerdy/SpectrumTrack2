@@ -33,7 +33,6 @@ public class TripDetailFragment extends Fragment {
 public static TripDetailFragment newInstance(Trip trip){
     TripDetailFragment fragment = new TripDetailFragment();
     Bundle args = new Bundle();
-
     args.putSerializable(ARG_TRIP_ID, trip );
     fragment.setArguments(args);
     return fragment;

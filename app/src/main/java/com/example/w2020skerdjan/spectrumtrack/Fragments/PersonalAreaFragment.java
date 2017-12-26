@@ -4,6 +4,8 @@ package com.example.w2020skerdjan.spectrumtrack.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +13,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.w2020skerdjan.spectrumtrack.Models.DriverRelated.PersonalAreaData;
+import com.example.w2020skerdjan.spectrumtrack.Models.DriverRelated.UserExpiration;
 import com.example.w2020skerdjan.spectrumtrack.Models.ResponseModels.LoginResponse;
 import com.example.w2020skerdjan.spectrumtrack.Models.ResponseModels.PersonalAreaResponse;
+import com.example.w2020skerdjan.spectrumtrack.Models.ResponseModels.UserExpirationsResponse;
 import com.example.w2020skerdjan.spectrumtrack.R;
+import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.ExpirationsAdapter;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.DriverRelatedCalls.DriverCallAPI;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.RetrofitClient;
 import com.example.w2020skerdjan.spectrumtrack.Utils.RetrofitHeaderManager;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,8 +39,12 @@ public class PersonalAreaFragment extends Fragment {
     private Retrofit retrofit;
     private RetrofitClient retrofitClient;
     private DriverCallAPI driverCallAPI;
-    private TextView day , week, nextStop;
+    private TextView day , week, nextStop, infrigements;
     private PersonalAreaData personalAreaData;
+    private List<UserExpiration> expirations;
+    private RecyclerView recyclerView;
+    private ExpirationsAdapter expirationsAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +53,9 @@ public class PersonalAreaFragment extends Fragment {
         retrofit = retrofitClient.krijoRetrofit();
         driverCallAPI = retrofit.create(DriverCallAPI.class);
         personalAreaData = null;
-        driverCallAPI.getPersonalAreaData(RetrofitHeaderManager.getAuthMap(getActivity())).enqueue(personalAreaCallBack);
+        layoutManager= new LinearLayoutManager(getActivity());
+
+
     }
 
     @Nullable
@@ -56,34 +69,64 @@ public class PersonalAreaFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         day = (TextView) view.findViewById(R.id.day_PA);
         week = (TextView) view.findViewById(R.id.week_PA);
-        if(personalAreaData!=null){
-            setDataIntoViews(personalAreaData);
-        }
+        nextStop = (TextView) view.findViewById(R.id.next_stop_PA);
+        infrigements = (TextView) view.findViewById(R.id.infrigements);
+        recyclerView = (RecyclerView)view.findViewById(R.id.expiration_RecyclerView);
+        recyclerView.setLayoutManager(layoutManager);
+
+        driverCallAPI.getPersonalAreaData(RetrofitHeaderManager.getAuthMap(getActivity())).enqueue(personalAreaCallBack);
+        driverCallAPI.getUserExpirations(RetrofitHeaderManager.getAuthMap(getActivity())).enqueue(userExpirationsCallBack);
+
+
+
+
         //nese personal area data nuk ka ardhur ende bej nej thirrje te dyte
         //else if (personalAreaData==null)
-        driverCallAPI.getPersonalAreaData(RetrofitHeaderManager.getAuthMap(getActivity())).enqueue(personalAreaCallBack);
     }
 
     Callback<PersonalAreaResponse> personalAreaCallBack =  new Callback<PersonalAreaResponse>() {
         @Override
         public void onResponse(Call<PersonalAreaResponse> call, Response<PersonalAreaResponse> response) {
             if (response.isSuccessful()){
+                Log.d("ResponsePersonalArea", " Response is successful");
                 PersonalAreaResponse personalAreaResponse = response.body();
                 personalAreaData=personalAreaResponse.getData();
-                if(validateViewsCreated()){
                     setDataIntoViews(personalAreaData);
-                }
+
             }
             else {
-                Log.d("Response PersonalArea", " Response not successful");
+                Log.d("ResponsePersonalArea", " Response not successful");
             }
         }
 
         @Override
         public void onFailure(Call<PersonalAreaResponse> call, Throwable t) {
-            Log.d("Response PersonalArea", " Response Failed : " + t.getMessage());
+            Log.d("ResponsePersonalArea", " Response Failed : " + t.getMessage());
         }
     };
+
+
+    Callback<UserExpirationsResponse> userExpirationsCallBack = new Callback<UserExpirationsResponse>() {
+        @Override
+        public void onResponse(Call<UserExpirationsResponse> call, Response<UserExpirationsResponse> response) {
+            if (response.isSuccessful()){
+                Log.d("ResponsePersonalArea", " Response is successful");
+                UserExpirationsResponse expirationsResponse = response.body();
+                expirations=expirationsResponse.getData();
+                expirationsAdapter = new ExpirationsAdapter(getActivity(), expirations);
+                recyclerView.setAdapter(expirationsAdapter);
+            }
+            else {
+                Log.d("ResponsePersonalArea", " Response not successful");
+            }
+        }
+
+        @Override
+        public void onFailure(Call<UserExpirationsResponse> call, Throwable t) {
+
+        }
+    };
+
 
 
     public boolean validateViewsCreated (){
@@ -97,17 +140,17 @@ public class PersonalAreaFragment extends Fragment {
         if(nextStop==null){
             flag=false;
         }
-        Log.d("Response PersonalArea", " flag : " + flag);
-
+        Log.d("ResponsePersonalArea", " flag : " + flag);
         return flag;
     }
 
-    public void setDataIntoViews ( PersonalAreaData data){
+    public void setDataIntoViews (PersonalAreaData data){
         day.setText(data.getDay().toString());
         week.setText(data.getWeek().toString());
         nextStop.setText(data.getNextStop().toString());
-        Log.d("Response PersonalArea", " textviews associated wuith data");
-
+        StringBuilder infrigements_string = new StringBuilder();
+        infrigements_string.append("INFRIGEMENTS (").append(data.getFine()).append(")");
+        infrigements.setText(infrigements_string.toString());
+        Log.d("ResponsePersonalArea", " textviews associated wuith data");
     }
-
 }

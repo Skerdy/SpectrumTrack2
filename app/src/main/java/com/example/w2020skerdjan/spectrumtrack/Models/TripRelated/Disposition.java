@@ -20,6 +20,9 @@ public class Disposition implements Serializable {
     @SerializedName("vehicle")
     @Expose
     private String vehicle;
+    @SerializedName("vehicleId")
+    @Expose
+    private Integer vehicleId;
     @SerializedName("trailer")
     @Expose
     private String trailer;
@@ -87,6 +90,13 @@ public class Disposition implements Serializable {
         this.vehicle = vehicle;
     }
 
+    public Integer getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(Integer vehicleId) {
+        this.vehicleId = vehicleId;
+    }
     public String getTrailer() {
         return trailer;
     }

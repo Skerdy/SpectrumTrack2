@@ -1,17 +1,17 @@
 package com.example.w2020skerdjan.spectrumtrack.Models.ResponseModels;
 
 /**
- * Created by W2020 Android on 12/12/2017.
+ * Created by W2020 Android on 12/26/2017.
  */
 
 import java.util.List;
 
-import com.example.w2020skerdjan.spectrumtrack.Models.LoginRelated.AuthData;
+import com.example.w2020skerdjan.spectrumtrack.Models.DriverRelated.UserExpiration;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.MessageList;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LoginResponse {
+public class UserExpirationsResponse {
 
     @SerializedName("messagePresent")
     @Expose
@@ -21,7 +21,7 @@ public class LoginResponse {
     private List<MessageList> messageList = null;
     @SerializedName("data")
     @Expose
-    private AuthData data;
+    private List<UserExpiration> data = null;
 
     public Boolean getMessagePresent() {
         return messagePresent;
@@ -39,11 +39,11 @@ public class LoginResponse {
         this.messageList = messageList;
     }
 
-    public AuthData getData() {
+    public List<UserExpiration> getData() {
         return data;
     }
 
-    public void setData(AuthData data) {
+    public void setData(List<UserExpiration> data) {
         this.data = data;
     }
 

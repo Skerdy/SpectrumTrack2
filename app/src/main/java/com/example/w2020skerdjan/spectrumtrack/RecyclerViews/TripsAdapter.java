@@ -109,7 +109,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder>{
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
+        int month = cal.get(Calendar.MONTH)+1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
         StringBuilder string = new StringBuilder();
         string.append(" " + month +"/"+day +"/"+year);

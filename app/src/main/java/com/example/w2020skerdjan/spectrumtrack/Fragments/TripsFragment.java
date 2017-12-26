@@ -64,7 +64,6 @@ public class TripsFragment extends Fragment {
         rc = (RecyclerView)view.findViewById(R.id.trips_recycler_view);
         rc.setLayoutManager(mLayoutManager);
         retrofitClient = new RetrofitClient();
-
         retrofit = retrofitClient.krijoRetrofit();
         tripDetailsAPI = retrofit.create(TripDetailsAPI.class);
         tripDetailsAPI.getAllTripsOfDriver(RetrofitHeaderManager.getAuthMap(getActivity())).enqueue(callbackAllTrips);
