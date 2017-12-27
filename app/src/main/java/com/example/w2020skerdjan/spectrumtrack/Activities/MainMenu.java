@@ -209,18 +209,7 @@ public class MainMenu extends BaseActivity implements WaveSwipeRefreshLayout.OnR
         refresh();
     }
 
-    private class Task extends AsyncTask<Void, Void, String[]> {
-        @Override
-        protected String[] doInBackground(Void... voids) {
-            return new String[0];
-        }
 
-        @Override protected void onPostExecute(String[] result) {
-            // Call setRefreshing(false) when the list has been refreshed.
-            mWaveSwipeRefreshLayout.setRefreshing(false);
-            super.onPostExecute(result);
-        }
-    }
 
     private void refresh(){
         new Handler().postDelayed(new Runnable() {

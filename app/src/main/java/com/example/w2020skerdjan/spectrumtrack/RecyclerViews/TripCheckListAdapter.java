@@ -5,10 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.CheckedTextViewModel;
 import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.VehicleEquipment;
 import com.example.w2020skerdjan.spectrumtrack.R;
 
@@ -26,9 +29,14 @@ private List<VehicleEquipment> vehicleEquipments =  new ArrayList<>();
 
 private Context ctx;
 
+
+
+    private int checkedEquipments=0;
+
 public TripCheckListAdapter(Context ctx, List<VehicleEquipment> vE) {
         this.vehicleEquipments = vE;
         this.ctx = ctx;
+        checkedEquipments=0;
         }
 
 
@@ -40,12 +48,25 @@ public TripCheckListAdapter(Context ctx, List<VehicleEquipment> vE) {
      }
 
     @Override
-    public void onBindViewHolder(TripCheckListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final TripCheckListAdapter.ViewHolder holder, int position) {
         VehicleEquipment vehicleEquipment = vehicleEquipments.get(position);
+        final CheckedTextViewModel checkedTextViewModel = new CheckedTextViewModel(vehicleEquipment.getEquipment());
+        checkedTextViewModel.setChecked(false);
         holder.equipmentName.setText(vehicleEquipment.getEquipment());
         holder.equipmentQuantity.setText(" of "+vehicleEquipment.getQuantity());
-        holder.equipmentQuantity.setChecked(false);
         holder.quantityEditor.setText(""+vehicleEquipment.getMinimalAmount());
+        holder.checkBox.setChecked(false);
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    checkedEquipments++;
+                }
+                else{
+                    checkedEquipments--;
+                }
+            }
+        });
     }
 
     @Override
@@ -56,14 +77,24 @@ public TripCheckListAdapter(Context ctx, List<VehicleEquipment> vE) {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView equipmentName;
-        private CheckedTextView equipmentQuantity;
+        private TextView equipmentQuantity;
         private EditText quantityEditor;
+        private CheckBox checkBox;
         public ViewHolder(View v) {
             super(v);
             equipmentName = (TextView) v.findViewById(R.id.equipmentName);
-            equipmentQuantity = (CheckedTextView) v.findViewById(R.id.checkQuantity);
+            equipmentQuantity = (TextView) v.findViewById(R.id.maxQuantity);
             quantityEditor = (EditText) v.findViewById(R.id.quantityEditor);
+            checkBox = (CheckBox) v.findViewById(R.id.checkBox);
         }
 
+    }
+
+    public int getCheckedEquipments() {
+        return checkedEquipments;
+    }
+
+    public void setCheckedEquipments(int checkedEquipments) {
+        this.checkedEquipments = checkedEquipments;
     }
 }

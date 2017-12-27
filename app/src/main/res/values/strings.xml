@@ -33,4 +33,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="BottomSheetBehaviorGoogleMapsLike">co.com.parsoniisolutions.custombottomsheetbehavior.lib.BottomSheetBehaviorGoogleMapsLike</string>
 
+    <string name ="prove"> PROVE PROVE</string>
+
 </resources>

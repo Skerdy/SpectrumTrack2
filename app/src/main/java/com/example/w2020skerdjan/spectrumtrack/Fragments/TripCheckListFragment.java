@@ -1,6 +1,8 @@
 package com.example.w2020skerdjan.spectrumtrack.Fragments;
 
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -46,6 +48,8 @@ public class TripCheckListFragment extends Fragment {
     private Retrofit retrofit;
     private TripDetailsAPI tripDetailsAPI;
     private Trip trip;
+    private TripCheckListAdapter adapter;
+    private EquipmentResponseModel responseModel;
 
     public static TripCheckListFragment newInstance(Trip trip){
         TripCheckListFragment fragment = new TripCheckListFragment();
@@ -74,7 +78,7 @@ public class TripCheckListFragment extends Fragment {
         retrofitClient = new RetrofitClient();
         retrofit = retrofitClient.krijoRetrofit();
         tripDetailsAPI = retrofit.create(TripDetailsAPI.class);
-        tripDetailsAPI.getEquipments(getEquipmentMapHeader(),trip.getDisposition().getVehicleId().toString()).enqueue(callbackEquipments);
+        tripDetailsAPI.getEquipments(getEquipmentMapHeader(),"2").enqueue(callbackEquipments);
     }
 
     Callback<EquipmentResponseModel> callbackEquipments = new Callback<EquipmentResponseModel>(){
@@ -82,9 +86,9 @@ public class TripCheckListFragment extends Fragment {
         public void onResponse(Call<EquipmentResponseModel> call, Response<EquipmentResponseModel> response) {
             if(response.isSuccessful()){
                 Log.d("Skerdi", "response Sukses");
-                EquipmentResponseModel responseModel = response.body();
-                TripCheckListAdapter adapter =  new TripCheckListAdapter(getActivity(), responseModel.getData());
-                recyclerView.setAdapter(adapter);
+                responseModel= response.body();
+                new initCheckListAsync().execute(getActivity());
+
             }
             else{
                 //Log.d("Skerdi", response.body().toString());
@@ -112,6 +116,7 @@ public class TripCheckListFragment extends Fragment {
         mLayoutManager= new LinearLayoutManager(getActivity());
         recyclerView= (RecyclerView) view.findViewById(R.id.check_list_recycler_view);
         recyclerView.setLayoutManager(mLayoutManager);
+
         //recyclerView.setAdapter(new TripCheckListAdapter(getActivity(), vehicleEquipments));
     }
 
@@ -122,4 +127,31 @@ public class TripCheckListFragment extends Fragment {
         newMap.put("x-auth-token", auth);
         return  newMap;
     }
+
+    public boolean initConfirmationButton(){
+        if(adapter!=null){
+            if(adapter.getCheckedEquipments()==adapter.getItemCount()){
+                return true;
+            }
+            else return false;
+        }
+        else return false;
+    }
+
+    private class initCheckListAsync extends AsyncTask<Context,Integer,Void>  {
+
+        @Override
+        protected Void doInBackground(Context... contexts) {
+            adapter =  new TripCheckListAdapter(contexts[0], responseModel.getData());
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    recyclerView.setAdapter(adapter);
+
+                }
+            });
+            return null;
+        }
+    }
+
 }
