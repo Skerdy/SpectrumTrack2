@@ -23,7 +23,7 @@ public interface LoginCalls {
                               @Query("password") String password);
                               */
 
-    @Headers({"Content-Type:application/json", "Origin:192.168.0.192:8081"})
+    @Headers({"Content-Type:application/json", "Origin:192.168.0.194:8081"})
     @GET("login")
     Call<LoginResponse> Login(@HeaderMap Map<String, String> headers);
 

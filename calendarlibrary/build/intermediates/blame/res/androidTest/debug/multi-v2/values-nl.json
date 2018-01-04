@@ -14,21 +14,6 @@
                     }
                 }
             ]
-        },
-        {
-            "outputFile": "C:\\Users\\user\\Desktop\\SpectrumTrack2\\calendarlibrary\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-nl\\values-nl.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\user\\Desktop\\SpectrumTrack2\\calendarlibrary\\build\\intermediates\\bundles\\debug\\res\\values-nl\\values-nl.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "79",
-                        "endOffsets": "130"
-                    }
-                }
-            ]
         }
     ]
 }

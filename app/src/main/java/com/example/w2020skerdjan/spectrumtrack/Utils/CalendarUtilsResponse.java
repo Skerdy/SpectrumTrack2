@@ -27,7 +27,13 @@ public class CalendarUtilsResponse {
     private List<CalendarEvent> calendarEvents;
     private ArrayList<Date> resultHighlight;
 
+    public List<CalendarEvent> getCalendarEvents() {
+        return calendarEvents;
+    }
 
+    public void setCalendarEvents(List<CalendarEvent> calendarEvents) {
+        this.calendarEvents = calendarEvents;
+    }
 
     public CalendarUtilsResponse(CalendarResponse calendarResponse){
         this.calendarResponse = calendarResponse;
@@ -46,6 +52,7 @@ public class CalendarUtilsResponse {
          Log.d("CalendarUtil", "Jemi ne Calendar Info. Blloku = " + i);
          Log.d("CalendarUtil", "Activity Size " + calendarInfos.get(i).getActivity().size() );
          Log.d("CalendarUtil", "tipi i Eventit :  " + calendarInfos.get(i).getLegend() );
+         calendarEvents.addAll(calendarInfos.get(i).getActivity());
 
          for(int j=0;j<calendarInfos.get(i).getActivity().size();j++){
              //Logjika per cdo kalendar Activity
@@ -79,7 +86,7 @@ public class CalendarUtilsResponse {
      }
     }
 
-    public ArrayList<Date> ktheDatatNdermjet(Date startDate, Date endDate){
+    public static ArrayList<Date> ktheDatatNdermjet(Date startDate, Date endDate){
         ArrayList<Date> result = new ArrayList<>();
         Calendar start = Calendar.getInstance();
         start.setTime(startDate);
@@ -98,6 +105,13 @@ public class CalendarUtilsResponse {
             resultHighlight.clear();
         }
     }
+
+    public static ArrayList<Date> getDatesFromEvent(CalendarEvent calendarEvent) {
+        Date startingDate = new Date(calendarEvent.getLoadingPointDate());
+        Date endingDate = new Date(calendarEvent.getDeliveryPointDate());
+        return ktheDatatNdermjet(startingDate, endingDate);
+    }
+
 
 
     public CalendarResponse getCalendarResponse() {

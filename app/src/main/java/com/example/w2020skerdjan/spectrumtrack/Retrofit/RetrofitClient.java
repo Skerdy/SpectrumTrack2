@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RetrofitClient {
-    private String MAIN_URL="http://192.168.0.192:8081/SpectrumTrack/";
+    private String MAIN_URL="http://192.168.0.194:8081/SpectrumTrack/";
     Retrofit retrofit;
 
 

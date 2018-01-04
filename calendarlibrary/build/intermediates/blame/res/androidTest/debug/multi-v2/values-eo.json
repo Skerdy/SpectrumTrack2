@@ -1,21 +1,6 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\user\\Desktop\\SpectrumTrack2\\calendarlibrary\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-eo\\values-eo.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\user\\Desktop\\SpectrumTrack2\\calendarlibrary\\build\\intermediates\\bundles\\debug\\res\\values-eo\\values-eo.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "77",
-                        "endOffsets": "128"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "C:\\Users\\W2020 Android\\Documents\\GitHub\\SpectrumTrack2\\calendarlibrary\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-eo\\values-eo.xml",
             "map": [
                 {

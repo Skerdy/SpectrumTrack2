@@ -1,21 +1,6 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\user\\Desktop\\SpectrumTrack2\\calendarlibrary\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-ru\\values-ru.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\user\\Desktop\\SpectrumTrack2\\calendarlibrary\\build\\intermediates\\bundles\\debug\\res\\values-ru\\values-ru.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "76",
-                        "endOffsets": "127"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "C:\\Users\\W2020 Android\\Documents\\GitHub\\SpectrumTrack2\\calendarlibrary\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-ru\\values-ru.xml",
             "map": [
                 {

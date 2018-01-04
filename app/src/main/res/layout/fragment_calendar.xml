@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/canvasMonth"
@@ -6,124 +6,46 @@
     android:layout_height="match_parent"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/monthCanvas1"
+        >
 
-        <LinearLayout
+        <com.squareup.timessquare.CalendarPickerView
+            android:id="@+id/calendar_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <com.squareup.timessquare.CalendarPickerView
-                android:id="@+id/calendar_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteY="8dp"
-                tools:layout_editor_absoluteX="8dp" />
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteY="9dp"
+            tools:layout_editor_absoluteX="9dp"
+            />
+    </LinearLayout>
+
+
+            <View
+            android:background="@color/guillotine_background_dark"
+            android:id="@+id/separator"
+                android:layout_below="@id/monthCanvas1"
+            android:layout_width="match_parent"
+                android:layout_centerVertical="true"
+            android:layout_height="30dp" />
 
             <LinearLayout
+                android:layout_below="@+id/separator"
                 android:id="@+id/legjenda"
                 android:layout_width="match_parent"
                 android:orientation="vertical"
-                android:layout_height="wrap_content"
-                android:background="@color/layout_background_underMonth">
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:background="@color/guillotine_background_dark"
-                    android:layout_gravity="top"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-                    <View
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="15dp"
-                        android:background="@color/calendar_highlighted_day_bg"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:text="Trip Milano-Rome"
-                        android:layout_gravity="center"
-                        android:layout_margin="15dp"/>
-                </LinearLayout>
+                android:layout_height="match_parent"
+                android:background="@color/guillotine_background">
 
-                <LinearLayout
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/legendRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-                    <View
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="15dp"
-                        android:background="@color/calendar_highlighted_day_bg"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:text="Trip Milano-Rome"
-                        android:layout_gravity="center"
-                        android:layout_margin="15dp"/>
-                </LinearLayout>
+                    android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-                    <View
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="15dp"
-                        android:background="@color/calendar_highlighted_day_bg"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:text="Trip Milano-Rome"
-                        android:layout_gravity="center"
-                        android:layout_margin="15dp"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-                    <View
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="15dp"
-                        android:background="@color/calendar_highlighted_day_bg"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:text="Trip Milano-Rome"
-                        android:layout_gravity="center"
-                        android:layout_margin="15dp"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-                    <View
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_margin="15dp"
-                        android:background="@color/calendar_highlighted_day_bg"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:text="Trip Milano-Rome"
-                        android:layout_gravity="center"
-                        android:layout_margin="15dp"/>
-                </LinearLayout>
+                </android.support.v7.widget.RecyclerView>
 
             </LinearLayout>
-        </LinearLayout>
 
 
-</FrameLayout>
+</RelativeLayout>

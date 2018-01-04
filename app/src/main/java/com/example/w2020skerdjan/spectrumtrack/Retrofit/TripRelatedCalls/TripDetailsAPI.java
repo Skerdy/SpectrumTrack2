@@ -21,19 +21,19 @@ import retrofit2.http.Path;
  */
 
 public interface TripDetailsAPI {
-    @Headers({"Content-Type:application/json", "Origin:192.168.0.192:8081"})
+    @Headers({"Content-Type:application/json", "Origin:192.168.0.194:8081"})
     @GET("vehicleEquipmentModule/equipmentsOfVehicle/{vehicleId}")
     Call<EquipmentResponseModel> getEquipments(@HeaderMap Map<String,String> map, @Path("vehicleId") String vehicleId);
 
-    @Headers({"Content-Type:application/json", "Origin:192.168.0.192:8081"})
+    @Headers({"Content-Type:application/json", "Origin:192.168.0.194:8081"})
     @GET("tripModule/tripsOfDriver/")
     Call<tripsOfDriverResponse> getAllTripsOfDriver(@HeaderMap Map<String,String> map);
 
-    @Headers({"Content-Type:application/json", "Origin:192.168.0.192:8081"})
+    @Headers({"Content-Type:application/json", "Origin:192.168.0.194:8081"})
     @GET("tripModule/activity")
     Call<AllActivities> getAllActivities(@HeaderMap Map<String,String> map);
 
-    @Headers({"Content-Type:application/json", "Origin:192.168.0.192:8081"})
+    @Headers({"Content-Type:application/json", "Origin:192.168.0.194:8081"})
     @GET("tripModule/stop")
     Call<AllStops> getAllStops(@HeaderMap Map<String, String> authMap);
 }

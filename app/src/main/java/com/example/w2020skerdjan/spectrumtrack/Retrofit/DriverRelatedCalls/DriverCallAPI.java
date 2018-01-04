@@ -13,12 +13,12 @@ import retrofit2.http.Headers;
  */
 
 public interface DriverCallAPI {
-    @Headers({"Content-Type:application/json", "Origin:192.168.0.192:8081"})
+    @Headers({"Content-Type:application/json", "Origin:192.168.0.194:8081"})
     @GET("userPersonalAreaModule/userPersonalArea")
     Call<PersonalAreaResponse> getPersonalAreaData(@HeaderMap Map<String, String> headers);
 
 
-    @Headers({"Content-Type:application/json", "Origin:192.168.0.192:8081"})
+    @Headers({"Content-Type:application/json", "Origin:192.168.0.194:8081"})
     @GET("usersModule/userExpirations")
     Call<UserExpirationsResponse> getUserExpirations(@HeaderMap Map<String, String> headers);
 
