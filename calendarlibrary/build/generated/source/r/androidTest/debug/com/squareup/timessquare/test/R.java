@@ -10,88 +10,92 @@ package com.squareup.timessquare.test;
 public final class R {
   public static final class attr {
     /**
-     * <p>May be a reference to another resource, in the form
-     * "<code>@[+][<i>package</i>:]<i>type</i>/<i>name</i></code>" or a theme
-     * attribute in the form
-     * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
+     * <p>May be an integer value, such as "<code>100</code>".
      */
-    public static final int tsquare_dayBackground=0x7f010000;
-    /**
-     * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
-     * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
-     * "<code>#<i>aarrggbb</i></code>".
-     */
-    public static final int tsquare_dayTextColor=0x7f010001;
-    /**
-     * <p>May be a boolean value, such as "<code>true</code>" or
-     * "<code>false</code>".
-     */
-    public static final int tsquare_displayDayNamesHeaderRow=0x7f010002;
-    /**
-     * <p>May be a boolean value, such as "<code>true</code>" or
-     * "<code>false</code>".
-     */
-    public static final int tsquare_displayHeader=0x7f010003;
-    /**
-     * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
-     * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
-     * "<code>#<i>aarrggbb</i></code>".
-     */
-    public static final int tsquare_dividerColor=0x7f010004;
-    /**
-     * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
-     * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
-     * "<code>#<i>aarrggbb</i></code>".
-     */
-    public static final int tsquare_headerTextColor=0x7f010005;
-    /**
-     * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
-     * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
-     * "<code>#<i>aarrggbb</i></code>".
-     */
-    public static final int tsquare_highlightColor=0x7f010006;
-    /**
-     * <p>May be a boolean value, such as "<code>true</code>" or
-     * "<code>false</code>".
-     */
-    public static final int tsquare_state_current_month=0x7f010007;
-    /**
-     * <p>May be a boolean value, such as "<code>true</code>" or
-     * "<code>false</code>".
-     */
-    public static final int tsquare_state_highlighted=0x7f010008;
-    /**
-     * <p>May be a boolean value, such as "<code>true</code>" or
-     * "<code>false</code>".
-     */
-    public static final int tsquare_state_range_first=0x7f010009;
-    /**
-     * <p>May be a boolean value, such as "<code>true</code>" or
-     * "<code>false</code>".
-     */
-    public static final int tsquare_state_range_last=0x7f01000a;
-    /**
-     * <p>May be a boolean value, such as "<code>true</code>" or
-     * "<code>false</code>".
-     */
-    public static final int tsquare_state_range_middle=0x7f01000b;
-    /**
-     * <p>May be a boolean value, such as "<code>true</code>" or
-     * "<code>false</code>".
-     */
-    public static final int tsquare_state_selectable=0x7f01000c;
-    /**
-     * <p>May be a boolean value, such as "<code>true</code>" or
-     * "<code>false</code>".
-     */
-    public static final int tsquare_state_today=0x7f01000d;
+    public static final int highlightColor=0x7f010000;
     /**
      * <p>May be a reference to another resource, in the form
      * "<code>@[+][<i>package</i>:]<i>type</i>/<i>name</i></code>" or a theme
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      */
-    public static final int tsquare_titleTextStyle=0x7f01000e;
+    public static final int tsquare_dayBackground=0x7f010001;
+    /**
+     * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
+     * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
+     * "<code>#<i>aarrggbb</i></code>".
+     */
+    public static final int tsquare_dayTextColor=0x7f010002;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int tsquare_displayDayNamesHeaderRow=0x7f010003;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int tsquare_displayHeader=0x7f010004;
+    /**
+     * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
+     * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
+     * "<code>#<i>aarrggbb</i></code>".
+     */
+    public static final int tsquare_dividerColor=0x7f010005;
+    /**
+     * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
+     * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
+     * "<code>#<i>aarrggbb</i></code>".
+     */
+    public static final int tsquare_headerTextColor=0x7f010006;
+    /**
+     * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
+     * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
+     * "<code>#<i>aarrggbb</i></code>".
+     */
+    public static final int tsquare_highlightColor=0x7f010007;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int tsquare_state_current_month=0x7f010008;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int tsquare_state_highlighted=0x7f010009;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int tsquare_state_range_first=0x7f01000a;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int tsquare_state_range_last=0x7f01000b;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int tsquare_state_range_middle=0x7f01000c;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int tsquare_state_selectable=0x7f01000d;
+    /**
+     * <p>May be a boolean value, such as "<code>true</code>" or
+     * "<code>false</code>".
+     */
+    public static final int tsquare_state_today=0x7f01000e;
+    /**
+     * <p>May be a reference to another resource, in the form
+     * "<code>@[+][<i>package</i>:]<i>type</i>/<i>name</i></code>" or a theme
+     * attribute in the form
+     * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
+     */
+    public static final int tsquare_titleTextStyle=0x7f01000f;
   }
   public static final class color {
     public static final int calendar_active_month_bg=0x7f020000;
@@ -170,9 +174,9 @@ public final class R {
      * @see #CalendarPickerView_tsquare_titleTextStyle
      */
     public static final int[] CalendarPickerView={
-        0x010100d4, 0x7f010000, 0x7f010001, 0x7f010002, 
-        0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 
-        0x7f01000e
+        0x010100d4, 0x7f010001, 0x7f010002, 0x7f010003, 
+        0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007, 
+        0x7f01000f
       };
     /**
      * <p>This symbol is the offset where the {@link android.R.attr#background}
@@ -284,6 +288,7 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
+     * <tr><td><code>{@link #calendar_cell_highlightColor com.squareup.timessquare.test:highlightColor}</code></td><td></td></tr>
      * <tr><td><code>{@link #calendar_cell_tsquare_state_current_month com.squareup.timessquare.test:tsquare_state_current_month}</code></td><td></td></tr>
      * <tr><td><code>{@link #calendar_cell_tsquare_state_highlighted com.squareup.timessquare.test:tsquare_state_highlighted}</code></td><td></td></tr>
      * <tr><td><code>{@link #calendar_cell_tsquare_state_range_first com.squareup.timessquare.test:tsquare_state_range_first}</code></td><td></td></tr>
@@ -292,6 +297,7 @@ public final class R {
      * <tr><td><code>{@link #calendar_cell_tsquare_state_selectable com.squareup.timessquare.test:tsquare_state_selectable}</code></td><td></td></tr>
      * <tr><td><code>{@link #calendar_cell_tsquare_state_today com.squareup.timessquare.test:tsquare_state_today}</code></td><td></td></tr>
      * </table>
+     * @see #calendar_cell_highlightColor
      * @see #calendar_cell_tsquare_state_current_month
      * @see #calendar_cell_tsquare_state_highlighted
      * @see #calendar_cell_tsquare_state_range_first
@@ -301,9 +307,18 @@ public final class R {
      * @see #calendar_cell_tsquare_state_today
      */
     public static final int[] calendar_cell={
-        0x7f010007, 0x7f010008, 0x7f010009, 0x7f01000a, 
-        0x7f01000b, 0x7f01000c, 0x7f01000d
+        0x7f010000, 0x7f010008, 0x7f010009, 0x7f01000a, 
+        0x7f01000b, 0x7f01000c, 0x7f01000d, 0x7f01000e
       };
+    /**
+     * <p>This symbol is the offset where the {@link com.squareup.timessquare.test.R.attr#highlightColor}
+     * attribute's value can be found in the {@link #calendar_cell} array.
+     *
+     * <p>May be an integer value, such as "<code>100</code>".
+     *
+     * @attr name com.squareup.timessquare.test:highlightColor
+     */
+    public static final int calendar_cell_highlightColor=0;
     /**
      * <p>This symbol is the offset where the {@link com.squareup.timessquare.test.R.attr#tsquare_state_current_month}
      * attribute's value can be found in the {@link #calendar_cell} array.
@@ -313,7 +328,7 @@ public final class R {
      *
      * @attr name com.squareup.timessquare.test:tsquare_state_current_month
      */
-    public static final int calendar_cell_tsquare_state_current_month=0;
+    public static final int calendar_cell_tsquare_state_current_month=1;
     /**
      * <p>This symbol is the offset where the {@link com.squareup.timessquare.test.R.attr#tsquare_state_highlighted}
      * attribute's value can be found in the {@link #calendar_cell} array.
@@ -323,7 +338,7 @@ public final class R {
      *
      * @attr name com.squareup.timessquare.test:tsquare_state_highlighted
      */
-    public static final int calendar_cell_tsquare_state_highlighted=1;
+    public static final int calendar_cell_tsquare_state_highlighted=2;
     /**
      * <p>This symbol is the offset where the {@link com.squareup.timessquare.test.R.attr#tsquare_state_range_first}
      * attribute's value can be found in the {@link #calendar_cell} array.
@@ -333,7 +348,7 @@ public final class R {
      *
      * @attr name com.squareup.timessquare.test:tsquare_state_range_first
      */
-    public static final int calendar_cell_tsquare_state_range_first=2;
+    public static final int calendar_cell_tsquare_state_range_first=3;
     /**
      * <p>This symbol is the offset where the {@link com.squareup.timessquare.test.R.attr#tsquare_state_range_last}
      * attribute's value can be found in the {@link #calendar_cell} array.
@@ -343,7 +358,7 @@ public final class R {
      *
      * @attr name com.squareup.timessquare.test:tsquare_state_range_last
      */
-    public static final int calendar_cell_tsquare_state_range_last=3;
+    public static final int calendar_cell_tsquare_state_range_last=4;
     /**
      * <p>This symbol is the offset where the {@link com.squareup.timessquare.test.R.attr#tsquare_state_range_middle}
      * attribute's value can be found in the {@link #calendar_cell} array.
@@ -353,7 +368,7 @@ public final class R {
      *
      * @attr name com.squareup.timessquare.test:tsquare_state_range_middle
      */
-    public static final int calendar_cell_tsquare_state_range_middle=4;
+    public static final int calendar_cell_tsquare_state_range_middle=5;
     /**
      * <p>This symbol is the offset where the {@link com.squareup.timessquare.test.R.attr#tsquare_state_selectable}
      * attribute's value can be found in the {@link #calendar_cell} array.
@@ -363,7 +378,7 @@ public final class R {
      *
      * @attr name com.squareup.timessquare.test:tsquare_state_selectable
      */
-    public static final int calendar_cell_tsquare_state_selectable=5;
+    public static final int calendar_cell_tsquare_state_selectable=6;
     /**
      * <p>This symbol is the offset where the {@link com.squareup.timessquare.test.R.attr#tsquare_state_today}
      * attribute's value can be found in the {@link #calendar_cell} array.
@@ -373,6 +388,6 @@ public final class R {
      *
      * @attr name com.squareup.timessquare.test:tsquare_state_today
      */
-    public static final int calendar_cell_tsquare_state_today=6;
+    public static final int calendar_cell_tsquare_state_today=7;
   }
 }

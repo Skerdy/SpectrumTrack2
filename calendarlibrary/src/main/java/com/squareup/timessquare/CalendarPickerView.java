@@ -798,6 +798,13 @@ public class CalendarPickerView extends ListView implements Serializable {
     validateAndUpdate();
   }
 
+
+  public void highLightOrganizedDates(ArrayList<LegendHighLight> legendHighLights){
+    for(LegendHighLight legendHighLight : legendHighLights){
+      highlightSkerdyDates(legendHighLight.getEventHighlightedDates(), legendHighLight.getEventCellsHighlightColor());
+    }
+  }
+
   public void clearSelectedDates() {
     for (MonthCellDescriptor selectedCell : selectedCells) {
       selectedCell.setRangeState(RangeState.NONE);
@@ -937,7 +944,7 @@ public class CalendarPickerView extends ListView implements Serializable {
 
         weekCells.add(
                 new MonthCellDescriptor(date, isCurrentMonth, isSelectable, isSelected, isToday,
-                        isHighlighted, value, rangeState, "Skerdi", highlightColor));
+                        isHighlighted, value, rangeState, "Skerdi"));
         cal.add(DATE, 1);
       }
     }

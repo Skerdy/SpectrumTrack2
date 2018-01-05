@@ -1,16 +1,11 @@
 package com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated;
 
-import android.graphics.Color;
-
-import com.squareup.timessquare.CalendarCellView;
-import com.squareup.timessquare.CalendarPickerView;
-import com.squareup.timessquare.DayViewAdapter;
+import com.squareup.timessquare.LegendHighLight;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by W2020 Android on 12/7/2017.
@@ -19,19 +14,25 @@ import java.util.List;
 public class FragmentCalendarState implements Serializable {
     private Date calendarStartingDate;
     private Calendar calendarJavaObject;
-
-    public ArrayList<Date> getHighlighteddates() {
-        return highlighteddates;
-    }
-
     private ArrayList<Date> highlighteddates;
+    private ArrayList<LegendHighLight> organizedHighLightedDates;
 
     public FragmentCalendarState(Date dt, Calendar cl){
         calendarJavaObject=cl;
         calendarStartingDate=dt;
         highlighteddates = new ArrayList<>();
+        organizedHighLightedDates = new ArrayList<>();
     }
 
+
+    public void addOneOrganizedDate(LegendHighLight legendHighLight){
+        this.organizedHighLightedDates.add(legendHighLight);
+    }
+
+
+    public ArrayList<Date> getHighlighteddates() {
+        return highlighteddates;
+    }
     public Date getCalendarStartingDate(){
         return calendarStartingDate;
     }
@@ -46,41 +47,18 @@ public class FragmentCalendarState implements Serializable {
 
     public void clearHighLightedDates (){
         this.highlighteddates.clear();
-
+    }
+    public void clearOrganizedDates(){
+        this.organizedHighLightedDates.clear();
     }
 
-    public Date krijoDate (int Viti, int muaji, int dite){
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, Viti);
-        calendar.set(Calendar.MONTH, muaji);
-        calendar.set(Calendar.DATE, dite);
-        Date date = calendar.getTime();
-        return date;
+
+    public ArrayList<LegendHighLight> getOrganizedHighLightedDates() {
+        return organizedHighLightedDates;
     }
 
-    private int getMonthFromDate(Date date){
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        return month;
-    }
-
-    private  int getYearFromDate(Date date) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        return year;
-    }
-
-    private int getDayFromDate(Date date){
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        return day;
+    public void setOrganizedHighLightedDates(ArrayList<LegendHighLight> organizedHighLightedDates) {
+        this.organizedHighLightedDates = organizedHighLightedDates;
     }
 
 }

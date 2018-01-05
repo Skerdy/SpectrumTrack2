@@ -29,10 +29,10 @@ class MonthCellDescriptor implements Serializable {
 
 
 
-  private int HIGHLIGHT_COLOR = RED;
+  private int HIGHLIGHT_COLOR ;
 
   MonthCellDescriptor(Date date, boolean currentMonth, boolean selectable, boolean selected,
-      boolean today, boolean highlighted, int value, RangeState rangeState, String tripName, int Color) {
+      boolean today, boolean highlighted, int value, RangeState rangeState, String tripName) {
     this.date = date;
     isCurrentMonth = currentMonth;
     isSelectable = selectable;
@@ -42,7 +42,6 @@ class MonthCellDescriptor implements Serializable {
     this.value = value;
     this.rangeState = rangeState;
     this.tripName = tripName;
-    this.HIGHLIGHT_COLOR = Color;
   }
 
   public Date getDate() {

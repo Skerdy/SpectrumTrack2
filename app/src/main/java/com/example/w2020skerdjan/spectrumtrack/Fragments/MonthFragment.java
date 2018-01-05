@@ -1,6 +1,5 @@
 package com.example.w2020skerdjan.spectrumtrack.Fragments;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,11 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated.CalendarEntity;
 import com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated.FragmentCalendarState;
@@ -21,7 +20,6 @@ import com.example.w2020skerdjan.spectrumtrack.R;
 import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.CalendarLegendAdapter;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.CalendarRelatedCalls.CalendarCalls;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.RetrofitClient;
-import com.example.w2020skerdjan.spectrumtrack.Utils.CalendarParams;
 import com.example.w2020skerdjan.spectrumtrack.Utils.CalendarUtilsResponse;
 import com.example.w2020skerdjan.spectrumtrack.Utils.RetrofitHeaderManager;
 import com.squareup.timessquare.CalendarPickerView;
@@ -158,8 +156,9 @@ import retrofit2.Retrofit;
             calendarPickerView.init(fr.getCalendarStartingDate(), fr.getCalendarJavaObject().getTime())
                     .inMode(CalendarPickerView.SelectionMode.SINGLE);
             if(fr.getHighlighteddates().size()!=0){
-                //  cal.highlightDates(highlighteddates);
-                calendarPickerView.highlightSkerdyDates(fr.getHighlighteddates(), Color.BLUE);
+                 // calendarPickerView.highlightDates(fr.getHighlighteddates());
+                    calendarPickerView.highLightOrganizedDates(fr.getOrganizedHighLightedDates());
+
             }
         }
 
@@ -188,10 +187,19 @@ import retrofit2.Retrofit;
                         if (calendarUtilsResponse.getResultHighlight().size() != 0) {
                             Log.d("Kalendar", "HighlightedDates te llogaritura jane OK");
                             fragmentCalendarState.setHighlighteddates(calendarUtilsResponse.getResultHighlight());
+                            fragmentCalendarState.setOrganizedHighLightedDates(calendarUtilsResponse.getOrganizedHighlight());
+
                             initCalendarData(fragmentCalendarState);
 
-                            CalendarLegendAdapter calendarLegendAdapter = new CalendarLegendAdapter(getActivity(), calendarUtilsResponse.getCalendarEvents(),
+                            CalendarLegendAdapter calendarLegendAdapter = new CalendarLegendAdapter(getActivity(), calendarUtilsResponse,
                                     MonthFragment.this ,fragmentCalendarState);
+
+                            calendarLegendAdapter.setClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    int pos = recyclerView.indexOfChild(v);
+                                    Toast toast = Toast.makeText(getActivity(), "Skerdi + " + pos, Toast.LENGTH_LONG);                                }
+                            });
 
                             recyclerView.setAdapter(calendarLegendAdapter);
                         }
@@ -200,6 +208,7 @@ import retrofit2.Retrofit;
                         }
                     }
                     else {
+
                         //logjika kur calendar response size eshte 0
                         Log.d("Kalendar", "Response size eshte 0");
                     }

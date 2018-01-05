@@ -8,21 +8,22 @@ package com.squareup.timessquare;
 
 public final class R {
     public static final class attr {
-        public static final int tsquare_dayBackground = 0x7f010000;
-        public static final int tsquare_dayTextColor = 0x7f010001;
-        public static final int tsquare_displayDayNamesHeaderRow = 0x7f010002;
-        public static final int tsquare_displayHeader = 0x7f010003;
-        public static final int tsquare_dividerColor = 0x7f010004;
-        public static final int tsquare_headerTextColor = 0x7f010005;
-        public static final int tsquare_highlightColor = 0x7f010006;
-        public static final int tsquare_state_current_month = 0x7f010007;
-        public static final int tsquare_state_highlighted = 0x7f010008;
-        public static final int tsquare_state_range_first = 0x7f010009;
-        public static final int tsquare_state_range_last = 0x7f01000a;
-        public static final int tsquare_state_range_middle = 0x7f01000b;
-        public static final int tsquare_state_selectable = 0x7f01000c;
-        public static final int tsquare_state_today = 0x7f01000d;
-        public static final int tsquare_titleTextStyle = 0x7f01000e;
+        public static final int highlightColor = 0x7f010000;
+        public static final int tsquare_dayBackground = 0x7f010001;
+        public static final int tsquare_dayTextColor = 0x7f010002;
+        public static final int tsquare_displayDayNamesHeaderRow = 0x7f010003;
+        public static final int tsquare_displayHeader = 0x7f010004;
+        public static final int tsquare_dividerColor = 0x7f010005;
+        public static final int tsquare_headerTextColor = 0x7f010006;
+        public static final int tsquare_highlightColor = 0x7f010007;
+        public static final int tsquare_state_current_month = 0x7f010008;
+        public static final int tsquare_state_highlighted = 0x7f010009;
+        public static final int tsquare_state_range_first = 0x7f01000a;
+        public static final int tsquare_state_range_last = 0x7f01000b;
+        public static final int tsquare_state_range_middle = 0x7f01000c;
+        public static final int tsquare_state_selectable = 0x7f01000d;
+        public static final int tsquare_state_today = 0x7f01000e;
+        public static final int tsquare_titleTextStyle = 0x7f01000f;
     }
     public static final class color {
         public static final int calendar_active_month_bg = 0x7f020000;
@@ -73,7 +74,7 @@ public final class R {
         public static final int CalendarTitle = 0x7f080005;
     }
     public static final class styleable {
-        public static final int[] CalendarPickerView = { 0x010100d4, 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 0x7f01000e };
+        public static final int[] CalendarPickerView = { 0x010100d4, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007, 0x7f01000f };
         public static final int CalendarPickerView_android_background = 0;
         public static final int CalendarPickerView_tsquare_dayBackground = 1;
         public static final int CalendarPickerView_tsquare_dayTextColor = 2;
@@ -83,13 +84,14 @@ public final class R {
         public static final int CalendarPickerView_tsquare_headerTextColor = 6;
         public static final int CalendarPickerView_tsquare_highlightColor = 7;
         public static final int CalendarPickerView_tsquare_titleTextStyle = 8;
-        public static final int[] calendar_cell = { 0x7f010007, 0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d };
-        public static final int calendar_cell_tsquare_state_current_month = 0;
-        public static final int calendar_cell_tsquare_state_highlighted = 1;
-        public static final int calendar_cell_tsquare_state_range_first = 2;
-        public static final int calendar_cell_tsquare_state_range_last = 3;
-        public static final int calendar_cell_tsquare_state_range_middle = 4;
-        public static final int calendar_cell_tsquare_state_selectable = 5;
-        public static final int calendar_cell_tsquare_state_today = 6;
+        public static final int[] calendar_cell = { 0x7f010000, 0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d, 0x7f01000e };
+        public static final int calendar_cell_highlightColor = 0;
+        public static final int calendar_cell_tsquare_state_current_month = 1;
+        public static final int calendar_cell_tsquare_state_highlighted = 2;
+        public static final int calendar_cell_tsquare_state_range_first = 3;
+        public static final int calendar_cell_tsquare_state_range_last = 4;
+        public static final int calendar_cell_tsquare_state_range_middle = 5;
+        public static final int calendar_cell_tsquare_state_selectable = 6;
+        public static final int calendar_cell_tsquare_state_today = 7;
     }
 }
