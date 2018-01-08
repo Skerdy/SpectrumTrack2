@@ -3,6 +3,7 @@ package com.example.w2020skerdjan.spectrumtrack.Utils;
 import android.graphics.Color;
 import android.util.Log;
 
+import com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated.CalendarTrip;
 import com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated.ResponseModel.CalendarEvent;
 import com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated.ResponseModel.CalendarInfo;
 import com.example.w2020skerdjan.spectrumtrack.Models.ResponseModels.CalendarResponse;
@@ -20,6 +21,7 @@ import java.util.Map;
  */
 
 public class CalendarUtilsResponse {
+
     private CalendarResponse calendarResponse;
     private Map<CalendarEvent, ArrayList<Date>> highlightedDates;
     private CalendarEvent calendarEvent;
@@ -28,8 +30,11 @@ public class CalendarUtilsResponse {
     private List<CalendarEvent> calendarEvents;
     private ArrayList<Date> resultHighlight;
     private ArrayList<LegendHighLight> organizedHighlight;
-    private int[] colors;
 
+    // The Important one
+    private ArrayList<CalendarTrip> calendarTrips;
+
+    private int[] colors;
 
     public CalendarUtilsResponse(CalendarResponse calendarResponse) {
         this.calendarResponse = calendarResponse;

@@ -12,16 +12,12 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class CalendarEvent {
-
     @SerializedName("id")
     @Expose
     private Integer id;
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("driver")
-    @Expose
-    private Driver driver;
     @SerializedName("instructions")
     @Expose
     private String instructions;
@@ -46,6 +42,25 @@ public class CalendarEvent {
     @SerializedName("deliveryPointAddress")
     @Expose
     private DeliveryPointAddress deliveryPointAddress;
+    @Expose
+    private Integer tripLoadId;
+    @SerializedName("tripUnloadId")
+    @Expose
+    private Integer tripUnloadId;
+    @SerializedName("load")
+    @Expose
+    private Boolean load;
+    @SerializedName("unload")
+    @Expose
+    private Boolean unload;
+
+    public Boolean getUnload() {
+        return unload;
+    }
+
+    public void setUnload(Boolean unload) {
+        this.unload = unload;
+    }
 
     public Integer getId() {
         return id;
@@ -63,13 +78,6 @@ public class CalendarEvent {
         this.name = name;
     }
 
-    public Driver getDriver() {
-        return driver;
-    }
-
-    public void setDriver(Driver driver) {
-        this.driver = driver;
-    }
 
     public String getInstructions() {
         return instructions;
@@ -134,5 +142,27 @@ public class CalendarEvent {
     public void setDeliveryPointAddress(DeliveryPointAddress deliveryPointAddress) {
         this.deliveryPointAddress = deliveryPointAddress;
     }
+    public Integer getTripLoadId() {
+        return tripLoadId;
+    }
 
+    public void setTripLoadId(Integer tripLoadId) {
+        this.tripLoadId = tripLoadId;
+    }
+
+    public Integer getTripUnloadId() {
+        return tripUnloadId;
+    }
+
+    public void setTripUnloadId(Integer tripUnloadId) {
+        this.tripUnloadId = tripUnloadId;
+    }
+
+    public Boolean getLoad() {
+        return load;
+    }
+
+    public void setLoad(Boolean load) {
+        this.load = load;
+    }
 }

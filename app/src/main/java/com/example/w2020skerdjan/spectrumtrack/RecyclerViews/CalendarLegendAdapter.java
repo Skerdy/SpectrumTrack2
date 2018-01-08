@@ -50,7 +50,6 @@ public class CalendarLegendAdapter extends  RecyclerView.Adapter<CalendarLegendA
         this.calendarEvents = calendarUtilsResponse.getCalendarEvents();
         this.monthFragment = monthFragment;
         this.fragmentCalendarState = fragmentCalendarState;
-
     }
 
 
