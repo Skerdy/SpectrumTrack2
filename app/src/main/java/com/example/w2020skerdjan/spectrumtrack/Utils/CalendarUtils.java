@@ -52,92 +52,91 @@ public class CalendarUtils {
         calendarInfos = calendarResponse.getData();
         Log.d("CalendarUtil", calendarInfos.get(0).getLegend() + "  " + calendarInfos.get(1).getLegend());
         //iterojme neper objektet CalendarInfo
-            CalendarInfo calendarInfotrip = calendarInfos.get(0);
+        CalendarInfo calendarInfotrip = calendarInfos.get(0);
 
-            //iterojme per cdo objekt CalendarEvent
-            for (int j = 0 ; j<calendarInfotrip.getActivity().size();j++) {
-                CalendarEvent calendarEvent = calendarInfotrip.getActivity().get(j);
-                // nese jemi ne legjenden trip krijojme nje objekt Calendar Trip dhe e shtojme ne listen e calendarTrip
-                Log.d("CalendarUtil", "U krijua Nje Calendar trip");
-                CalendarTrip calendarTrip = calendarTripFromCalendarEvent(calendarEvent);
-                calendarTrips.add(calendarTrip);
-            }
+        //iterojme per cdo objekt CalendarEvent
+        for (int j = 0; j < calendarInfotrip.getActivity().size(); j++) {
+            CalendarEvent calendarEvent = calendarInfotrip.getActivity().get(j);
+            // nese jemi ne legjenden trip krijojme nje objekt Calendar Trip dhe e shtojme ne listen e calendarTrip
+            Log.d("CalendarUtil", "U krijua Nje Calendar trip");
+            CalendarTrip calendarTrip = calendarTripFromCalendarEvent(calendarEvent);
+            calendarTrips.add(calendarTrip);
+        }
 
-            CalendarInfo calendarInfodeadline = calendarInfos.get(1);
+        if( calendarTrips.size()!=0) {
+        CalendarInfo calendarInfodeadline = calendarInfos.get(1);
         Log.d("CalendarUtil", " Size i tere activiteteve ne deadline = " + calendarInfodeadline.getActivity().size());
 
 
-            for (int j = 0; j <calendarInfodeadline.getActivity().size(); j++){
+        for (int j = 0; j < calendarInfodeadline.getActivity().size(); j++) {
 
-                CalendarEvent calendarEvent = calendarInfodeadline.getActivity().get(j);
-                 if(calendarEvent.getTripLoadId()==calendarEvent.getTripUnloadId()) {
-                     Log.d("CalendarUtil", "U krijua Nje calendar Event nga kushti i pare");
-                     String CustomCalendarEventType;
-                     DrivingSession startDrivingSession;
-                     DrivingSession finishDrivingSession;
-                     Integer tripID;
-                     tripID = calendarEvent.getTripLoadId();
-                     CustomCalendarEventType = CustomCalendarEvent.FULL_EVENT;
-                     startDrivingSession = createDrivingSession(calendarEvent, DrivingSession.LOAD);
-                     finishDrivingSession = createDrivingSession(calendarEvent, DrivingSession.UNLOAD);
-                     CustomCalendarEvent customCalendarEvent = new CustomCalendarEvent(CustomCalendarEventType, startDrivingSession, finishDrivingSession);
-                     customCalendarEvent.setTripID(tripID);
-                     calendarTrips.get(ktheTripID(customCalendarEvent)).addCustomCalendarEvent(customCalendarEvent);
+            CalendarEvent calendarEvent = calendarInfodeadline.getActivity().get(j);
+            if (calendarEvent.getTripLoadId() == calendarEvent.getTripUnloadId()) {
+                Log.d("CalendarUtil", "U krijua Nje calendar Event nga kushti i pare");
+                String CustomCalendarEventType;
+                DrivingSession startDrivingSession;
+                DrivingSession finishDrivingSession;
+                Integer tripID;
+                tripID = calendarEvent.getTripLoadId();
+                CustomCalendarEventType = CustomCalendarEvent.FULL_EVENT;
+                startDrivingSession = createDrivingSession(calendarEvent, DrivingSession.LOAD);
+                finishDrivingSession = createDrivingSession(calendarEvent, DrivingSession.UNLOAD);
+                CustomCalendarEvent customCalendarEvent = new CustomCalendarEvent(CustomCalendarEventType, startDrivingSession, finishDrivingSession);
+                customCalendarEvent.setTripID(tripID);
+                calendarTrips.get(ktheTripID(customCalendarEvent)).addCustomCalendarEvent(customCalendarEvent);
 
-                }
-                else if (calendarEvent.getTripLoadId()==null){
-                     Log.d("CalendarUtil", "U krijua Nje calendar Event nga kushti i dyte");
-                     String CustomCalendarEventType;
-                     DrivingSession startDrivingSession;
-                     DrivingSession finishDrivingSession;
-                     Integer tripID;
-                     tripID = calendarEvent.getTripUnloadId();
-                     CustomCalendarEventType = CustomCalendarEvent.HALF_EVENT;
-                     finishDrivingSession = createDrivingSession(calendarEvent, DrivingSession.UNLOAD);
-                     startDrivingSession = null;
-                     CustomCalendarEvent customCalendarEvent = new CustomCalendarEvent(CustomCalendarEventType, startDrivingSession, finishDrivingSession);
-                     customCalendarEvent.setTripID(tripID);
-                     calendarTrips.get(ktheTripID(customCalendarEvent)).addCustomCalendarEvent(customCalendarEvent);
-                }
-                else if (calendarEvent.getTripUnloadId()==null){
-                     Log.d("CalendarUtil", "U krijua Nje calendar Event nga kushti i trete");
-                     String CustomCalendarEventType;
-                     DrivingSession startDrivingSession;
-                     DrivingSession finishDrivingSession;
-                     Integer tripID;
-                     tripID = calendarEvent.getTripLoadId();
-                     CustomCalendarEventType = CustomCalendarEvent.HALF_EVENT;
-                     startDrivingSession = createDrivingSession(calendarEvent, DrivingSession.LOAD);
-                     finishDrivingSession = null;
-                     CustomCalendarEvent customCalendarEvent = new CustomCalendarEvent(CustomCalendarEventType, startDrivingSession, finishDrivingSession);
-                     customCalendarEvent.setTripID(tripID);
-                     calendarTrips.get(ktheTripID(customCalendarEvent)).addCustomCalendarEvent(customCalendarEvent);
-                }
-                 else if (!calendarEvent.getTripLoadId().equals(calendarEvent.getTripUnloadId())){
-                     Log.d("CalendarUtil", "U krijua Nje calendar Event nga kushti i katert");
-                     String CustomCalendarEventType;
-                     DrivingSession startDrivingSession;
-                     DrivingSession finishDrivingSession;
-                     Integer tripID;
-                     tripID = calendarEvent.getTripLoadId();
-                     CustomCalendarEventType = CustomCalendarEvent.HALF_EVENT;
-                     startDrivingSession = createDrivingSession(calendarEvent, DrivingSession.LOAD);
-                     finishDrivingSession = null;
-                     CustomCalendarEvent customCalendarEvent = new CustomCalendarEvent(CustomCalendarEventType, startDrivingSession, finishDrivingSession);
-                     customCalendarEvent.setTripID(tripID);
-                     calendarTrips.get(ktheTripID(customCalendarEvent)).addCustomCalendarEvent(customCalendarEvent);
+            } else if (calendarEvent.getTripLoadId() == null) {
+                Log.d("CalendarUtil", "U krijua Nje calendar Event nga kushti i dyte");
+                String CustomCalendarEventType;
+                DrivingSession startDrivingSession;
+                DrivingSession finishDrivingSession;
+                Integer tripID;
+                tripID = calendarEvent.getTripUnloadId();
+                CustomCalendarEventType = CustomCalendarEvent.HALF_EVENT;
+                finishDrivingSession = createDrivingSession(calendarEvent, DrivingSession.UNLOAD);
+                startDrivingSession = null;
+                CustomCalendarEvent customCalendarEvent = new CustomCalendarEvent(CustomCalendarEventType, startDrivingSession, finishDrivingSession);
+                customCalendarEvent.setTripID(tripID);
+                calendarTrips.get(ktheTripID(customCalendarEvent)).addCustomCalendarEvent(customCalendarEvent);
+            } else if (calendarEvent.getTripUnloadId() == null) {
+                Log.d("CalendarUtil", "U krijua Nje calendar Event nga kushti i trete");
+                String CustomCalendarEventType;
+                DrivingSession startDrivingSession;
+                DrivingSession finishDrivingSession;
+                Integer tripID;
+                tripID = calendarEvent.getTripLoadId();
+                CustomCalendarEventType = CustomCalendarEvent.HALF_EVENT;
+                startDrivingSession = createDrivingSession(calendarEvent, DrivingSession.LOAD);
+                finishDrivingSession = null;
+                CustomCalendarEvent customCalendarEvent = new CustomCalendarEvent(CustomCalendarEventType, startDrivingSession, finishDrivingSession);
+                customCalendarEvent.setTripID(tripID);
+                calendarTrips.get(ktheTripID(customCalendarEvent)).addCustomCalendarEvent(customCalendarEvent);
+            } else if (!calendarEvent.getTripLoadId().equals(calendarEvent.getTripUnloadId())) {
+                Log.d("CalendarUtil", "U krijua Nje calendar Event nga kushti i katert");
+                String CustomCalendarEventType;
+                DrivingSession startDrivingSession;
+                DrivingSession finishDrivingSession;
+                Integer tripID;
+                tripID = calendarEvent.getTripLoadId();
+                CustomCalendarEventType = CustomCalendarEvent.HALF_EVENT;
+                startDrivingSession = createDrivingSession(calendarEvent, DrivingSession.LOAD);
+                finishDrivingSession = null;
+                CustomCalendarEvent customCalendarEvent = new CustomCalendarEvent(CustomCalendarEventType, startDrivingSession, finishDrivingSession);
+                customCalendarEvent.setTripID(tripID);
+                calendarTrips.get(ktheTripID(customCalendarEvent)).addCustomCalendarEvent(customCalendarEvent);
 
 
-                     Log.d("CalendarUtil", "U krijua Nje calendar Event");
-                     tripID = calendarEvent.getTripUnloadId();
-                     CustomCalendarEventType = CustomCalendarEvent.HALF_EVENT;
-                     finishDrivingSession = createDrivingSession(calendarEvent,DrivingSession.UNLOAD);
-                     startDrivingSession = null;
-                     customCalendarEvent = new CustomCalendarEvent(CustomCalendarEventType, startDrivingSession, finishDrivingSession);
-                     customCalendarEvent.setTripID(tripID);
-                     calendarTrips.get(ktheTripID(customCalendarEvent)).addCustomCalendarEvent(customCalendarEvent);
-                 }
+                Log.d("CalendarUtil", "U krijua Nje calendar Event");
+                tripID = calendarEvent.getTripUnloadId();
+                CustomCalendarEventType = CustomCalendarEvent.HALF_EVENT;
+                finishDrivingSession = createDrivingSession(calendarEvent, DrivingSession.UNLOAD);
+                startDrivingSession = null;
+                customCalendarEvent = new CustomCalendarEvent(CustomCalendarEventType, startDrivingSession, finishDrivingSession);
+                customCalendarEvent.setTripID(tripID);
+                calendarTrips.get(ktheTripID(customCalendarEvent)).addCustomCalendarEvent(customCalendarEvent);
             }
+        }
+    }
 
     }
 
