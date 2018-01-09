@@ -3,6 +3,7 @@ package com.example.w2020skerdjan.spectrumtrack.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,13 +19,16 @@ import com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated.FragmentCa
 import com.example.w2020skerdjan.spectrumtrack.Models.ResponseModels.CalendarResponse;
 import com.example.w2020skerdjan.spectrumtrack.R;
 import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.CalendarLegendAdapter;
+import com.example.w2020skerdjan.spectrumtrack.RecyclerViews.SectionedLegendAdapter;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.CalendarRelatedCalls.CalendarCalls;
 import com.example.w2020skerdjan.spectrumtrack.Retrofit.RetrofitClient;
+import com.example.w2020skerdjan.spectrumtrack.Utils.CalendarUtils;
 import com.example.w2020skerdjan.spectrumtrack.Utils.CalendarUtilsResponse;
 import com.example.w2020skerdjan.spectrumtrack.Utils.RetrofitHeaderManager;
 import com.squareup.timessquare.CalendarPickerView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -57,10 +61,16 @@ import retrofit2.Retrofit;
         private float fixedViewYPosition ;
         private ViewGroup.LayoutParams finalMonthParams;
         private RecyclerView recyclerView;
+        private SectionedLegendAdapter adapter;
+        private boolean hideEmpty = true;
+        private boolean showFooters = true;
+        private GridLayoutManager gridLayoutManager;
+
 
         public MonthFragment() {
 
         }
+
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,10 +79,11 @@ import retrofit2.Retrofit;
             monthParam =fragmentCalendarState.getCalendarStartingDate().getMonth()+1;
             yearParam = CalendarEntity.getYearFromDate(fragmentCalendarState.getCalendarStartingDate());
             retrofitClient = new RetrofitClient();
+            gridLayoutManager  = new GridLayoutManager(getActivity(),2);
             retrofit = retrofitClient.krijoRetrofit();
             calendarCalls = retrofit.create(CalendarCalls.class);
             Log.d("CalendarStateFragment", " getCurrentMonth = " + monthParam + " ||| getCurrentYear = " + yearParam);
-            calendarCalls.getCalendarEvents(RetrofitHeaderManager.getCalendarMap(getActivity(),monthParam,yearParam)).enqueue(finalCalendarCallback);
+
 
         }
 
@@ -96,8 +107,10 @@ import retrofit2.Retrofit;
             rootLayout = (RelativeLayout) rootView.findViewById(R.id.canvasMonth);
             monthCanvasView = (LinearLayout) rootView.findViewById(R.id.monthCanvas1);
             recyclerView = (RecyclerView) rootView.findViewById(R.id.legendRecyclerView);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setLayoutManager(gridLayoutManager);
+            //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             //rootView.findViewById(R.id.separator).setOnTouchListener(this);
+            calendarCalls.getCalendarEvents(RetrofitHeaderManager.getCalendarMap(getActivity(),monthParam,yearParam)).enqueue(finalCalendarCallback);
 
 
             rootView.post(new Runnable() {
@@ -178,11 +191,11 @@ import retrofit2.Retrofit;
         @Override
         public void onResponse(Call<CalendarResponse> call, Response<CalendarResponse> response) {
             if (response.isSuccessful()) {
-
                 Log.d("Kalendar", "Success");
                 calendarResponse = response.body();
                 if (calendarResponse != null) {
                     if (calendarResponse.getData().size() != 0) {
+                        /*
                         CalendarUtilsResponse calendarUtilsResponse = new CalendarUtilsResponse(calendarResponse);
                         if (calendarUtilsResponse.getResultHighlight().size() != 0) {
                             Log.d("Kalendar", "HighlightedDates te llogaritura jane OK");
@@ -206,7 +219,17 @@ import retrofit2.Retrofit;
                         else {
                             Log.d("Kalendar", "HighlightedDates te llogaritura jane Bosh");
                         }
+                    */
+
+                            CalendarUtils calendarUtils = new CalendarUtils(calendarResponse);
+                        if (calendarUtils.getCalendarTrips().size() != 0) {
+                            SectionedLegendAdapter sectionedLegendAdapter = new SectionedLegendAdapter(getActivity(), calendarUtils.getCalendarTrips());
+                            sectionedLegendAdapter.setLayoutManager(gridLayoutManager);
+                            sectionedLegendAdapter.shouldShowHeadersForEmptySections(hideEmpty);
+                            recyclerView.setAdapter(sectionedLegendAdapter);
+                        }
                     }
+
                     else {
 
                         //logjika kur calendar response size eshte 0

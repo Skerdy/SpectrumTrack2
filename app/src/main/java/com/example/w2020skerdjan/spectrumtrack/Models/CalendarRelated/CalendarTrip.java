@@ -21,17 +21,20 @@ public class CalendarTrip {
     private ArrayList<CustomCalendarEvent> calendarCustomEvents;
 
     public CalendarTrip(Integer id, String name){
+        calendarCustomEvents = new ArrayList<>();
         this.id=id;
         this.name=name;
     }
 
     public CalendarTrip(Integer id, String name, Disposition disposition ){
+        calendarCustomEvents = new ArrayList<>();
         this.id=id;
         this.name=name;
         this.disposition=disposition;
     }
 
     public CalendarTrip(Integer id, String name, String instructions, Disposition disposition, Long createdAt){
+        calendarCustomEvents = new ArrayList<>();
         this.id=id;
         this.name=name;
         this.instructions = instructions;
@@ -40,6 +43,7 @@ public class CalendarTrip {
     }
 
     public CalendarTrip(Integer id, String name, Disposition disposition, ArrayList<CustomCalendarEvent> calendarCustomEvents){
+        calendarCustomEvents = new ArrayList<>();
         this.id=id;
         this.name=name;
         this.disposition=disposition;

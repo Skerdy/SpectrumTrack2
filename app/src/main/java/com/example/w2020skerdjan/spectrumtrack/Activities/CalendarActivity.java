@@ -78,7 +78,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Context... contexts) {
-            calendarFragmentAdapter = new CalendarFragmentAdapter(getSupportFragmentManager(),12,contexts[0] );
+            calendarFragmentAdapter = new CalendarFragmentAdapter(getSupportFragmentManager(),1,contexts[0] );
             mViewPager.setAdapter(calendarFragmentAdapter);
             return null;
         }

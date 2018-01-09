@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="220dp"
+    android:layout_height="40dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/legend"
+    android:background="@color/gray_dark"
+    android:orientation="horizontal"
+    android:weightSum="4"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:id="@+id/legendColor"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:background="@color/calendar_highlighted_day_bg"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="10dp"
+        >
+        <TextView
+            android:id="@+id/number"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginLeft="18dp"
+            android:textSize="18sp"
+            android:text="1."/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_weight="3"
+        android:id="@+id/legendText"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:text="Prove"
+        />
+
+</LinearLayout>

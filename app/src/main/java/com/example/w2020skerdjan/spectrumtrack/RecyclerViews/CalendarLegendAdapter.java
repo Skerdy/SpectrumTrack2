@@ -10,22 +10,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.w2020skerdjan.spectrumtrack.Fragments.MonthFragment;
-import com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated.CalendarEntity;
 import com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated.FragmentCalendarState;
 import com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated.ResponseModel.CalendarEvent;
-import com.example.w2020skerdjan.spectrumtrack.Models.ResponseModels.CalendarResponse;
-import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.Activities.TripActivity;
 import com.example.w2020skerdjan.spectrumtrack.R;
 import com.example.w2020skerdjan.spectrumtrack.Utils.CalendarUtilsResponse;
 import com.example.w2020skerdjan.spectrumtrack.Utils.Interfaces.LegendClicker;
-import com.squareup.timessquare.CalendarPickerView;
 import com.squareup.timessquare.LegendHighLight;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,7 +48,7 @@ public class CalendarLegendAdapter extends  RecyclerView.Adapter<CalendarLegendA
     @Override
     public CalendarLegendAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View cv =  LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.legend, parent, false);
+                .inflate(R.layout.legend_item_footer, parent, false);
         return  new CalendarLegendAdapter.ViewHolder(cv);
     }
 
