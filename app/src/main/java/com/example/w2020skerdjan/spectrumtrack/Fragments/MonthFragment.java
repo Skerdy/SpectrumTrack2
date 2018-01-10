@@ -229,6 +229,8 @@ import retrofit2.Retrofit;
                             recyclerView.setAdapter(sectionedLegendAdapter);
                             if(calendarUtils.getOrganizedHighlight().size()!=0){
                                 Log.d("CalendarUtils", " size i  highlighted  nuk eshte zero");
+                                Log.d("CalendarUtils", " size i  highlighted  dates : " + calendarUtils.getHighlightedDates().size());
+                                Log.d("CalendarUtils", " size i organized  highlighted  dates : " + calendarUtils.getOrganizedHighlight().size());
                                 fragmentCalendarState.setHighlighteddates(calendarUtils.getHighlightedDates());
                                 fragmentCalendarState.setOrganizedHighLightedDates(calendarUtils.getOrganizedHighlight());
                             }

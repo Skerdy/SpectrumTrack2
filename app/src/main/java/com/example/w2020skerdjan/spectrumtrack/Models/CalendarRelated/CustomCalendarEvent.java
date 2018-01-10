@@ -26,6 +26,7 @@ public class CustomCalendarEvent {
     public CustomCalendarEvent(String type, DrivingSession startDrivingSession, DrivingSession finishDrivingSession){
         this.startDrivingSession = startDrivingSession;
         this.finishDrivingSession = finishDrivingSession;
+        inBetweenDates = new ArrayList<>();
         this.type = type;
         if(type.equals(FULL_EVENT))
             calculateInBetWeenDates();
@@ -71,6 +72,8 @@ public class CustomCalendarEvent {
     }
 
     public ArrayList<Date> getInBetweenDates() {
+        if(type.equals(FULL_EVENT))
+            calculateInBetWeenDates();
         return inBetweenDates;
     }
 
