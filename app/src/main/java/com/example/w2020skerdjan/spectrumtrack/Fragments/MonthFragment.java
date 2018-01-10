@@ -227,6 +227,15 @@ import retrofit2.Retrofit;
                             sectionedLegendAdapter.setLayoutManager(gridLayoutManager);
                             sectionedLegendAdapter.shouldShowHeadersForEmptySections(hideEmpty);
                             recyclerView.setAdapter(sectionedLegendAdapter);
+                            if(calendarUtils.getOrganizedHighlight().size()!=0){
+                                Log.d("CalendarUtils", " size i  highlighted  nuk eshte zero");
+                                fragmentCalendarState.setHighlighteddates(calendarUtils.getHighlightedDates());
+                                fragmentCalendarState.setOrganizedHighLightedDates(calendarUtils.getOrganizedHighlight());
+                            }
+                            else {
+                                Log.d("CalendarUtils", " size i  highlighted  eshte zero");
+                            }
+                            initCalendarData(fragmentCalendarState);
                         }
                     }
 

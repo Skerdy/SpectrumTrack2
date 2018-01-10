@@ -6,12 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter;
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder;
 import com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated.CalendarTrip;
 import com.example.w2020skerdjan.spectrumtrack.R;
+import com.example.w2020skerdjan.spectrumtrack.Utils.CalendarUtils;
+import com.example.w2020skerdjan.spectrumtrack.Utils.CalendarUtilsResponse;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,10 +33,10 @@ public class SectionedLegendAdapter extends SectionedRecyclerViewAdapter<Section
         this.calendarTrips = calendarTrips;
         for(int i = 0; i<calendarTrips.size(); i++) {
             Log.d("CalendarUtils", "Section 1 : " + calendarTrips.get(i).getName() + " ka gjithsej : " + calendarTrips.get(i).getCalendarCustomEvents().size() + " Evente");
+
+
         }
     }
-
-
 
     @Override
     public int getSectionCount() {
@@ -64,6 +68,19 @@ public class SectionedLegendAdapter extends SectionedRecyclerViewAdapter<Section
                     String.format("S:%d, P:%d, A:%d", section, relativePosition, absolutePosition));
     }
     */
+
+       holder.number.setText(""+(relativePosition+1));
+       holder.eventName.setText(calendarTrips.get(section).getCalendarCustomEvents().get(relativePosition).getType());
+       if(calendarTrips.get(section).getCalendarCustomEvents().get(relativePosition).getStartDrivingSession()==null){
+           holder.eventName.setText(calendarTrips.get(section).getCalendarCustomEvents().get(relativePosition).getFinishDrivingSession().getType());
+       }
+       else if(calendarTrips.get(section).getCalendarCustomEvents().get(relativePosition).getFinishDrivingSession()==null){
+           holder.eventName.setText(calendarTrips.get(section).getCalendarCustomEvents().get(relativePosition).getStartDrivingSession().getType());
+       }
+       else {
+           holder.eventName.setText("Load & Unload");
+       }
+       holder.coloredView.setBackgroundColor(CalendarUtils.generateCustomEventColor(relativePosition));
     }
 
     @Override
@@ -90,11 +107,17 @@ public class SectionedLegendAdapter extends SectionedRecyclerViewAdapter<Section
         final SectionedRecyclerViewAdapter adapter;
         final TextView title;
         final ImageView caret;
+        final TextView number;;
+        final RelativeLayout coloredView;
+        final TextView eventName;
 
         public ViewHolder(View itemView, SectionedRecyclerViewAdapter adapter) {
             super(itemView);
             this.title = itemView.findViewById(R.id.header_title);
             this.caret = itemView.findViewById(R.id.caret);
+            this.number = (TextView) itemView.findViewById(R.id.number);
+            this.coloredView = (RelativeLayout) itemView.findViewById(R.id.legendColor);
+            this.eventName = (TextView) itemView.findViewById(R.id.legendText);
             this.adapter = adapter;
             itemView.setOnClickListener(this);
         }
@@ -107,7 +130,6 @@ public class SectionedLegendAdapter extends SectionedRecyclerViewAdapter<Section
                 // ignore footer clicks
                 return;
             }
-
             if (isHeader()) {
                 adapter.toggleSectionExpanded(getRelativePosition().section());
             }

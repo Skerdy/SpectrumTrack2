@@ -79,7 +79,6 @@ public class CalendarFragmentAdapter extends FragmentStatePagerAdapter {
         @Override
         public Fragment getItem(int position) {
              int year, month;
-
              year=yearParameters[position];
              month=monthParameters[position];
              cl = new CalendarEntity();

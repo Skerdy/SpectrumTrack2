@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by W2020 Android on 12/20/2017.
@@ -34,7 +35,7 @@ public class CalendarUtilsResponse {
     // The Important one
     private ArrayList<CalendarTrip> calendarTrips;
 
-    private int[] colors;
+    private static int[] colors;
 
     public CalendarUtilsResponse(CalendarResponse calendarResponse) {
         this.calendarResponse = calendarResponse;
@@ -44,7 +45,7 @@ public class CalendarUtilsResponse {
         eventDuration = new ArrayList<>();
         resultHighlight = new ArrayList<>();
         organizedHighlight = new ArrayList<>();
-        setupColorsList(7);
+        setupColorsList(14);
         mapEventsWithDates();
     }
 
@@ -93,7 +94,7 @@ public class CalendarUtilsResponse {
                         Date eventDeliveryDate = new Date(calendarInfos.get(i).getActivity().get(j).getDeliveryPointDate());
                         eventDuration = ktheDatatNdermjet(eventLoadDate, eventDeliveryDate);
 
-                        LegendHighLight legendHighLight = new LegendHighLight(eventName, eventDuration, colors[j]);
+                        LegendHighLight legendHighLight = new LegendHighLight(eventDuration, colors[j]);
                         organizedHighlight.add(legendHighLight);
 
                         for (int k = 0; k < eventDuration.size(); k++) {
@@ -112,7 +113,7 @@ public class CalendarUtilsResponse {
         }
     }
 
-    private void setupColorsList(int size) {
+    private static void setupColorsList(int size) {
         colors = new int[size];
         colors[0] = Color.RED;
         colors[1] = Color.BLUE;
@@ -121,6 +122,20 @@ public class CalendarUtilsResponse {
         colors[4] = Color.MAGENTA;
         colors[5] = Color.BLACK;
         colors[6] = Color.CYAN;
+        colors[7] = Color.WHITE;
+        colors[9] = Color.GREEN;
+        colors[10] = Color.YELLOW;
+        colors[11] = Color.MAGENTA;
+        colors[12] = Color.BLACK;
+        colors[13] = Color.CYAN;
+    }
+
+    public static int getColor(){
+        Random rand = new Random();
+
+        int  n = rand.nextInt(7) + 0;
+        setupColorsList(8);
+        return colors[n];
     }
 
     public void clearHighlightedResult() {

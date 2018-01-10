@@ -105,25 +105,36 @@ public class LoginActivity extends BaseActivity{
         public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
             if(response.isSuccessful()) {
                 loginResponse = response.body();
-                Log.d("Skerdi", "Sukses" + response.body().toString() + loginResponse.getData());
-                 auth= loginResponse.getData().getToken();
-                 mySharedPref.saveStringInSharedPref("Auth", auth);
+                if (loginResponse.getData() != null) {
+                    Log.d("Skerdi", "Sukses" + response.body().toString() + loginResponse.getData());
+                    auth = loginResponse.getData().getToken();
+                    mySharedPref.saveStringInSharedPref("Auth", auth);
 
-                new android.os.Handler().postDelayed(
-                        new Runnable() {
-                            public void run() {
-                                if(!loginResponse.getMessageList().get(0).getDescription().equals("Invalid user credentials!")){
-                                    onLoginSuccess();
-                                    // onLoginFailed();
-                                    progressDialog.dismiss();
+                    new android.os.Handler().postDelayed(
+                            new Runnable() {
+                                public void run() {
+                                    if (!loginResponse.getMessageList().get(0).getDescription().equals("Invalid user credentials!")) {
+                                        onLoginSuccess();
+                                        // onLoginFailed();
+                                        progressDialog.dismiss();
+                                    } else {
+                                        onLoginFailed();
+                                    }
                                 }
-                                else {
+                            }, 3000);
+
+                } else {
+                    new android.os.Handler().postDelayed(
+                            new Runnable() {
+                                public void run() {
                                     onLoginFailed();
                                 }
-                            }
-                        }, 3000);
+                            }, 3000);
+                }
+
 
             }
+
             else {
                 Log.d("Skerdi", "noSucces" );
             }

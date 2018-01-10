@@ -61,10 +61,10 @@ public static TripDetailFragment newInstance(Trip trip){
         */
         data = new ArrayList<>();
         data.add(new TripDetailsItem("Date", getStringDate(trip.getLoadUnloads().get(0).getLoadingPointDate())));
-        data.add(new TripDetailsItem("From", trip.getLoadUnloads().get(0).getLoadingPointAddress().getCity().toString() ));
+        data.add(new TripDetailsItem("From", trip.getLoadUnloads().get(0).getLoadingPointAddress().getCity()));
         data.add(new TripDetailsItem("To", trip.getLoadUnloads().get(trip.getLoadUnloads().size()-1).getDeliveryPointAddress().getCity()));
-        data.add(new TripDetailsItem("Truck", trip.getDisposition().getVehicle().toString()));
-        data.add(new TripDetailsItem("Trailer", trip.getDisposition().getTrailer().toString()));
+        data.add(new TripDetailsItem("Truck", trip.getDisposition().getVehicle()));
+        data.add(new TripDetailsItem("Trailer", trip.getDisposition().getTrailer()));
         lv.setLayoutManager(new LinearLayoutManager(getActivity()));
         lv.setAdapter(new com.example.w2020skerdjan.spectrumtrack.RecyclerViews.TripDetailsAdapter(getActivity(),data));
         return nsw;

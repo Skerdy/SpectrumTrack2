@@ -1,5 +1,6 @@
 package com.example.w2020skerdjan.spectrumtrack.Utils;
 
+import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.util.Log;
 
@@ -15,10 +16,13 @@ import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.DeliveryPointA
 import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.Disposition;
 import com.example.w2020skerdjan.spectrumtrack.Models.TripRelated.LoadingPointAddress;
 import com.example.w2020skerdjan.spectrumtrack.Utils.CalendarUtilsResponse;
+import com.squareup.timessquare.LegendHighLight;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by W2020 Android on 1/8/2018.
@@ -32,11 +36,14 @@ public class CalendarUtils {
     private List<CalendarInfo> calendarInfos;
     private ArrayList<CalendarTrip> calendarTrips;
     private ArrayList<CustomCalendarEvent> customCalendarEvents;
-
+    private ArrayList<LegendHighLight> organizedHighlight;
+    private ArrayList<Date> highlightedDates;
 
     public CalendarUtils (CalendarResponse calendarResponse) {
         this.calendarResponse = calendarResponse;
         calendarTrips = new ArrayList<>();
+        organizedHighlight = new ArrayList<>();
+        highlightedDates = new ArrayList<>();
         if (validateResponse()){
             Log.d("CalendarUtil", "Validimi i Calendar Response me sukses");
             generateAllCalendarTrips();
@@ -63,13 +70,58 @@ public class CalendarUtils {
             calendarTrips.add(calendarTrip);
         }
 
-        if( calendarTrips.size()!=0) {
+
         CalendarInfo calendarInfodeadline = calendarInfos.get(1);
+        if( calendarTrips.size()!=0) {
+
         Log.d("CalendarUtil", " Size i tere activiteteve ne deadline = " + calendarInfodeadline.getActivity().size());
+        generateCustomCalendarEvents(calendarInfodeadline);
+    }
 
+       //nese nuk vjen asnje trip per ate muaj por vjen me shume se nje deadline
+        else if(calendarTrips.size()==0 && calendarInfodeadline.getActivity().size()!=0){
+           // krijo nje objekt trip per cdo trip id te gjendur neper Deadline dhe fute ne liste
+            List<CalendarEvent> calendarEvents = calendarInfodeadline.getActivity();
 
+            for (CalendarEvent calendarEvent : calendarEvents){
+                //nese deadline eshte i shperndare ne nje trip te vetem
+                if(calendarEvent.getTripUnloadId().equals(calendarEvent.getTripLoadId())) {
+                    //nqs ky trip nuk eshte krjuar ende
+                    if (tripNotCreatedYet(calendarEvent.getTripLoadId())) {
+                        CalendarTrip calendarTrip = new CalendarTrip(calendarEvent.getTripLoadId(), "Emer Trip Kot");
+                        calendarTrips.add(calendarTrip);
+                    }
+                }
+                //nese deadline eshte i shperndare ne 1 trip dhe eshte Unload type
+                else if ( calendarEvent.getTripLoadId() == null){
+                    CalendarTrip calendarTrip = new CalendarTrip(calendarEvent.getTripUnloadId(), "Emer Trip Kot");
+                    calendarTrips.add(calendarTrip);
+                }
+
+                // nese deadline eshte i shperndare ne 1 trip dhe eshte Load type
+                else if (calendarEvent.getTripUnloadId() == null){
+                    CalendarTrip calendarTrip = new CalendarTrip(calendarEvent.getTripLoadId(), "Emer Trip Kot");
+                    calendarTrips.add(calendarTrip);
+                }
+
+                //nese deadline eshte shperndare ne 2 tripe te ndryshem krijo keto dy tripe te ndryshem
+                else if (!calendarEvent.getTripLoadId().equals(calendarEvent.getTripUnloadId())){
+                    CalendarTrip calendarTrip = new CalendarTrip(calendarEvent.getTripLoadId(), "Emer Trip Kot");
+                    CalendarTrip calendarTrip1 = new CalendarTrip(calendarEvent.getTripUnloadId(), "Emer Trip Kot");
+                    calendarTrips.add(calendarTrip);
+                    calendarTrips.add(calendarTrip1);
+                }
+
+            }
+
+            // ne kete moment lista calendarTrips eshte e mbushur sakte dhe mjafton te krijojme objektet CustomCalendarEvent per secilin CalendarTrip te krijuar
+            generateCustomCalendarEvents(calendarInfodeadline);
+        }
+
+    }
+
+    private void generateCustomCalendarEvents(CalendarInfo calendarInfodeadline){
         for (int j = 0; j < calendarInfodeadline.getActivity().size(); j++) {
-
             CalendarEvent calendarEvent = calendarInfodeadline.getActivity().get(j);
             if (calendarEvent.getTripLoadId() == calendarEvent.getTripUnloadId()) {
                 Log.d("CalendarUtil", "U krijua Nje calendar Event nga kushti i pare");
@@ -83,6 +135,7 @@ public class CalendarUtils {
                 finishDrivingSession = createDrivingSession(calendarEvent, DrivingSession.UNLOAD);
                 CustomCalendarEvent customCalendarEvent = new CustomCalendarEvent(CustomCalendarEventType, startDrivingSession, finishDrivingSession);
                 customCalendarEvent.setTripID(tripID);
+                generateHighLightedDates(customCalendarEvent);
                 calendarTrips.get(ktheTripID(customCalendarEvent)).addCustomCalendarEvent(customCalendarEvent);
 
             } else if (calendarEvent.getTripLoadId() == null) {
@@ -97,6 +150,7 @@ public class CalendarUtils {
                 startDrivingSession = null;
                 CustomCalendarEvent customCalendarEvent = new CustomCalendarEvent(CustomCalendarEventType, startDrivingSession, finishDrivingSession);
                 customCalendarEvent.setTripID(tripID);
+                generateHighLightedDates(customCalendarEvent);
                 calendarTrips.get(ktheTripID(customCalendarEvent)).addCustomCalendarEvent(customCalendarEvent);
             } else if (calendarEvent.getTripUnloadId() == null) {
                 Log.d("CalendarUtil", "U krijua Nje calendar Event nga kushti i trete");
@@ -110,6 +164,7 @@ public class CalendarUtils {
                 finishDrivingSession = null;
                 CustomCalendarEvent customCalendarEvent = new CustomCalendarEvent(CustomCalendarEventType, startDrivingSession, finishDrivingSession);
                 customCalendarEvent.setTripID(tripID);
+                generateHighLightedDates(customCalendarEvent);
                 calendarTrips.get(ktheTripID(customCalendarEvent)).addCustomCalendarEvent(customCalendarEvent);
             } else if (!calendarEvent.getTripLoadId().equals(calendarEvent.getTripUnloadId())) {
                 Log.d("CalendarUtil", "U krijua Nje calendar Event nga kushti i katert");
@@ -123,6 +178,7 @@ public class CalendarUtils {
                 finishDrivingSession = null;
                 CustomCalendarEvent customCalendarEvent = new CustomCalendarEvent(CustomCalendarEventType, startDrivingSession, finishDrivingSession);
                 customCalendarEvent.setTripID(tripID);
+                generateHighLightedDates(customCalendarEvent);
                 calendarTrips.get(ktheTripID(customCalendarEvent)).addCustomCalendarEvent(customCalendarEvent);
 
 
@@ -133,12 +189,52 @@ public class CalendarUtils {
                 startDrivingSession = null;
                 customCalendarEvent = new CustomCalendarEvent(CustomCalendarEventType, startDrivingSession, finishDrivingSession);
                 customCalendarEvent.setTripID(tripID);
+                generateHighLightedDates(customCalendarEvent);
                 calendarTrips.get(ktheTripID(customCalendarEvent)).addCustomCalendarEvent(customCalendarEvent);
             }
         }
     }
 
+    private boolean tripNotCreatedYet(Integer id){
+        boolean flag = true;
+        if(calendarTrips.size()==0){
+            return true;
+        }
+        else {
+            for(int i =0 ; i <calendarTrips.size() ; i++){
+                if(calendarTrips.get(i).getId()==id)
+                    flag=false;
+            }
+        }
+        return flag;
     }
+
+    private void generateHighLightedDates(CustomCalendarEvent customCalendarEvent){
+        Date eventLoadDate;
+        Date today = new Date();
+        LegendHighLight legendHighLight;
+
+        if (customCalendarEvent.isFullEvent()){
+            eventLoadDate = customCalendarEvent.getInBetweenDates().get(0);
+        }
+
+        else if (customCalendarEvent.getStartDrivingSession()==null){
+            eventLoadDate = customCalendarEvent.getFinishDrivingSession().getDate();
+        }
+
+        else {
+            eventLoadDate = customCalendarEvent.getStartDrivingSession().getDate();
+        }
+
+        if (eventLoadDate.compareTo(today) >= 0) {
+            legendHighLight = new LegendHighLight ( customCalendarEvent.getInBetweenDates(), customCalendarEvent.getColor());
+            organizedHighlight.add(legendHighLight);
+            highlightedDates.addAll(customCalendarEvent.getInBetweenDates());
+        }
+
+
+    }
+
 
     /*
     private CustomCalendarEvent customCalendarEventFromCalendarEvent(CalendarEvent calendarEvent) {
@@ -245,6 +341,27 @@ public class CalendarUtils {
         return 0;
     }
 
+    public static int generateCustomEventColor(int i){
+        int [] colors = new int[10];
+        colors[0] = Color.argb(200,0,136,255);
+        colors[1] = Color.argb(200,255,0,76);
+        colors[2] = Color.argb(200,255,183,0);
+        colors[3] = Color.argb(200,36,245,81);
+        colors[4] = Color.argb(200,241,255,51);
+        colors[5] = Color.argb(200,151,41,255);
+        colors[6] = Color.argb(200,0,255,106);
+        colors[7] = Color.argb(200,255,0,255);
+        colors[8] = Color.argb(200,35,190,246);
+        colors[9] = Color.argb(200,255,128,221);
+        if(i<10)
+        return colors[i];
+        else {
+            Random rand = new Random();
+            int  n = rand.nextInt(9) + 0;
+            return colors[n];
+        }
+    }
+
     private boolean validateResponse (){
         boolean flag = true;
         if(calendarResponse==null){
@@ -303,4 +420,20 @@ public class CalendarUtils {
         this.customCalendarEvents = customCalendarEvents;
     }
 
+    public ArrayList<LegendHighLight> getOrganizedHighlight() {
+        return organizedHighlight;
+    }
+
+    public void setOrganizedHighlight(ArrayList<LegendHighLight> organizedHighlight) {
+        this.organizedHighlight = organizedHighlight;
+    }
+
+
+    public ArrayList<Date> getHighlightedDates() {
+        return highlightedDates;
+    }
+
+    public void setHighlightedDates(ArrayList<Date> highlightedDates) {
+        this.highlightedDates = highlightedDates;
+    }
 }

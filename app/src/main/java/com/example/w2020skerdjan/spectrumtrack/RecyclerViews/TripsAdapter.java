@@ -47,12 +47,40 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Trip trip = trips.get(position);
+        String from, date, to, truck, trailer;
+        if(trip.getLoadUnloads().get(0).getLoadingPointAddress().getCity()!=null)
+         from = trip.getLoadUnloads().get(0).getLoadingPointAddress().getCity().toString();
+        else from = "NoDataEntry";
+
+        if(CalendarUtils.getStringDate(trip.getLoadUnloads().get(0).getLoadingPointDate())!=null){
+            date = CalendarUtils.getStringDate(trip.getLoadUnloads().get(0).getLoadingPointDate());
+        }
+        else{
+            date = "NoDataEntry";
+        }
+
+        if(trip.getLoadUnloads().get(trip.getLoadUnloads().size()-1).getDeliveryPointAddress().getCity()!=null)
+         to = trip.getLoadUnloads().get(trip.getLoadUnloads().size()-1).getDeliveryPointAddress().getCity();
+        else {
+            to = "NoDataEntry";
+        }
+        if(trip.getDisposition().getVehicle()!= null)
+         truck = trip.getDisposition().getVehicle();
+        else {
+            truck= "NoDataEntry";
+        }
+        if(trip.getDisposition().getTrailer()!=null)
+         trailer = trip.getDisposition().getTrailer();
+        else {
+            trailer = "NoDataEntry";
+        }
         final int p = position;
-        holder.from.setText(trip.getLoadUnloads().get(0).getLoadingPointAddress().getCity().toString());
-        holder.date.setText(CalendarUtils.getStringDate(trip.getLoadUnloads().get(0).getLoadingPointDate()));
-        holder.to.setText(trip.getLoadUnloads().get(trip.getLoadUnloads().size()-1).getDeliveryPointAddress().getCity());
-        holder.truck.setText(trip.getDisposition().getVehicle());
-        holder.trailer.setText(trip.getDisposition().getTrailer());
+        holder.from.setText(from);
+        holder.date.setText(date);
+        holder.to.setText(to);
+        holder.truck.setText(truck);
+        holder.trailer.setText(trailer);
+
         holder.openTripButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +103,9 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.ViewHolder>{
             }
         });
     }
+
+
+
 
     @Override
     public int getItemCount() {

@@ -18,8 +18,8 @@ public class LegendHighLight implements Serializable {
     private int eventCellsHighlightColor;
 
 
-    public LegendHighLight(String eventName, ArrayList<Date> eventHighlightedDates, int eventCellsHighlightColor){
-        this.eventName = eventName;
+    public LegendHighLight( ArrayList<Date> eventHighlightedDates, int eventCellsHighlightColor){
+       // this.eventName = eventName;
         this.eventHighlightedDates = eventHighlightedDates;
         this.eventCellsHighlightColor = eventCellsHighlightColor;
     }

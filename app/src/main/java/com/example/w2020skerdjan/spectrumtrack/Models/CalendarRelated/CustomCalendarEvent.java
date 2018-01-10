@@ -1,5 +1,6 @@
 package com.example.w2020skerdjan.spectrumtrack.Models.CalendarRelated;
 
+import com.example.w2020skerdjan.spectrumtrack.Utils.CalendarUtils;
 import com.example.w2020skerdjan.spectrumtrack.Utils.CalendarUtilsResponse;
 
 import java.util.ArrayList;
@@ -21,12 +22,19 @@ public class CustomCalendarEvent {
     private ArrayList<Date> inBetweenDates;
     private int color;
 
+
     public CustomCalendarEvent(String type, DrivingSession startDrivingSession, DrivingSession finishDrivingSession){
         this.startDrivingSession = startDrivingSession;
         this.finishDrivingSession = finishDrivingSession;
         this.type = type;
         if(type.equals(FULL_EVENT))
+            calculateInBetWeenDates();
+
+    }
+
+    private void calculateInBetWeenDates(){
         inBetweenDates = new ArrayList<>();
+        inBetweenDates = CalendarUtilsResponse.ktheDatatNdermjet(startDrivingSession.getDate(), finishDrivingSession.getDate());
     }
 
     public boolean isFullEvent(){
@@ -67,6 +75,7 @@ public class CustomCalendarEvent {
     }
 
     public void setInBetweenDates(ArrayList<Date> inBetweenDates) {
+        calculateInBetWeenDates();
         this.inBetweenDates = inBetweenDates;
     }
 
